@@ -1,0 +1,31 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import MenuMobile from './MenuMobile.astro';
+import StickySidebar from './StickySidebar.astro'; 
+---
+	<ViewTransitions />	
+	<nav class="md:hidden border-gray-200 bg-black">
+	  <div class="flex flex-nowrap items-center justify-between mx-auto p-2">
+		<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+			<img src="https://storage.googleapis.com/nrm-web/stereocien/sc-mil-500-min.png" class="max-w-28 logo" alt="Stereo Cien" width="112" height="75" />
+		</a>
+		<div class=""><MenuMobile /></div>	
+	  </div>
+	</nav>
+	<div class="w-[220px] flex-[0_0_auto] hidden md:block">
+		<StickySidebar />
+	</div>
+
+
+<style>
+.logo-beat-mobile img{
+	filter: drop-shadow(1px 0px 0 white) drop-shadow(0px 1px 1px white);
+}
+@media screen and (min-width: 1199px) {
+  .logo-beat-mobile {
+    display: none;
+  }
+}
+
+
+</style>
