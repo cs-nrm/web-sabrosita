@@ -1,9 +1,9 @@
 var streaming;
 var local_status;
-const buttonPause = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#01216a" fill="#01216a" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /></svg>';
-const buttonPlay = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play-filled" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#01216a" fill="#01216a" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" stroke-width="0" fill="currentColor" /></svg>';
-const bigButtonPause = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#01216a" fill="#01216a" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /></svg>';
-const bigButtonPlay = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#01216a" fill="#01216a" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 4v16l13 -8z" /></svg>';
+const buttonPause = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000" fill="#000" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /></svg>';
+const buttonPlay = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play-filled" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000" fill="#000" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" stroke-width="0" fill="currentColor" /></svg>';
+const bigButtonPause = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000" fill="#000" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /></svg>';
+const bigButtonPlay = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000" fill="#000" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 4v16l13 -8z" /></svg>';
 const buttongLoading = '<img width="40" height="40" src="https://storage.googleapis.com/nrm-web/oye/recursos/loading-normal.gif" style="padding:5px;"/>';
 const buttonPodcastPlay = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play" width="80" height="80" viewBox="0 0 24 24" stroke-width="2" stroke="#000" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 4v16l13 -8z" /></svg>';
 const buttonPodcastPause = '<svg xmlns="https://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause" width="80" height="80" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /></svg>';
@@ -33,8 +33,8 @@ const secchome = document.getElementById('home');
              analytics: {
                 active: true,
                 debug: false,
-                appInstallerId: 'stereocienpag',            
-                trackingId: 'G-W7YEMEWBX1',
+                appInstallerId: 'sabrositapag',            
+                trackingId: 'G-8T59T6QN5S',
                 trackingEvents: [ 'play', 'stop', 'pause', 'resume', 'all' ],
                 sampleRate: 100,     
                 category: 'Reproduccion Radio Pag' 
@@ -103,9 +103,9 @@ const secchome = document.getElementById('home');
 
     function completeAd(e){                
         streaming.play({
-            station:'XEOYAM',
+            station:'XEPHAM',
             trackingParameters:{
-            Dist: 'WebStereocien'
+            Dist: 'WebSanrosita'
             }
         }); 
         $('#td_container').removeClass('pub_active');
@@ -129,7 +129,7 @@ const secchome = document.getElementById('home');
       
       var start = function(){
         //console.log('trata la pub primero');    
-        streaming.playAd( 'vastAd', { url:'https://pubads.g.doubleclick.net/gampad/ads?sz=600x360&iu=/21799830913/StereoCien/VideoVast&ciu_szs=600x360&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]' } );	        
+        streaming.playAd( 'vastAd', { url:'https://pubads.g.doubleclick.net/gampad/ads?sz=600x360&iu=/21799830913/sabrosita/VDVIDEOS&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]' } );	        
       };
 
 
@@ -140,9 +140,9 @@ const secchome = document.getElementById('home');
       
       function play(){
         streaming.play({
-            station:'XEOYAM',
+            station:'XEPHAM',
             trackingParameters:{
-            Dist: 'WebStereocien'
+            Dist: 'WebSabrosita'
             }
         });        
       }      
@@ -155,9 +155,9 @@ const secchome = document.getElementById('home');
 
       function errorAd(e){        
         streaming.play({
-            station:'XEOYAM',
+            station:'XEPHAM',
             trackingParameters:{
-            Dist: 'WebStereocien'
+            Dist: 'WebSabrosita'
             }
         });
         console.log(e);
@@ -199,7 +199,7 @@ const secchome = document.getElementById('home');
 
     const autoplay = function(){        
         streaming.play({
-            station:'XEOYAM',
+            station:'XEPHAM',
             trackingParameters:{
                 Dist: 'WebStereocien',
                 autoplay: 1
@@ -239,7 +239,7 @@ var lastArtist = null;
 var lastSong = null;
 
 function getInfoMusic() {
-    fetch("https://cdn.nrm.com.mx/cdn/stereociendigital/playlist/cancion.json")
+    fetch("https://cdn.nrm.com.mx/cdn/sabrosita/playlist/cancion.json")
     .then((res) => {
         if (!res.ok) {
             throw new Error(`HTTP error! Status: ${res.status}`);
@@ -251,18 +251,8 @@ function getInfoMusic() {
         let newSong = '';
         let newHora = '';
 
-        switch (data.categoria) {
-            case 'ST2000':
-            case "ST70'S":
-            case "ST80'S":
-            case "ST90'S":
-            case 'STCIEN':
-            case 'STCURREN':
-            case 'STDISCO':
-            case 'STEREO CIEN 2020':
-            case 'STEXITOS':
-            case 'ST-BEATLES':
-            case 'STNAVIDAD':
+        switch (data.categoria) {            
+            case 'SAB-MUSICA':
                 newArtist = data.artista;
                 newSong = data.title;
                 newHora = data.hora_real;
@@ -674,7 +664,7 @@ document.addEventListener('astro:page-load', ev => {
         
     }else{
        // getInfoMusic();
-        $('.logo-player img').attr('src','https://storage.googleapis.com/nrm-web/stereocien/STEREOCIEN_MIL2.svg');        
+        $('.logo-player img').attr('src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player.svg');        
         $('#radiobutton').removeClass('en-vivo');
         $('#big-play').addClass('border-4');
     }
