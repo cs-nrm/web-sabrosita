@@ -1,0 +1,193 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+  <!-- Navigation -->
+  <nav class="nav-menu">
+    <ul class="menu-desktop">
+      <li class={`menu-section${currentPath.startsWith('/nota-sabrosa') ? ' active' : ''}`}><a href="/nota-sabrosa">Nota Sabrosa</a></li>
+      <li class={`menu-section${currentPath.startsWith('/promociones') ? ' active' : ''}`}><a href="/promociones">Promociones</a></li>
+      <li class={`menu-section${currentPath.startsWith('/hot-parade') ? ' active' : ''}`}><a href="/hot-parade">Hot Parade</a></li>
+      <li class={`menu-section${currentPath.startsWith('/entrevistas') ? ' active' : ''}`}><a href="/entrevistas">Entrevistas</a></li>
+      <li class="dd-menu">Podcast
+        <ul>
+          <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
+          <li class={`menu-section${currentPath.startsWith('/video-podcast') ? ' active' : ''}`}><a href="/video-podcast">Video Podcast</a></li>
+        </ul>        
+      </li>
+      <li class={`menu-section${currentPath.startsWith('/son-sonidero') ? ' active' : ''}`}><a href="/son-sonidero">Son Sonidero</a></li>
+    </ul>
+    <ul class="menu-mobile !hidden">
+      <li class={`menu-section${currentPath.startsWith('/nota-sabrosa') ? ' active' : ''}`}><a href="/nota-sabrosa">Nota Sabrosa</a></li>
+      <li class={`menu-section${currentPath.startsWith('/promociones') ? ' active' : ''}`}><a href="/promociones">Promociones</a></li>
+      <li class={`menu-section${currentPath.startsWith('/hot-parade') ? ' active' : ''}`}><a href="/hot-parade">Hot Parade</a></li>
+      <li class={`menu-section${currentPath.startsWith('/entrevistas') ? ' active' : ''}`}><a href="/entrevistas">Entrevistas</a></li>
+      <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
+      <li class={`menu-section${currentPath.startsWith('/video-podcast') ? ' active' : ''}`}><a href="/video-podcast">Video Podcast</a></li>
+    </ul>
+  </nav>
+
+<style>
+/* Navigation styles */
+
+.nav-menu .active a:hover{
+  color:white !important;
+}
+.nav-menu {
+  background: black;
+  padding: 0.5rem;
+  font-family: 'Roboto';
+  z-index: 999;
+}
+
+.nav-menu ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.3rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  justify-content: center;
+  line-height: 1.3;
+}
+
+.nav-menu a, .nav-menu li {
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.2s;
+}
+
+.nav-menu a:hover, .nav-menu li:hover {
+  color: #717171;
+}
+
+.nav-menu a.active, .nav-menu li.active {
+  color: #caccce;
+}
+
+@media (max-width: 1236px){
+  .nav-menu ul{
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow-x: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+    justify-content: left;
+  }
+  .menu-mobile { 
+      display: flex !important;  
+  }
+  .menu-desktop{
+    display: none !important;
+  }
+  .nav-menu:after { content:  'ᐅ'; font-size: 18px; position: absolute; top: 30%; right: 4px;}
+}
+
+/*
+@media (max-width: 1023px) {
+.menutres {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.menutres >{
+  flex: 1 0 50%;
+}
+.menutres:first-child{
+  flex: 0 1 50%;
+}
+  .logo{
+    justify-content: left;
+  }
+  button{
+    justify-content: right;
+  }
+}
+
+.menu-mobile{
+  white-space: nowrap;
+  overflow-x: scroll;
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+.menu-mobile::-webkit-scrollbar { 
+    display: none;  
+}
+
+
+
+.link-menu{height: 39px;}
+.link-menu a {color:white;  font-size: 14px;}
+button.radio-button {    display: flex;    align-items: center;    gap: 7px;      font-size: 15px;  color: #ffaa1f;}
+.opacity-back {position: absolute;    top: 0;    left: 0;    backdrop-filter: brightness(60%) blur(16px);    width: 100%;    height: 100%;    z-index: -1;  }
+
+nav ul {
+	padding: 0;
+  margin: 0;
+	list-style: none;
+	position: relative;
+  overflow: visible;
+}
+	
+nav ul li {
+	display:inline-block;
+}
+*/
+.dd-menu {
+	display:block;
+  position: relative;
+  overflow: visible;
+}
+
+nav ul ul {
+	display: none;
+	position: absolute; 
+  background: white;
+  top: 20px;
+  left: 0;
+  overflow: visible;
+  padding-top: 5px;
+}
+	
+
+nav ul li:hover > ul {
+	display:inherit;
+}
+	
+.dd-menu li a{
+  font-size: 14px;
+
+}
+nav ul ul li {
+	width:160px;
+	float:none;
+	display:list-item;
+	position: relative;
+  margin-bottom: 5px;
+  padding: 3px 6px;
+  line-height: 13px;
+}
+
+
+nav ul ul ul li {
+	position: relative;
+	top:-60px; 
+	left:170px;
+}
+
+	
+
+li > a:after, .dd-menu:after { content:  ' ▼'; font-size: 10px;}
+li > a:only-child:after, li > .dd-menu:only-child:after { content: ''; }
+
+
+/*@media (max-width: 639px) {
+  .nav-menu a, .nav-menu li{
+    font-size: 0.5rem;
+  }
+  li > a:after, .dd-menu:after {font-size: 7px;}
+}*/
+
+
+</style>
