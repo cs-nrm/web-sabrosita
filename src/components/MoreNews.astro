@@ -1,11 +1,13 @@
 ---
 import Card from '../layouts/CardMoreNews.astro';
 
-const res = await fetch("https://stereociendigital.mx/wp-json/wp/v2/posts?_embed&per_page=5&_fields=title,slug,yoast_head_json,categories&categories=143");
+
+const res = await fetch("https://contenido.stereociendigital.mx/wp-json/wp/v2/posts?_embed&per_page=4&_fields=title,slug,yoast_head_json,categories&categories=143");
 const posts = await res.json();
+
 ---
 <div class="my-12 mx-auto">
-	<h4 class="font-bold">Te podría interesar...</h4>
+	<h5 class="font-bold">Te podría interesar...</h4>
         <section class="flex flex-wrap -mx-1 lg:-mx-4">
                     {
                         posts.map((post:any) => ( 
@@ -15,12 +17,11 @@ const posts = await res.json();
                         ))
                     }
         </section>
-    <div class="text-center">
-        <a href="/news/">
-            <button class="ver-mas group relative h-8 w-36 m-4 overflow-hidden rounded-lg bg-zinc-700 text-base shadow">
-                <div class="absolute inset-0 w-3 bg-[#09e6f1] transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-                <span class="relative text-zinc-200 group-hover:text-zinc-900">Más</span>
-            </button>
-        </a>
-    </div>
+<div class="m-auto text-center">
+    <a href="/cultura-pop" class="text-black hover:text-white">
+        <button class="ver-mas lovelo group relative h-8 w-36 m-4 overflow-hidden bg-white hover:bg-[#ef4444] uppercase text-xs font-bold tracking-[3px]">
+            <span>Más</span>
+        </button>
+    </a>
+</div>
 </div>

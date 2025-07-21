@@ -35,42 +35,89 @@ const { title, description, image = '/stereocien-share.jpg', seccion } = Astro.p
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
-<title>{title} - {seccion}</title>
+<title>{seccion} - {title} </title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="author" content='Sabrosita 590-1410 AM' />
+<meta name="publisher" content='NRM Comunicaciones' />
+<meta http-equiv="Content-Language" content="es">
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<!--meta property="og:title" content={title} /-->
+<meta property="og:title" content={title} >
 <meta property="og:description" content={description} />
-<!--meta property="og:image" content={new URL(image, Astro.url)} /-->
+<meta property="og:image" content='' />
+<meta property="og:url" content="https://sabrositadigital.mx">
+<meta property="og:type" content="website">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<!--meta property="twitter:image" content={new URL(image, Astro.url)} /-->
+<meta name="twitter:site" content="@stereocienmx">
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+<!-- sitemap -->
+<link rel="sitemap" href="/sitemap.xml" />
+<meta name="robots" content="index, follow">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W7YEMEWBX1"></script>
-<script is:inline> 
+<!-- Google tag (gtag.js) Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8DSGT28PYF"></script>
+<script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-W7YEMEWBX1');
+  gtag('config', 'G-8DSGT28PYF');
 </script>
 
-<!--script defer>
+<!-- AD SENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7423640555477330"
+     crossorigin="anonymous"></script>
+<!-- AD MANAGER -->
+
+<!-- Begin comScore Tag -->
+<script is:inline>
+  var _comscore = _comscore || [];
+  _comscore.push({
+  c1: "2", c2: "6906652",
+  options: {
+  enableFirstPartyCookie: true,
+  bypassUserConsentRequirementFor1PCookie: true
+  }
+  });
+  (function() {
+  var s = document.createElement("script"), el =
+  document.getElementsByTagName("script")[0]; s.async = true;
+  s.src = "https://sb.scorecardresearch.com/cs/6906652/beacon.js";
+  el.parentNode.insertBefore(s, el);
+  })();
+  </script>
+  <noscript>
+  <img
+  src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=6906652&amp;cv=cv=4.4.0&amp;c
+  j=1" width="1" height="1" alt="" style="display:none;"/>
+  </noscript>
+  <!-- End comScore Tag -->
+
+<script defer>
     // Cargue GPT de forma síncrona (Expandibles y Creatividad Adaptable)
     (function() {
         var useSSL = 'https:' == document.location.protocol;
-        var src = (useSSL ? 'https:' : 'http:') +
+        var src = (useSSL ? 'https:' : 'https:') +
         '//www.googletagservices.com/tag/js/gpt.js';
         document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
     })();
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7423640555477330" crossorigin="anonymous"></script-->
+
+<!-- Hotjar Tracking Code for Stereocien Astro -->
+<script is:inline>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6445872,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+

@@ -6,6 +6,9 @@ export interface Props {
          rendered: string;
       }
       content: string;
+      excerpt:{
+        rendered: string;
+      }
       slug: string;
       categories : {};
       yoast_head_json: {
@@ -17,6 +20,10 @@ export interface Props {
          article_published_time: string;
          author:string;         
       }
+
+
+
+
     };
     
 }
@@ -24,25 +31,43 @@ export interface Props {
 const { post } = Astro.props;
 
 var url_seccion;
-//console.log(post.categories[0]);
+console.log(post.categories[0]);
 switch (post.categories[0]){
     case 143:        
-        url_seccion = 'noticias';
+        url_seccion = 'cultura-pop';
     break;
-    case 275:        
-        url_seccion = 'promociones';
+    case 525:        
+        url_seccion = 'libros';
+    break;
+    case 524:
+        url_seccion = 'series-y-peliculas';
+    break;
+    case 527:
+        url_seccion = 'comida-y-guias';
     break;
     case 169:
-        url_seccion = 'autos-al-cien';
+        url_seccion = 'autos';
     break;
     case 167:
         url_seccion = 'mascotas';
     break;
-    case 531:
-        url_seccion = 'nerdosis';
+    case 528:
+        url_seccion = 'tecnologia';
+    break;
+    case 683:
+        url_seccion = 'viajes';
+    break;
+    case 275:
+        url_seccion = 'promociones';
+    break;
+    case 853:
+        url_seccion = 'relojes';
+    break;
+        case 854:
+        url_seccion = 'corona-capital';
     break;
     default:
-        url_seccion = 'noticias';    
+        url_seccion = 'cultura-pop';    
     break;      
 }
 
@@ -51,22 +76,35 @@ switch (post.categories[0]){
 console.log(section);*/
 
 ---
+          <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
+            <a href={`/${url_seccion}/${post.slug}/`}>
+              <div class="bg-black"><img src={post.yoast_head_json.og_image[0].url} alt="Imagen Noticias"/></div>
+              <div class="news-content p-6">
+                <h5 set:html={post.title.rendered}></h5>
+                <div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
+                <span class="roboto font-bold text-xs mt-4">por {post.yoast_head_json.author}</span>
+              </div>
+            </a>  
+          </article>
 
-<div class="card w-full md:w-1/2 lg:w-1/3 xl:w-1/3 md:p-4 pb-4 ">
-    <article>
-    <div class="glows"></div>
-    <div class="overflow-hidden rounded-lg">
-        <a href={`/${url_seccion}/${post.slug}/`} >
-            <img class="block h-auto w-full aspect-video object-cover" src={post.yoast_head_json.og_image[0].url} alt={post.title.rendered} />
-            <div class="flex items-center justify-between leading-tight p-2 md:p-4 min-h-40">
-              <h2 class="text-base text-zinc-300 font-bold" set:html={post.title.rendered}></h2>
-            </div>
-        </a>
 
-        <div class="flex items-center justify-between p-2 md:px-4 text-xs font-bold uppercase text-zinc-400">
-            <p>{post.yoast_head_json.author}</p>
-            <p>{post.yoast_head_json.article_published_time.substring(0, 10)}</p>
-        </div>
-    </div>
-    </article>
-</div>
+<style>
+    .carduno img{
+        box-shadow: none;
+        width: 100%;
+        height: 100%;
+        mask-image: linear-gradient(225deg, hsla(var(--color-black), 1) 0, hsla(var(--color-black), 0.9) 40%, hsla(var(--color-black), 0) 80%);
+        }
+
+    .carduno h2, .carddos h2{
+        display: -webkit-box;
+        -webkit-margin-before: 0;
+        margin-block-start: 0;
+        -webkit-margin-after: 12px;
+        margin-block-end: 12px;
+        line-height: 1.2;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
