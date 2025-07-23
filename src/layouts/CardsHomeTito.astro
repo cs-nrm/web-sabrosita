@@ -1,0 +1,124 @@
+---
+import DoubleBox from '../components/DoubleBox.astro';
+import BoxBanner from '../components/BoxBanner.astro';
+import LeaderBoard from'../components/LeaderBoard.astro';
+import SuperLeader from '../components/SuperLeader.astro';
+import { Image } from 'astro:assets';
+
+
+const res = await fetch("https://sabrositadigital.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,acf,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=4&categories=143");
+const posts = await res.json();
+const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
+
+---
+<div class="max-w-[700px] m-auto text-center">
+  <img class="max-w-[350px] m-auto text-center" src="https://storage.googleapis.com/nrm-web/sabrosita/titulo-tito.png" alt="Título Tito"/>
+  <div class="primera-tito flex items-center">
+    <article class="news-card">
+      <a href={`/nota-sabrosa/${posts[0].slug}/`}>
+        <div class="relative h-full">
+          <img class="rounded-xl" src={posts[0]._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt="Imagen Las de Hoy"/>
+          <div class="news-content absolute bottom-0 left-0 bg-black bg-opacity-60 text-white p-2 w-full rounded-b-xl ">
+            <h6 class="leading-none" set:html={posts[0].title.rendered}></h6>
+          </div>
+        </div>
+      </a>  
+    </article>
+    <img class="max-w-[170px]" src="https://storage.googleapis.com/nrm-web/sabrosita/logo-tito.png" alt="Logo Tito"/>
+  </div>
+  <div class="container cards mt-8">
+    <div class="film">
+      <div class="news-grid grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 xl:gap-16">
+        {
+          filteredPosts.slice(1, 4).map((post:any, idx:number) => (
+            <div class={`cards-filtro-${idx}`}>
+              <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
+                <a href={`/nota-sabrosa/${post.slug}/`}>
+                  <div><img class="rounded-xl" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt="Imagen Las de Hoy"/></div>
+                  <div class="news-content p-6">
+                    <h5 class="leading-none" set:html={post.title.rendered}></h5>
+                    <!--div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
+                    <span class="roboto font-bold text-xs mt-4">por {post.yoast_head_json.author}</span-->
+                  </div>
+                </a>  
+              </article>
+            </div>
+          ))
+        }
+        </div>
+
+      </div>
+
+
+      </div>
+</div>
+
+<div class="m-auto text-center">
+    <a href="/nota-sabrosa">
+        <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
+            <span>Más noticias aquí</span>
+        </button>
+    </a>
+</div>
+
+<style>
+.film {
+  position: relative;
+  /*top: 200px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 300px;
+  height: 100px;*/
+  background: #111111;
+  overflow: hidden;
+}
+
+.film::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0px;
+  width: 8px;
+  height: 8px;
+  background: #5e5e5e;
+  box-shadow: 14px 0px 0px #5e5e5e, 28px 0px 0px #5e5e5e, 42px 0px 0px #5e5e5e, 56px 0px 0px #5e5e5e, 70px 0px 0px #5e5e5e, 84px 0px 0px #5e5e5e, 98px 0px 0px #5e5e5e, 112px 0px 0px #5e5e5e, 126px 0px 0px #5e5e5e, 140px 0px 0px #5e5e5e, 154px 0px 0px #5e5e5e, 168px 0px 0px #5e5e5e, 182px 0px 0px #5e5e5e, 196px 0px 0px #5e5e5e, 210px 0px 0px #5e5e5e, 224px 0px 0px #5e5e5e, 238px 0px 0px #5e5e5e, 252px 0px 0px #5e5e5e, 266px 0px 0px #5e5e5e, 280px 0px 0px #5e5e5e, 294px 0px 0px #5e5e5e, 308px 0px 0px #5e5e5e, 322px 0px 0px #5e5e5e, 336px 0px 0px #5e5e5e, 350px 0px 0px #5e5e5e, 364px 0px 0px #5e5e5e, 378px 0px 0px #5e5e5e, 392px 0px 0px #5e5e5e, 406px 0px 0px #5e5e5e, 420px 0px 0px #5e5e5e, 434px 0px 0px #5e5e5e, 448px 0px 0px #5e5e5e, 462px 0px 0px #5e5e5e, 476px 0px 0px #5e5e5e, 490px 0px 0px #5e5e5e, 504px 0px 0px #5e5e5e, 518px 0px 0px #5e5e5e, 532px 0px 0px #5e5e5e, 546px 0px 0px #5e5e5e, 560px 0px 0px #5e5e5e, 574px 0px 0px #5e5e5e, 588px 0px 0px #5e5e5e, 602px 0px 0px #5e5e5e, 616px 0px 0px #5e5e5e, 630px 0px 0px #5e5e5e, 644px 0px 0px #5e5e5e, 658px 0px 0px #5e5e5e, 672px 0px 0px #5e5e5e, 686px 0px 0px #5e5e5e, 700px 0px 0px #5e5e5e, 714px 0px 0px #5e5e5e, 728px 0px 0px #5e5e5e, 742px 0px 0px #5e5e5e, 756px 0px 0px #5e5e5e, 770px 0px 0px #5e5e5e, 784px 0px 0px #5e5e5e, 798px 0px 0px #5e5e5e, 812px 0px 0px #5e5e5e, 826px 0px 0px #5e5e5e, 840px 0px 0px #5e5e5e, 854px 0px 0px #5e5e5e, 868px 0px 0px #5e5e5e, 882px 0px 0px #5e5e5e, 896px 0px 0px #5e5e5e, 910px 0px 0px #5e5e5e, 924px 0px 0px #5e5e5e, 938px 0px 0px #5e5e5e, 952px 0px 0px #5e5e5e, 966px 0px 0px #5e5e5e, 980px 0px 0px #5e5e5e, 994px 0px 0px #5e5e5e, 1008px 0px 0px #5e5e5e, 1022px 0px 0px #5e5e5e, 1036px 0px 0px #5e5e5e, 1050px 0px 0px #5e5e5e, 1064px 0px 0px #5e5e5e, 1078px 0px 0px #5e5e5e, 1092px 0px 0px #5e5e5e, 1106px 0px 0px #5e5e5e, 1120px 0px 0px #5e5e5e, 1134px 0px 0px #5e5e5e, 1148px 0px 0px #5e5e5e, 1162px 0px 0px #5e5e5e, 1176px 0px 0px #5e5e5e, 1190px 0px 0px #5e5e5e, 1204px 0px 0px #5e5e5e, 1218px 0px 0px #5e5e5e, 1232px 0px 0px #5e5e5e, 1246px 0px 0px #5e5e5e, 1260px 0px 0px #5e5e5e, 1274px 0px 0px #5e5e5e, 1288px 0px 0px #5e5e5e;
+}
+
+.film::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0px;
+  width: 8px;
+  height: 8px;
+  background: #5e5e5e;
+  box-shadow: 14px 0px 0px #5e5e5e, 28px 0px 0px #5e5e5e, 42px 0px 0px #5e5e5e, 56px 0px 0px #5e5e5e, 70px 0px 0px #5e5e5e, 84px 0px 0px #5e5e5e, 98px 0px 0px #5e5e5e, 112px 0px 0px #5e5e5e, 126px 0px 0px #5e5e5e, 140px 0px 0px #5e5e5e, 154px 0px 0px #5e5e5e, 168px 0px 0px #5e5e5e, 182px 0px 0px #5e5e5e, 196px 0px 0px #5e5e5e, 210px 0px 0px #5e5e5e, 224px 0px 0px #5e5e5e, 238px 0px 0px #5e5e5e, 252px 0px 0px #5e5e5e, 266px 0px 0px #5e5e5e, 280px 0px 0px #5e5e5e, 294px 0px 0px #5e5e5e, 308px 0px 0px #5e5e5e, 322px 0px 0px #5e5e5e, 336px 0px 0px #5e5e5e, 350px 0px 0px #5e5e5e, 364px 0px 0px #5e5e5e, 378px 0px 0px #5e5e5e, 392px 0px 0px #5e5e5e, 406px 0px 0px #5e5e5e, 420px 0px 0px #5e5e5e, 434px 0px 0px #5e5e5e, 448px 0px 0px #5e5e5e, 462px 0px 0px #5e5e5e, 476px 0px 0px #5e5e5e, 490px 0px 0px #5e5e5e, 504px 0px 0px #5e5e5e, 518px 0px 0px #5e5e5e, 532px 0px 0px #5e5e5e, 546px 0px 0px #5e5e5e, 560px 0px 0px #5e5e5e, 574px 0px 0px #5e5e5e, 588px 0px 0px #5e5e5e, 602px 0px 0px #5e5e5e, 616px 0px 0px #5e5e5e, 630px 0px 0px #5e5e5e, 644px 0px 0px #5e5e5e, 658px 0px 0px #5e5e5e, 672px 0px 0px #5e5e5e, 686px 0px 0px #5e5e5e, 700px 0px 0px #5e5e5e, 714px 0px 0px #5e5e5e, 728px 0px 0px #5e5e5e, 742px 0px 0px #5e5e5e, 756px 0px 0px #5e5e5e, 770px 0px 0px #5e5e5e, 784px 0px 0px #5e5e5e, 798px 0px 0px #5e5e5e, 812px 0px 0px #5e5e5e, 826px 0px 0px #5e5e5e, 840px 0px 0px #5e5e5e, 854px 0px 0px #5e5e5e, 868px 0px 0px #5e5e5e, 882px 0px 0px #5e5e5e, 896px 0px 0px #5e5e5e, 910px 0px 0px #5e5e5e, 924px 0px 0px #5e5e5e, 938px 0px 0px #5e5e5e, 952px 0px 0px #5e5e5e, 966px 0px 0px #5e5e5e, 980px 0px 0px #5e5e5e, 994px 0px 0px #5e5e5e, 1008px 0px 0px #5e5e5e, 1022px 0px 0px #5e5e5e, 1036px 0px 0px #5e5e5e, 1050px 0px 0px #5e5e5e, 1064px 0px 0px #5e5e5e, 1078px 0px 0px #5e5e5e, 1092px 0px 0px #5e5e5e, 1106px 0px 0px #5e5e5e, 1120px 0px 0px #5e5e5e, 1134px 0px 0px #5e5e5e, 1148px 0px 0px #5e5e5e, 1162px 0px 0px #5e5e5e, 1176px 0px 0px #5e5e5e, 1190px 0px 0px #5e5e5e, 1204px 0px 0px #5e5e5e, 1218px 0px 0px #5e5e5e, 1232px 0px 0px #5e5e5e, 1246px 0px 0px #5e5e5e, 1260px 0px 0px #5e5e5e, 1274px 0px 0px #5e5e5e, 1288px 0px 0px #5e5e5e;
+}
+/*
+.film div {
+  width: 90px;
+  height: 60%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  margin-left: 4px;
+  box-shadow: inset 0px 0px 10px 0px #b7410e;
+  display: inline-block;
+  margin-top: 50px;
+}
+
+.film div:nth-child(1) {
+  background: url(http://i.ytimg.com/vi/on7C1XuUAdY/maxresdefault.jpg) center center no-repeat;
+  background-size: cover;
+}
+
+.film div:nth-child(2) {
+  background: url(https://static.guim.co.uk/sys-images/Books/Pix/pictures/2013/8/27/1377623225716/Pain-and-Gain----2013-011.jpg) center center no-repeat;
+  background-size: cover;
+}
+
+.film div:nth-child(3) {
+  background: url(http://assets.nydailynews.com/polopoly_fs/1.1763504!/img/httpImage/image.jpg_gen/derivatives/article_970/pain-gain.jpg) center center no-repeat;
+  background-size: cover;
+}*/
+</style>
+

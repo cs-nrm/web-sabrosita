@@ -5,10 +5,10 @@ const currentPath = Astro.url.pathname;
 
 <div class="hidden md:flex gap-12 bar-stereo is-pinned">
     <!--div class="white-space sec-menu"></div-->
-    <div class="logo sec-menu"><a href="/"><img src="https://storage.googleapis.com/nrm-web/sabrosita/LOGO_SABROSITA_NEW.png" /></a></div>
+    <div class="logo relative sec-menu"><a class="absolute" href="/"><img src="https://storage.googleapis.com/nrm-web/sabrosita/LOGO_SABROSITA_NEW.png" /></a></div>
     <div class="header-buttons sec-menu">
       <div><Menu /></div> 
-      <div class="bg-black mt-2">
+      <div class="mt-2">
           <ul class="p-2 hh flex flex-row justify-end items-center gap-2">
             <li class="text-xs text-[#ef4444]"><span class="live-icon"></span> <span class="min-w-[60px] sm:min-w-[85px]">En la Radio:</span></li>
             <li class={`menu-section${currentPath.startsWith('/en-vivo') ? ' active' : ''}`}><a href="/en-vivo" target="_blank" class="text-xs flex flex-nowrap items-center gris gap-2 hover:text-#ef4444">
@@ -38,6 +38,7 @@ const currentPath = Astro.url.pathname;
       </button>
       <a target="_blank" href=="https://enfoquenoticias.com.mx/"><button class="radio-button text-xs text-white to-dark">Noticias</button></a-->
     </div>
+    <div class="opacity-back"></div>
 </div>
 <div class="flex md:hidden bar-stereo-mobile">
     <div class="white-space sec-menu"></div>
@@ -101,6 +102,16 @@ const currentPath = Astro.url.pathname;
 </div>
 
 <style>
+.opacity-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-backdrop-filter: brightness(60%) blur(16px);
+    backdrop-filter: brightness(60%) blur(16px);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
 .flecha-svg{
   transition: transform .4s;
 }
@@ -146,10 +157,13 @@ const currentPath = Astro.url.pathname;
   font-size: 1.5rem;
   font-weight: bold;
   display: flex;
+  width: 20%;
+  transition: all 0.5s;
 }
 
 .logo img{
-  height: 110px;
+  width: 100%;
+  height: auto;
   transition: all 0.5s;
 }
 
@@ -231,7 +245,7 @@ button:hover {
     display: inline-block;
     position: relative;
     top: calc(50% - 5px);
-    background-color: #ef4444;
+    background-color: #EA262A;
     width: 10px;
     height: 10px;
     margin-right: 5px;

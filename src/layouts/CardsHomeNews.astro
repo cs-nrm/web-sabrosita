@@ -6,25 +6,25 @@ import SuperLeader from '../components/SuperLeader.astro';
 import { Image } from 'astro:assets';
 
 
-const res = await fetch("https://contenido.stereociendigital.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,acf,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=20&categories=143");
+const res = await fetch("https://sabrositadigital.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,acf,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=4&categories=143");
 const posts = await res.json();
 const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
 
 ---
 
-      <div class="container cards">
-        <h1 class="text-center p-4 my-4 font-bold text-xl md:text-2xl lg:text-4xl">LAS DE HOY</h1>
+      <div class="container cards mt-8">
+
         <div class="news-grid grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 xl:gap-16">
         {
-          filteredPosts.slice(0, 4).map((post:any, idx:number) => (
+          filteredPosts.slice(1, 4).map((post:any, idx:number) => (
             <div class={`cards-filtro-${idx}`}>
               <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
                 <a href={`/cultura-pop/${post.slug}/`}>
-                  <div class="bg-black"><img src={post._embedded['wp:featuredmedia'][0].media_details.sizes['stc-size'].source_url} alt="Imagen Las de Hoy"/></div>
+                  <div><img class="rounded-xl" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt="Imagen Las de Hoy"/></div>
                   <div class="news-content p-6">
-                    <h5 set:html={post.title.rendered}></h5>
-                    <div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
-                    <span class="roboto font-bold text-xs mt-4">por {post.yoast_head_json.author}</span>
+                    <h5 class="leading-none" set:html={post.title.rendered}></h5>
+                    <!--div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
+                    <span class="roboto font-bold text-xs mt-4">por {post.yoast_head_json.author}</span-->
                   </div>
                 </a>  
               </article>
@@ -35,9 +35,9 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
       </div>
 
 <div class="m-auto text-center">
-    <a href="/cultura-pop" class="hover:text-white">
-        <button class="ver-mas lovelo group relative h-8 w-36 m-4 overflow-hidden bg-white hover:bg-[#ef4444] uppercase text-xs font-bold tracking-[3px]">
-            <span>Ver más</span>
+    <a href="/nota-sabrosa">
+        <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
+            <span>Más noticias aquí</span>
         </button>
     </a>
 </div>
@@ -48,22 +48,5 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
 @media (min-width: 769px) and (max-width: 1024px){
   .cards-filtro-3{display: block;}
 }
-/*
-.texto-nota{
-  box-shadow: none;
-  mask-image: linear-gradient(to bottom, hsla(var(--color-black), 1) 0, hsla(var(--color-black), 1) 10%, hsla(var(--color-black), 0) 100%);
-}
-
-.text-uno{
-	display: -webkit-box;
-	-webkit-margin-before: 0;
-  margin-block-start: 0;
-  -webkit-margin-after: 12px;
-  margin-block-end: 12px;
-  line-height: 1.2;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}*/
 </style>
 

@@ -25,7 +25,7 @@ import BarNrm from '../components/BarNrm.astro';
 import NotaPrincipal from '../layouts/CardsHomePrincipal.astro';
 import Viajes from '../layouts/CardsHomeViajes.astro';
 import Libros from '../layouts/CardsHomeLibros.astro'; 
-import CardsHomePlataformas from '../layouts/CardsHomePlataformas.astro';
+import CardsHomeTito from '../layouts/CardsHomeTito.astro';
 import Podcast from '../layouts/CardsHomePodcast.astro';
 import NewsLetter from '../layouts/NewsLetter.astro';
 import Promociones from '../layouts/SliderPromociones.astro';
@@ -38,33 +38,28 @@ import Promociones from '../layouts/SliderPromociones.astro';
         <BaseHead title={SITE_TITLE} seccion="Home" description={SITE_DESCRIPTION} />       
     </head>
     <body>
-        <BarNrm />
-        <NotaPrincipal />
         <Header title={SITE_TITLE} />
-        
+        <BarNrm />
         <main id="home">
-                <!--header-->
-                    <!--HomeHeader /-->
-                <!--/header-->
-                        
                 <section>                   
                     <div class="container-home p-4 mx-auto">                        
+                        <NotaPrincipal />
                         <CardNews />
                     </div>
                 </section>
-                <BillBoard />
-                <section>
+                <LeaderBoard />
+                <section class="bg-[#F0DAB5]">
                     <div class="container-home p-4 mx-auto">          
-                        <h1 class="text-center p-4 my-4 font-bold text-xl md:text-2xl lg:text-4xl">SERIES Y PELÍCULAS</h1>
-                        <CardsHomePlataformas />
+                        <CardsHomeTito />
                     </div>
                 </section>
-                <section>
+                <!--section>
                     <div class="container-home p-4 mx-auto">                        
                         <CardTecnologia/>
                     </div>
                 </section>
-                <LeaderBoard />
+
+                <BillBoard />
                 <section>
                     <Viajes />
                 </section>
@@ -85,7 +80,6 @@ import Promociones from '../layouts/SliderPromociones.astro';
                 <LeaderBoard2/>
                 <section>
                     <div class="container-home p-4 mx-auto">
-                        <!--h1 class="text-center p-4 my-4 font-bold text-xl md:text-2xl lg:text-4xl">MASCOTAS</h1-->
                         <div class="flex flex-nowrap gap-2">
                             <div class="w-full lg:w-2/3 platforms">
                                 <CardMascotas />
@@ -129,7 +123,7 @@ import Promociones from '../layouts/SliderPromociones.astro';
                     <div class="container-home p-4 mx-auto">
                         <NewsLetter />        
                     </div>
-                </section>
+                </section-->
         </main> 
         <!--Modal/-->
         <Footer />

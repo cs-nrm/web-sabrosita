@@ -564,7 +564,7 @@ document.addEventListener("astro:after-swap", () => {
 document.addEventListener('astro:page-load', ev => {
    // console.log('pageload');
    //$('.cover-background').html('');
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    
     window.addEventListener('scroll', function () {
                 const scrollY = window.scrollY;
                 
@@ -684,6 +684,8 @@ document.addEventListener('astro:page-load', ev => {
        // getInfoProg();
         console.log(getplayingstatus);
         
+    }else{
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
     const secprogram = document.getElementById('programacion');
     
