@@ -59,18 +59,18 @@ import BarNrm from '../../components/BarNrm.astro';
 <style>
     .programas{display:flex; width: 100%; font-family: 'Roboto'}
     .prog-now{width: 33%; padding: 20px; background: #201e1e;     border-top-right-radius: 20px;}
-    .prog-next{width: 33%;  padding: 20px; border-right: 1px solid white}
-    .prog-all{width: 34%;  padding: 20px; ; display: flex; gap: 25px; color:#201e1e;}
+    .prog-next{width: 33%;  padding: 20px; border-right: 1px solid white; margin-bottom:30px; }
+    .prog-all{width: 34%;  padding: 20px; ; display: flex; gap: 25px; color:#fff;}
     .prog-all div { display: flex; gap:10px;}
     .prog-all a {color:#e94543 }
     .banner-prog {width: 25%; padding:20px;}
     .banner-prog img {    object-fit: cover;    border-radius: 163%;}
-    .envivo-prog {   font-size: 2.5rem; color:#201e1e; font-family: 'Roboto';}
+    .envivo-prog {   font-size: 2.5rem; color:#fff; font-family: 'Roboto';}
     .envivo-prog-tab{ color:#d6d8d7; }
-    .envivo-prog-next-tab { color:#201e1e; }
+    .envivo-prog-next-tab { color:#fff; }
     .info-envivo {   padding: 40px; }
     .envivo-title, .siguiente-title {   color:#e94543; font-weight: bold; font-size: 85%;}
-    .envivo-title span, .siguiente-title span {color:#201e1e; font-weight: normal; }
+    .envivo-title span, .siguiente-title span {color:#fff; font-weight: normal; }
 
     @media (max-width: 768px) {
         .programas {display: block;}
@@ -87,7 +87,7 @@ import BarNrm from '../../components/BarNrm.astro';
     }
 </style>
 <script>
-$('.logo-player img').attr('src','/img/logo-STEREO-pag.png');
+$('.logo-player img').attr('src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player-small.svg');
 $('#big-play').removeClass('border-4');
 
 $('.like').on('click',function(){
