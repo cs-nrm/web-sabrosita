@@ -6,7 +6,7 @@ import SuperLeader from '../components/SuperLeader.astro';
 import { Image } from 'astro:assets';
 
 
-const res = await fetch("https://sabrositadigital.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,acf,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=4&categories=143");
+const res = await fetch("https://sabrositadigital.mx/wp-json/wp/v2/posts?_fields=id,date,title,slug,categories,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=5&categories=143&orderby=id&order=desc");
 const posts = await res.json();
 const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
 
@@ -16,7 +16,7 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
 
         <div class="news-grid grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 xl:gap-16">
         {
-          filteredPosts.slice(1, 4).map((post:any, idx:number) => (
+          filteredPosts.slice(1, 5).map((post:any, idx:number) => (
             <div class={`cards-filtro-${idx}`}>
               <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
                 <a href={`/cultura-pop/${post.slug}/`}>

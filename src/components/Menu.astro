@@ -18,16 +18,17 @@ const currentPath = Astro.url.pathname;
       <li class={`menu-section${currentPath.startsWith('/son-sonidero') ? ' active' : ''}`}><a href="/son-sonidero">Son Sonidero</a></li>
     </ul>
     <ul class="menu-mobile !hidden">
-      <li class={`menu-section${currentPath.startsWith('/nota-sabrosa') ? ' active' : ''}`}><a href="/nota-sabrosa">Nota Sabrosa</a></li>
+      <li class={`menu-section${currentPath.startsWith('/nota-sabrosa') ? ' active' : ''}`}><a href="/nota-sabrosa">Nota Sabrosacc</a></li>
       <li class={`menu-section${currentPath.startsWith('/promociones') ? ' active' : ''}`}><a href="/promociones">Promociones</a></li>
       <li class={`menu-section${currentPath.startsWith('/hot-parade') ? ' active' : ''}`}><a href="/hot-parade">Hot Parade</a></li>
       <li class={`menu-section${currentPath.startsWith('/entrevistas') ? ' active' : ''}`}><a href="/entrevistas">Entrevistas</a></li>
-      <li class={`menu-section${currentPath.startsWith('/momentos-irrepetibles') ? ' active' : ''}`}><a href="/podcast/momentos-irrepetibles">Audio Podcast</a></li>
-      <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
-      <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
-      <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
-      <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
-      <li class={`menu-section${currentPath.startsWith('/video-podcast') ? ' active' : ''}`}><a href="/video-podcast">Video Podcast</a></li>
+      <li class={`menu-section${currentPath.startsWith('/momentos-irrepetibles') ? ' active' : ''}`}><a href="/podcast/momentos-irrepetibles">Momentos irrepetibles</a></li>
+      <li class={`menu-section${currentPath.startsWith('/frecuencia-del-miedo') ? ' active' : ''}`}><a href="/podcast/frecuencia-del-miedo">Frecuencia del Miedo</a></li>
+      <li class={`menu-section${currentPath.startsWith('/vidas-salseras') ? ' active' : ''}`}><a href="/vidas-salseras">Vidas Salseras</a></li>
+      <li class={`menu-section${currentPath.startsWith('/secretos-detras-de-las-letras') ? ' active' : ''}`}><a href="/secretos-detras-de-las-letras">Los Secretos detrás de las Letras</a></li>
+      <li class={`menu-section${currentPath.startsWith('/sin-barreras') ? ' active' : ''}`}><a href="/sin-barreras">Sin Barreras</a></li>
+      <li class={`menu-section${currentPath.startsWith('/sabor-del-amor') ? ' active' : ''}`}><a href="/sabor-del-amor">El sabor del amor</a></li>
+      <li class={`menu-section${currentPath.startsWith('/retropical') ? ' active' : ''}`}><a href="/retropical">Retropical</a></li>
     </ul>
   </nav>
 
@@ -58,7 +59,7 @@ const currentPath = Astro.url.pathname;
 .nav-menu a, .nav-menu li {
   color: white;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 1rem;
   transition: color 0.2s;
 }
 
@@ -71,6 +72,7 @@ const currentPath = Astro.url.pathname;
 }
 
 @media (max-width: 990px){
+  .logo img{min-width: 100px; width: 30%;}
   .nav-menu ul{
     flex-wrap: nowrap;
     white-space: nowrap;
