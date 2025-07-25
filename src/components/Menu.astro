@@ -22,6 +22,10 @@ const currentPath = Astro.url.pathname;
       <li class={`menu-section${currentPath.startsWith('/promociones') ? ' active' : ''}`}><a href="/promociones">Promociones</a></li>
       <li class={`menu-section${currentPath.startsWith('/hot-parade') ? ' active' : ''}`}><a href="/hot-parade">Hot Parade</a></li>
       <li class={`menu-section${currentPath.startsWith('/entrevistas') ? ' active' : ''}`}><a href="/entrevistas">Entrevistas</a></li>
+      <li class={`menu-section${currentPath.startsWith('/momentos-irrepetibles') ? ' active' : ''}`}><a href="/podcast/momentos-irrepetibles">Audio Podcast</a></li>
+      <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
+      <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
+      <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
       <li class={`menu-section${currentPath.startsWith('/audio-podcast') ? ' active' : ''}`}><a href="/audio-podcast">Audio Podcast</a></li>
       <li class={`menu-section${currentPath.startsWith('/video-podcast') ? ' active' : ''}`}><a href="/video-podcast">Video Podcast</a></li>
     </ul>
@@ -66,7 +70,7 @@ const currentPath = Astro.url.pathname;
   color: #caccce;
 }
 
-@media (max-width: 1236px){
+@media (max-width: 990px){
   .nav-menu ul{
     flex-wrap: nowrap;
     white-space: nowrap;

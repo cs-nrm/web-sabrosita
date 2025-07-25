@@ -6,7 +6,7 @@ import SuperLeader from '../components/SuperLeader.astro';
 import { Image } from 'astro:assets';
 
 
-const res = await fetch("https://sabrositadigital.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,acf,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=4&categories=143");
+const res = await fetch("https://sabrositadigital.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,acf,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=5&categories=143");
 const posts = await res.json();
 const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
 
@@ -28,17 +28,19 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
   </div>
   <div class="container cards mt-8">
     <div class="film">
-      <div class="news-grid grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 xl:gap-16">
+      <div class="news-grid py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {
-          filteredPosts.slice(1, 4).map((post:any, idx:number) => (
+          filteredPosts.slice(1, 5).map((post:any, idx:number) => (
             <div class={`cards-filtro-${idx}`}>
-              <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
+              <article class="news-card">
                 <a href={`/nota-sabrosa/${post.slug}/`}>
-                  <div><img class="rounded-xl" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt="Imagen Las de Hoy"/></div>
-                  <div class="news-content p-6">
-                    <h5 class="leading-none" set:html={post.title.rendered}></h5>
-                    <!--div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
-                    <span class="roboto font-bold text-xs mt-4">por {post.yoast_head_json.author}</span-->
+                  <div class="relative h-full">
+                    <img class="" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt="Imagen Las de Hoy"/>
+                    <div class="news-content absolute bottom-0 left-0 bg-black bg-opacity-60 p-[5px] text-white w-full">
+                      <p class="leading-none text-xs mb-0" set:html={post.title.rendered}></p>
+                      <!--div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
+                      <span class="roboto font-bold text-xs mt-4">por {post.yoast_head_json.author}</span-->
+                    </div>
                   </div>
                 </a>  
               </article>
@@ -80,8 +82,8 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
   left: 0px;
   width: 8px;
   height: 8px;
-  background: #5e5e5e;
-  box-shadow: 14px 0px 0px #5e5e5e, 28px 0px 0px #5e5e5e, 42px 0px 0px #5e5e5e, 56px 0px 0px #5e5e5e, 70px 0px 0px #5e5e5e, 84px 0px 0px #5e5e5e, 98px 0px 0px #5e5e5e, 112px 0px 0px #5e5e5e, 126px 0px 0px #5e5e5e, 140px 0px 0px #5e5e5e, 154px 0px 0px #5e5e5e, 168px 0px 0px #5e5e5e, 182px 0px 0px #5e5e5e, 196px 0px 0px #5e5e5e, 210px 0px 0px #5e5e5e, 224px 0px 0px #5e5e5e, 238px 0px 0px #5e5e5e, 252px 0px 0px #5e5e5e, 266px 0px 0px #5e5e5e, 280px 0px 0px #5e5e5e, 294px 0px 0px #5e5e5e, 308px 0px 0px #5e5e5e, 322px 0px 0px #5e5e5e, 336px 0px 0px #5e5e5e, 350px 0px 0px #5e5e5e, 364px 0px 0px #5e5e5e, 378px 0px 0px #5e5e5e, 392px 0px 0px #5e5e5e, 406px 0px 0px #5e5e5e, 420px 0px 0px #5e5e5e, 434px 0px 0px #5e5e5e, 448px 0px 0px #5e5e5e, 462px 0px 0px #5e5e5e, 476px 0px 0px #5e5e5e, 490px 0px 0px #5e5e5e, 504px 0px 0px #5e5e5e, 518px 0px 0px #5e5e5e, 532px 0px 0px #5e5e5e, 546px 0px 0px #5e5e5e, 560px 0px 0px #5e5e5e, 574px 0px 0px #5e5e5e, 588px 0px 0px #5e5e5e, 602px 0px 0px #5e5e5e, 616px 0px 0px #5e5e5e, 630px 0px 0px #5e5e5e, 644px 0px 0px #5e5e5e, 658px 0px 0px #5e5e5e, 672px 0px 0px #5e5e5e, 686px 0px 0px #5e5e5e, 700px 0px 0px #5e5e5e, 714px 0px 0px #5e5e5e, 728px 0px 0px #5e5e5e, 742px 0px 0px #5e5e5e, 756px 0px 0px #5e5e5e, 770px 0px 0px #5e5e5e, 784px 0px 0px #5e5e5e, 798px 0px 0px #5e5e5e, 812px 0px 0px #5e5e5e, 826px 0px 0px #5e5e5e, 840px 0px 0px #5e5e5e, 854px 0px 0px #5e5e5e, 868px 0px 0px #5e5e5e, 882px 0px 0px #5e5e5e, 896px 0px 0px #5e5e5e, 910px 0px 0px #5e5e5e, 924px 0px 0px #5e5e5e, 938px 0px 0px #5e5e5e, 952px 0px 0px #5e5e5e, 966px 0px 0px #5e5e5e, 980px 0px 0px #5e5e5e, 994px 0px 0px #5e5e5e, 1008px 0px 0px #5e5e5e, 1022px 0px 0px #5e5e5e, 1036px 0px 0px #5e5e5e, 1050px 0px 0px #5e5e5e, 1064px 0px 0px #5e5e5e, 1078px 0px 0px #5e5e5e, 1092px 0px 0px #5e5e5e, 1106px 0px 0px #5e5e5e, 1120px 0px 0px #5e5e5e, 1134px 0px 0px #5e5e5e, 1148px 0px 0px #5e5e5e, 1162px 0px 0px #5e5e5e, 1176px 0px 0px #5e5e5e, 1190px 0px 0px #5e5e5e, 1204px 0px 0px #5e5e5e, 1218px 0px 0px #5e5e5e, 1232px 0px 0px #5e5e5e, 1246px 0px 0px #5e5e5e, 1260px 0px 0px #5e5e5e, 1274px 0px 0px #5e5e5e, 1288px 0px 0px #5e5e5e;
+  background: #F0DAB5;
+  box-shadow: 14px 0px 0px #F0DAB5, 28px 0px 0px #F0DAB5, 42px 0px 0px #F0DAB5, 56px 0px 0px #F0DAB5, 70px 0px 0px #F0DAB5, 84px 0px 0px #F0DAB5, 98px 0px 0px #F0DAB5, 112px 0px 0px #F0DAB5, 126px 0px 0px #F0DAB5, 140px 0px 0px #F0DAB5, 154px 0px 0px #F0DAB5, 168px 0px 0px #F0DAB5, 182px 0px 0px #F0DAB5, 196px 0px 0px #F0DAB5, 210px 0px 0px #F0DAB5, 224px 0px 0px #F0DAB5, 238px 0px 0px #F0DAB5, 252px 0px 0px #F0DAB5, 266px 0px 0px #F0DAB5, 280px 0px 0px #F0DAB5, 294px 0px 0px #F0DAB5, 308px 0px 0px #F0DAB5, 322px 0px 0px #F0DAB5, 336px 0px 0px #F0DAB5, 350px 0px 0px #F0DAB5, 364px 0px 0px #F0DAB5, 378px 0px 0px #F0DAB5, 392px 0px 0px #F0DAB5, 406px 0px 0px #F0DAB5, 420px 0px 0px #F0DAB5, 434px 0px 0px #F0DAB5, 448px 0px 0px #F0DAB5, 462px 0px 0px #F0DAB5, 476px 0px 0px #F0DAB5, 490px 0px 0px #F0DAB5, 504px 0px 0px #F0DAB5, 518px 0px 0px #F0DAB5, 532px 0px 0px #F0DAB5, 546px 0px 0px #F0DAB5, 560px 0px 0px #F0DAB5, 574px 0px 0px #F0DAB5, 588px 0px 0px #F0DAB5, 602px 0px 0px #F0DAB5, 616px 0px 0px #F0DAB5, 630px 0px 0px #F0DAB5, 644px 0px 0px #F0DAB5, 658px 0px 0px #F0DAB5, 672px 0px 0px #F0DAB5, 686px 0px 0px #F0DAB5, 700px 0px 0px #F0DAB5, 714px 0px 0px #F0DAB5, 728px 0px 0px #F0DAB5, 742px 0px 0px #F0DAB5, 756px 0px 0px #F0DAB5, 770px 0px 0px #F0DAB5, 784px 0px 0px #F0DAB5, 798px 0px 0px #F0DAB5, 812px 0px 0px #F0DAB5, 826px 0px 0px #F0DAB5, 840px 0px 0px #F0DAB5, 854px 0px 0px #F0DAB5, 868px 0px 0px #F0DAB5, 882px 0px 0px #F0DAB5, 896px 0px 0px #F0DAB5, 910px 0px 0px #F0DAB5, 924px 0px 0px #F0DAB5, 938px 0px 0px #F0DAB5, 952px 0px 0px #F0DAB5, 966px 0px 0px #F0DAB5, 980px 0px 0px #F0DAB5, 994px 0px 0px #F0DAB5, 1008px 0px 0px #F0DAB5, 1022px 0px 0px #F0DAB5, 1036px 0px 0px #F0DAB5, 1050px 0px 0px #F0DAB5, 1064px 0px 0px #F0DAB5, 1078px 0px 0px #F0DAB5, 1092px 0px 0px #F0DAB5, 1106px 0px 0px #F0DAB5, 1120px 0px 0px #F0DAB5, 1134px 0px 0px #F0DAB5, 1148px 0px 0px #F0DAB5, 1162px 0px 0px #F0DAB5, 1176px 0px 0px #F0DAB5, 1190px 0px 0px #F0DAB5, 1204px 0px 0px #F0DAB5, 1218px 0px 0px #F0DAB5, 1232px 0px 0px #F0DAB5, 1246px 0px 0px #F0DAB5, 1260px 0px 0px #F0DAB5, 1274px 0px 0px #F0DAB5, 1288px 0px 0px #F0DAB5;
 }
 
 .film::after {
@@ -91,8 +93,8 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
   left: 0px;
   width: 8px;
   height: 8px;
-  background: #5e5e5e;
-  box-shadow: 14px 0px 0px #5e5e5e, 28px 0px 0px #5e5e5e, 42px 0px 0px #5e5e5e, 56px 0px 0px #5e5e5e, 70px 0px 0px #5e5e5e, 84px 0px 0px #5e5e5e, 98px 0px 0px #5e5e5e, 112px 0px 0px #5e5e5e, 126px 0px 0px #5e5e5e, 140px 0px 0px #5e5e5e, 154px 0px 0px #5e5e5e, 168px 0px 0px #5e5e5e, 182px 0px 0px #5e5e5e, 196px 0px 0px #5e5e5e, 210px 0px 0px #5e5e5e, 224px 0px 0px #5e5e5e, 238px 0px 0px #5e5e5e, 252px 0px 0px #5e5e5e, 266px 0px 0px #5e5e5e, 280px 0px 0px #5e5e5e, 294px 0px 0px #5e5e5e, 308px 0px 0px #5e5e5e, 322px 0px 0px #5e5e5e, 336px 0px 0px #5e5e5e, 350px 0px 0px #5e5e5e, 364px 0px 0px #5e5e5e, 378px 0px 0px #5e5e5e, 392px 0px 0px #5e5e5e, 406px 0px 0px #5e5e5e, 420px 0px 0px #5e5e5e, 434px 0px 0px #5e5e5e, 448px 0px 0px #5e5e5e, 462px 0px 0px #5e5e5e, 476px 0px 0px #5e5e5e, 490px 0px 0px #5e5e5e, 504px 0px 0px #5e5e5e, 518px 0px 0px #5e5e5e, 532px 0px 0px #5e5e5e, 546px 0px 0px #5e5e5e, 560px 0px 0px #5e5e5e, 574px 0px 0px #5e5e5e, 588px 0px 0px #5e5e5e, 602px 0px 0px #5e5e5e, 616px 0px 0px #5e5e5e, 630px 0px 0px #5e5e5e, 644px 0px 0px #5e5e5e, 658px 0px 0px #5e5e5e, 672px 0px 0px #5e5e5e, 686px 0px 0px #5e5e5e, 700px 0px 0px #5e5e5e, 714px 0px 0px #5e5e5e, 728px 0px 0px #5e5e5e, 742px 0px 0px #5e5e5e, 756px 0px 0px #5e5e5e, 770px 0px 0px #5e5e5e, 784px 0px 0px #5e5e5e, 798px 0px 0px #5e5e5e, 812px 0px 0px #5e5e5e, 826px 0px 0px #5e5e5e, 840px 0px 0px #5e5e5e, 854px 0px 0px #5e5e5e, 868px 0px 0px #5e5e5e, 882px 0px 0px #5e5e5e, 896px 0px 0px #5e5e5e, 910px 0px 0px #5e5e5e, 924px 0px 0px #5e5e5e, 938px 0px 0px #5e5e5e, 952px 0px 0px #5e5e5e, 966px 0px 0px #5e5e5e, 980px 0px 0px #5e5e5e, 994px 0px 0px #5e5e5e, 1008px 0px 0px #5e5e5e, 1022px 0px 0px #5e5e5e, 1036px 0px 0px #5e5e5e, 1050px 0px 0px #5e5e5e, 1064px 0px 0px #5e5e5e, 1078px 0px 0px #5e5e5e, 1092px 0px 0px #5e5e5e, 1106px 0px 0px #5e5e5e, 1120px 0px 0px #5e5e5e, 1134px 0px 0px #5e5e5e, 1148px 0px 0px #5e5e5e, 1162px 0px 0px #5e5e5e, 1176px 0px 0px #5e5e5e, 1190px 0px 0px #5e5e5e, 1204px 0px 0px #5e5e5e, 1218px 0px 0px #5e5e5e, 1232px 0px 0px #5e5e5e, 1246px 0px 0px #5e5e5e, 1260px 0px 0px #5e5e5e, 1274px 0px 0px #5e5e5e, 1288px 0px 0px #5e5e5e;
+  background: #F0DAB5;
+  box-shadow: 14px 0px 0px #F0DAB5, 28px 0px 0px #F0DAB5, 42px 0px 0px #F0DAB5, 56px 0px 0px #F0DAB5, 70px 0px 0px #F0DAB5, 84px 0px 0px #F0DAB5, 98px 0px 0px #F0DAB5, 112px 0px 0px #F0DAB5, 126px 0px 0px #F0DAB5, 140px 0px 0px #F0DAB5, 154px 0px 0px #F0DAB5, 168px 0px 0px #F0DAB5, 182px 0px 0px #F0DAB5, 196px 0px 0px #F0DAB5, 210px 0px 0px #F0DAB5, 224px 0px 0px #F0DAB5, 238px 0px 0px #F0DAB5, 252px 0px 0px #F0DAB5, 266px 0px 0px #F0DAB5, 280px 0px 0px #F0DAB5, 294px 0px 0px #F0DAB5, 308px 0px 0px #F0DAB5, 322px 0px 0px #F0DAB5, 336px 0px 0px #F0DAB5, 350px 0px 0px #F0DAB5, 364px 0px 0px #F0DAB5, 378px 0px 0px #F0DAB5, 392px 0px 0px #F0DAB5, 406px 0px 0px #F0DAB5, 420px 0px 0px #F0DAB5, 434px 0px 0px #F0DAB5, 448px 0px 0px #F0DAB5, 462px 0px 0px #F0DAB5, 476px 0px 0px #F0DAB5, 490px 0px 0px #F0DAB5, 504px 0px 0px #F0DAB5, 518px 0px 0px #F0DAB5, 532px 0px 0px #F0DAB5, 546px 0px 0px #F0DAB5, 560px 0px 0px #F0DAB5, 574px 0px 0px #F0DAB5, 588px 0px 0px #F0DAB5, 602px 0px 0px #F0DAB5, 616px 0px 0px #F0DAB5, 630px 0px 0px #F0DAB5, 644px 0px 0px #F0DAB5, 658px 0px 0px #F0DAB5, 672px 0px 0px #F0DAB5, 686px 0px 0px #F0DAB5, 700px 0px 0px #F0DAB5, 714px 0px 0px #F0DAB5, 728px 0px 0px #F0DAB5, 742px 0px 0px #F0DAB5, 756px 0px 0px #F0DAB5, 770px 0px 0px #F0DAB5, 784px 0px 0px #F0DAB5, 798px 0px 0px #F0DAB5, 812px 0px 0px #F0DAB5, 826px 0px 0px #F0DAB5, 840px 0px 0px #F0DAB5, 854px 0px 0px #F0DAB5, 868px 0px 0px #F0DAB5, 882px 0px 0px #F0DAB5, 896px 0px 0px #F0DAB5, 910px 0px 0px #F0DAB5, 924px 0px 0px #F0DAB5, 938px 0px 0px #F0DAB5, 952px 0px 0px #F0DAB5, 966px 0px 0px #F0DAB5, 980px 0px 0px #F0DAB5, 994px 0px 0px #F0DAB5, 1008px 0px 0px #F0DAB5, 1022px 0px 0px #F0DAB5, 1036px 0px 0px #F0DAB5, 1050px 0px 0px #F0DAB5, 1064px 0px 0px #F0DAB5, 1078px 0px 0px #F0DAB5, 1092px 0px 0px #F0DAB5, 1106px 0px 0px #F0DAB5, 1120px 0px 0px #F0DAB5, 1134px 0px 0px #F0DAB5, 1148px 0px 0px #F0DAB5, 1162px 0px 0px #F0DAB5, 1176px 0px 0px #F0DAB5, 1190px 0px 0px #F0DAB5, 1204px 0px 0px #F0DAB5, 1218px 0px 0px #F0DAB5, 1232px 0px 0px #F0DAB5, 1246px 0px 0px #F0DAB5, 1260px 0px 0px #F0DAB5, 1274px 0px 0px #F0DAB5, 1288px 0px 0px #F0DAB5;
 }
 /*
 .film div {

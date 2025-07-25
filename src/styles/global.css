@@ -85,7 +85,7 @@ body::before{
   transition: all 05.s;  
 }
 
-.compress{ transition: height 0.5s; position: fixed; width: 100%; background-color: #000;}
+.compress{ transition: height 0.5s; position: fixed; width: 100%;}
 .compress .header-buttons div, .compress .header-buttons div nav{background: none; margin-top: 0;}
 header {position: sticky; top: 49px;  z-index: 9999; }
 header .logo img{
