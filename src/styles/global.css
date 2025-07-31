@@ -692,7 +692,10 @@ article .plyr--video{
     width: 38px;
   }
 }
-
+/* HOT PARADE HOME */
+.topten .flickity-viewport {
+    min-height: 205px;
+}
 /* PROMOCIONES HOME */
 .slider-promociones .flickity-viewport {
     min-height: 360px;
