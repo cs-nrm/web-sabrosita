@@ -5,6 +5,7 @@
  */
 
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
  :root {
 	--accent: #2337ff;
@@ -39,10 +40,10 @@
   color: var(--rojo);
 }
 
-@font-face {
+/*@font-face {
   font-family: 'Roboto';
   src: url('/fonts/Roboto-VariableFont.ttf');
-}
+}*/
 @font-face {
   font-family: 'Poppins';
   src: url('/fonts/Poppins-Regular.ttf');
@@ -164,7 +165,6 @@ table {
 	width: 100%;
 }
 img {
-	max-width: 100%;
   width: 100%;
 	height: auto;
 }
@@ -241,8 +241,8 @@ hr {
 	}
 }
 
-
-
+/*PUBLICIDAD*/
+#ad-slot1 iframe, #ad-slot2 iframe, #ad-slot3 iframe, #ad-slot32 iframe, #ad-slot4 iframe, #ad-slot42 iframe, #ad-slot421 iframe, #ad-slot5 iframe, #ad-slot6 iframe{margin: 0 auto;}
 /*preloader*/
 .loading{    opacity: 0.3;    transition: opacity 2s; }
 .showpreloader {    display:blocK!important;    transition: opacity 2s; }
@@ -588,12 +588,13 @@ article .plyr--video{
 
 /* FLICKITY */
 .flickity-button{
-	background: var(--plyr-color-main) !important;
+	background: var(--rojo) !important;
   color: white !important;
 }
 .flickity-prev-next-button {
     width: 70px !important;
     height: 70px !important;
+    top: 42% !important;
 }
 .slider-promociones .flickity-prev-next-button.previous {
     left: 8% !important;
@@ -700,5 +701,10 @@ article .plyr--video{
 @media only screen and (max-width: 768px){
 	.slider-promociones .flickity-viewport {
     	min-height: 480px;
+	}
+}
+@media only screen and (max-width: 500px){
+	.slider-promociones .flickity-viewport {
+    	min-height: 300px;
 	}
 }

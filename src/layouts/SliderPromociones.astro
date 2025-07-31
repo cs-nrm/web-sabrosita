@@ -6,12 +6,13 @@ import SuperLeader from '../components/SuperLeader.astro';
 import { Image } from 'astro:assets';
 
 
-const res = await fetch("https://contenido.stereociendigital.mx/wp-json/wp/v2/posts?_fields=title,slug,yoast_head_json,_links,_embedded&_embed&per_page=10&categories=275");
+const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_fields=title,slug,yoast_head_json,_links,_embedded&_embed&per_page=10&categories=505");
 const posts = await res.json();
 
 ---
+<div><img class="m-auto max-w-[200px]" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/PROMOCIONES.png"/></div>
 <div class="slider-promociones">
-	<div class="carousel main-carousel cards promos">
+	<div class="carousel main-promos cards promos">
 
 	{
 	posts.map((post:any)=> (
@@ -114,7 +115,11 @@ const posts = await res.json();
 .slider-promociones .flickity-viewport {
     min-height: 360px;
 }
-
+@media only screen and (max-width: 500px){
+	.slider-promociones .flickity-viewport {
+    	min-height: 300px;
+	}
+}
 @media only screen and (max-width: 768px){
 	.carousel-cell {
 		width: 70%;
@@ -124,6 +129,7 @@ const posts = await res.json();
     	min-height: 480px;
 	}
 }
+
 
 
 

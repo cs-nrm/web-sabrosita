@@ -690,6 +690,25 @@ document.addEventListener('astro:page-load', ev => {
             pageDots: false,
             autoPlay: 5000,
         });
+        var elempromo = document.querySelector('.main-promos');
+        var flktypromo = new Flickity( elempromo, {
+            contain: true,
+            lazyLoad: 1, 
+            wrapAround: true, 
+            cellAlign: 'center',
+            pageDots: false,
+            autoPlay: 5000,
+        });
+
+        var elemtopten = document.querySelector('.main-topten');
+        var flktytopten = new Flickity( elemtopten, {
+            contain: true,
+            lazyLoad: 1, 
+            wrapAround: true, 
+            cellAlign: 'center',
+            pageDots: false,
+            autoPlay: true
+        });
     }
     
     const imagenNota = document.getElementById("imagen-nota");
