@@ -75,7 +75,7 @@ body {
 
 body::before{
   content:'';
-  background: url('https://storage.googleapis.com/nrm-web/sabrosita/BACK-PALMERAS-min.png');
+  background: url('https://storage.googleapis.com/nrm-web/sabrosita/BACK-PALMERAS%202-min.png');
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -391,6 +391,11 @@ article .plyr--video{
 .wp-block-embed-youtube .wp-block-embed__wrapper{
   padding-top: 0 !important;
 }
+.wp-block-embed-youtube .wp-block-embed__wrapper iframe{
+  width: 100% !important;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
 
 /* player */
 .iframestyle {box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px; background-image: url('https://storage.googleapis.com/nrm-web/oye/recursos/8p7m.gif'); background-size:contain; background-color:#15181f; border: 1px solid  white; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;}
@@ -472,7 +477,7 @@ article .plyr--video{
   .card article {
       --active: 0.15;
       --start: 0;
-      background: var(--card);
+      /*background: var(--card);*/
       gap: 0.25rem;
       position: relative;
       

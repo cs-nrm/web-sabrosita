@@ -65,7 +65,7 @@ const currentPath = Astro.url.pathname;
   display: flex !important;
   margin-right: 15px;
 }
-.menu-mobile:after { content:  'ᐅ'; font-size: 18px; position: absolute; top: 25%; right: 4px;}
+.menu-mobile:after { content:  'ᐅ'; font-size: 18px; position: absolute; top: 10%; right: -2px;}
 .links-menu{
   display: none !important;
 }
@@ -149,6 +149,7 @@ nav a, .dd-menu, .dd-menu2 {
 
 nav a:hover, dd-menu:hover { 
 	background-color: #000; 
+  color:white;
 }
 nav a:checked, dd-menu:checked { 
 	color: var(--amarillo-beat); 
@@ -251,7 +252,7 @@ li > a:only-child:after, li > .dd-menu:only-child:after { content: ''; }
 .active > a,
 li.active > div,
 li.active > span {
-  background: #ffaa1d;
+  background: var(--rojo);
     color: black;
     transition: all 0.5s;
 }

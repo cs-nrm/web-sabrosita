@@ -19,7 +19,7 @@ const posts = await res.json();
 		<div class="carousel-cell card">
 			<article>
 				<a href={`/promociones/${post.slug}/`}>
-					<Image class="block h-auto w-full object-fill" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['medium_large'].source_url} width="300" height="150" alt={post.title.rendered}/>
+					<Image class="block h-auto w-full object-fill rounded-xl" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['medium_large'].source_url} width="300" height="150" alt={post.title.rendered}/>
 				</a>
 			</article>
 		</div>
@@ -41,10 +41,10 @@ const posts = await res.json();
 
 <style>
 .slider-promociones{
-	mask-image: linear-gradient(to right, hsla(var(--color-black), 0) 0, hsla(var(--color-black), 1) var(--page-padding-inline), hsla(var(--color-black), 1) calc(100% - var(--page-padding-inline)), hsla(var(--color-black), 0) 100%);
+	/*mask-image: linear-gradient(to right, hsla(var(--color-black), 0) 0, hsla(var(--color-black), 1) var(--page-padding-inline), hsla(var(--color-black), 1) calc(100% - var(--page-padding-inline)), hsla(var(--color-black), 0) 100%);
 	mask-image: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(79,79,79,0) 51%, rgba(0,0,0,0.6488970588235294) 100%);
     mask-image: radial-gradient(ellipse 82% 200% at 49% 33%,black 39%,transparent 61%);
-	mask-image: radial-gradient(ellipse 76% 226% at 50% 60%, black 56%, transparent 65%);
+	mask-image: radial-gradient(ellipse 76% 226% at 50% 60%, black 56%, transparent 65%);*/
 }
 .carousel{
   /*background-color: #7cdada;*/
@@ -82,10 +82,10 @@ const posts = await res.json();
 }
 
 .carousel-nav .carousel-cell.is-nav-selected img{
-  background: 	#c9018a;
+  /*background: 	#c9018a;*/
   border-radius: 0.25rem;
   box-shadow: 0 0 0px #fff, 0 0 10px #06dbe5, 0 0 20px #eb2fc7, 0 0 50px #d52ab3;
-  background-color: #343434;
+  /*background-color: #343434;*/
   color: white;
 }
 

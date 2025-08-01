@@ -34,44 +34,23 @@ var url_seccion;
 console.log(post.categories[0]);
 switch (post.categories[0]){
     case 143:        
-        url_seccion = 'cultura-pop';
+        url_seccion = 'nota-sabrosa';
     break;
-    case 791:        
-        url_seccion = 'entrevistas';
-    break;
-    case 524:
-        url_seccion = 'series-y-peliculas';
-    break;
-    case 527:
-        url_seccion = 'comida-y-guias';
-    break;
-    case 169:
-        url_seccion = 'autos';
-    break;
-    case 167:
-        url_seccion = 'mascotas';
-    break;
-    case 528:
-        url_seccion = 'tecnologia';
-    break;
-    case 683:
-        url_seccion = 'viajes';
-    break;
-    case 275:
+    case 505:        
         url_seccion = 'promociones';
     break;
-    case 853:
-        url_seccion = 'relojes';
+    case 1632:
+        url_seccion = 'son-sonidero';
     break;
-    case 854:
-        url_seccion = 'corona-capital';
+    case 791:
+        url_seccion = 'entrevistas';
     break;
     case 1639:
         url_seccion = 'tito-nieves';
     break;
     default:
-        url_seccion = 'cultura-pop';    
-    break;      
+        url_seccion = 'nota-sabrosa';    
+    break;     
 }
 
 
@@ -81,7 +60,7 @@ console.log(section);*/
 ---
           <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
             <a href={`/${url_seccion}/${post.slug}/`}>
-              <div class="bg-black"><img src={post.yoast_head_json.og_image[0].url} alt="Imagen Noticias"/></div>
+              <div><img class="rounded-xl" src={post.yoast_head_json.og_image[0].url} alt="Imagen Noticias"/></div>
               <div class="news-content p-6">
                 <h5 set:html={post.title.rendered}></h5>
                 <div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
