@@ -75,7 +75,7 @@ body {
 
 body::before{
   content:'';
-  background: url(https://storage.googleapis.com/nrm-web/sabrosita/palmeras-3.png);
+  background: url('https://storage.googleapis.com/nrm-web/sabrosita/BACK-PALMERAS-min.png');
   background-size: cover;
   width: 100%;
   height: 100%;
