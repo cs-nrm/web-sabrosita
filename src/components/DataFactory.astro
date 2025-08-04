@@ -62,21 +62,21 @@ const getEscudoUrl = id =>
           </div>
         ) : (
           partidos.map(partido => (
-            <div class="bg-[#fcd586] rounded-2xl shadow-lg px-6 py-4 m-3 w-[300px] flex flex-col items-center" style="min-width: 270px; max-width: 300px;">
+            <div class="bg-[#fcd586] rounded-2xl shadow-lg px-0 py-0 m-3 w-[300px] flex flex-col items-center" style="min-width: 270px; max-width: 300px;">
               <div class="w-full mb-2">
-                <div class="bg-[#ffb534] px-4 py-2 rounded-t-2xl text-sm font-bold text-[#41154d] text-center">
+                <div class="bg-[#ffb534] px-2 py-2 rounded-t-2xl text-xs font-bold text-[#41154d] text-center">
                   {partido['@competition']}<br />
                   {formatFecha(partido['@date'])} {formatHora(partido['@scheduledStart'])} hrs.
                 </div>
               </div>
               <div class="flex items-center justify-center gap-4 mt-2">
                 <img src={getEscudoUrl(partido['@homeTeamId'])} alt={partido['@homeTeamName']} class="h-12" />
-                <span class="text-2xl font-bold text-[#41154d]">VS</span>
+                <span class="text-base font-bold text-[#41154d]">VS</span>
                 <img src={getEscudoUrl(partido['@awayTeamId'])} alt={partido['@awayTeamName']} class="h-12" />
               </div>
-              <div class="flex items-center justify-between gap-4 mt-2 w-full px-4">
-                <span class="font-bold text-lg text-[#41154d]">{partido['@homeTeamName'].toUpperCase()}</span>
-                <span class="font-bold text-lg text-[#41154d]">{partido['@awayTeamName'].toUpperCase()}</span>
+              <div class="flex items-center justify-around gap-4 mt-2 w-full px-4">
+                <span class="font-bold text-xs text-[#41154d]">{partido['@homeTeamName'].toUpperCase()}</span>
+                <span class="font-bold text-xs text-[#41154d]">{partido['@awayTeamName'].toUpperCase()}</span>
               </div>
             </div>
           ))
