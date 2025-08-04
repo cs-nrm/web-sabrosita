@@ -12,8 +12,8 @@ import BoxBanner from '../../components/BoxBanner.astro';
 import BarNrm from '../../components/BarNrm.astro';
 
 export async function getStaticPaths( { paginate } ) {
-  const data = await getArticles(505);  
-  return paginate(data, { pageSize: 10 });
+  const data = await getArticles(1632);  
+  return paginate(data, { pageSize: 20 });
 }
 
 interface Props{
@@ -26,7 +26,7 @@ const {page=[]} = Astro.props;
 <!doctype html>
 <html lang="es">
 	<head>
-		<BaseHead title={SITE_TITLE} seccion="Promociones" description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} seccion="Son Sonidero" description={SITE_DESCRIPTION} />
 		
 	</head>
 	<body>
@@ -35,7 +35,7 @@ const {page=[]} = Astro.props;
 		
 		<main>
       <div class="container my-12 mx-auto px-4 md:px-12">
-				<div class="my-8"><img class="max-w-[200px] m-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/PROMOCIONES.png" alt="Título Nota Sabrosa"/></div>	
+				<div class="my-8"><img class="max-w-[200px] m-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/SONSONIDERO.png" alt="Título Son Sonidero"/></div>	
         <div class="flex flex-col lg:flex-row">
           <div class="sm:min-w-[calc(100%-400px)] lg:mr-10">
             <!--section class="flex flex-wrap -mx-1 lg:-mx-4"-->
@@ -61,7 +61,7 @@ const {page=[]} = Astro.props;
                 </a>}
             </div>
           </div>
-          <div class="bg-black/20 p-5 rounded-xl sm:min-w-[350px] relative text-center md:text-left">
+          <div class="bg-black/20 rounded-xl p-5 sm:min-w-[350px] relative text-center md:text-left">
             <div class="sticky top-[50px] left-0 right-0">
               <BoxBanner />
               </br>

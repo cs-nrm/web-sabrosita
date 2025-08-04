@@ -2,7 +2,7 @@
 import Card from '../layouts/CardMoreNews.astro';
 
 
-const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_embed&per_page=4&_fields=title,slug,yoast_head_json,categories&categories=143");
+const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_embed&per_page=4&_fields=title,slug,yoast_head_json,categories&categories=1632");
 const posts = await res.json();
 
 ---
@@ -18,7 +18,7 @@ const posts = await res.json();
                     }
         </section>
 <div class="m-auto text-center">
-    <a href="/nota-sabrosa">
+    <a href="/son-sonidero">
         <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
             <span>Más</span>
         </button>
