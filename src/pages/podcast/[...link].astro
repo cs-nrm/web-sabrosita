@@ -8,10 +8,12 @@ import Card from '../../layouts/CardsPodcast.astro';
 
  export function getStaticPaths() {    
     const arrpodcast = [
-        {nodo: 281,title: 'Autos al Cien', link: 'autos-al-cien', imagen: 'https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=400', descripcion: 'Descubre la innovación e información de la industria automotriz.'},
-        {nodo: 279,title: 'El Especial', link: 'el-especial', imagen: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=400', descripcion: 'Nada se compara a la emoción de asistir a un concierto y encontrarte con tu artista favorito.'},
-        {nodo: 280,title: 'Mascotas con Estrella', link: 'mascotas-con-estrella', imagen: 'https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=400', descripcion: 'Todo eso que siempre quisiste saber de tus mascotas y jamás te atreviste a preguntar.'},
-        {nodo: 827,title: 'Magazin', link: 'magazin', imagen: 'https://contenido.stereociendigital.mx/wp-content/uploads/2025/06/MAGAZIN_.PODCST.jpg', descripcion: 'Recorridos llenos de nostalgia, descubrimientos y mucha música con alma.'},
+        {nodo: 773,title: 'Momentos Irrepetibles', link: 'momentos-irrepetibles', imagen: 'https://storage.googleapis.com/nrm-web/sabrosita/podcast/MOMENTOS.jpg', descripcion: 'Te presentamos material inédito de los grandes ídolos de México para que conozcas en sus propias palabras su verdadera historia... Escúchalo y entra en la vida de los grandes ídolos de México.'},
+        {nodo: 726,title: 'Frecuencia del Miedo', link: 'frecuencia-del-miedo', imagen: 'https://storage.googleapis.com/nrm-web/sabrosita/podcast/MIEDO.jpg', descripcion: 'Testimonios que hablan de la existencia de seres aterradores, demonios, fantasmas, seres que dan miedo. Te recomendamos no sugestionarte o de lo contrario quedarás atrapado en un plano dimensional sin regreso.'},
+        {nodo: 509,title: 'Vidas Salseras', link: 'vidas-salseras', imagen: 'https://storage.googleapis.com/nrm-web/sabrosita/podcast/VIDAS.jpg', descripcion: 'Historias, anécdotas, triunfos, fracasos y todas las experiencias que han construido a los protagonistas de la música tropical son parte de este podcast. Un acercamiento a la intimidad de los artistas más importantes de la música tropical.'},
+        {nodo: 511,title: 'Los Secretos detrás de las Letras', link: 'secretos-detras-de-las-letras', imagen: 'https://storage.googleapis.com/nrm-web/sabrosita/podcast/SECRETOS.jpg', descripcion: ''},
+        {nodo: 512,title: 'Sin Barreras', link: 'sin-barreras', imagen: 'https://storage.googleapis.com/nrm-web/sabrosita/podcast/SIN-BARRERAS.jpg', descripcion: 'Sin Barreras con Giovanna Franyuti'},
+        {nodo: 752,title: 'El Sabor del Amor', link: 'sabor-del-amor', imagen: 'https://storage.googleapis.com/nrm-web/sabrosita/podcast/SABOR_AMOR.jpg', descripcion: ''},
     ]; 
     return arrpodcast.map((podcast) => {
       return {
@@ -31,7 +33,7 @@ const { link } = Astro.params;
 const { podcast } = Astro.props;
 const { cat } = Astro.props ;
 
-const res = await fetch("https://contenido.stereociendigital.mx/wp-json/wp/v2/posts?_embed&fields=title,acf&per_page=10&categories=" + cat); 
+const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_embed&fields=title,acf&per_page=10&categories=" + cat); 
 const posts = await res.json();
 ---
 

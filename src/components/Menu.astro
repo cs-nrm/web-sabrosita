@@ -10,13 +10,19 @@ const currentPath = Astro.url.pathname;
             <li class={`menu-section${currentPath.startsWith('/hot-parade') ? ' active' : ''}`}><a href="/hot-parade">Hot Parade</a></li>
             <li class={`dd-menu${currentPath.startsWith('/podcast') ? ' active' : ''}`}>Podcast
               <ul>
-                <li class={`dd-menu2${currentPath.startsWith('/podcast') ? ' active' : ''}`}>Audio Podcast
+                <li class={currentPath.startsWith('/podcast/momentos-irrepetibles') ? 'active' : ''}><a href="/podcast/momentos-irrepetibles">Momentos Irrepetibles</a></li>
+                <li class={currentPath.startsWith('/podcast/frecuencia-del-miedo') ? 'active' : ''}><a href="/podcast/frecuencia-del-miedo">Frecuencia del Miedo</a></li>
+                <li class={currentPath.startsWith('/podcast/vidas-salseras') ? 'active' : ''}><a href="/podcast/vidas-salseras">Vidas Salseras</a></li>
+                <li class={currentPath.startsWith('/podcast/secretos-detras-de-las-letras') ? 'active' : ''}><a href="/podcast/secretos-detras-de-las-letras">Secretos detrás de las Letras</a></li>
+                <li class={currentPath.startsWith('/podcast/sin-barreras') ? 'active' : ''}><a href="/podcast/sin-barreras">Sin Barreras</a></li>
+                <li class={currentPath.startsWith('/podcast/sabor-del-amor') ? 'active' : ''}><a href="/podcast/sabor-del-amor">El sabor del amor</a></li>
+                <!--li class={`dd-menu2${currentPath.startsWith('/podcast') ? ' active' : ''}`}>Audio Podcast
                   <ul>
-                    <li class={currentPath.startsWith('/podcast/momentos irrepetibles') ? 'active' : ''}><a href="/podcast/momentos-irrepetibles">Momentos Irrepetibles</a></li>
+                    <li class={currentPath.startsWith('/podcast/momentos-irrepetibles') ? 'active' : ''}><a href="/podcast/momentos-irrepetibles">Momentos Irrepetibles</a></li>
                     <li class={currentPath.startsWith('/podcast/frecuencia-del-miedo') ? 'active' : ''}><a href="/podcast/frecuencia-del-miedo">Frecuencia del Miedo</a></li>
                     <li class={currentPath.startsWith('/podcast/vidas-salseras') ? 'active' : ''}><a href="/podcast/vidas-salseras">Vidas Salseras</a></li>
                     <li class={currentPath.startsWith('/podcast/secretos-detras-de-las-letras') ? 'active' : ''}><a href="/podcast/secretos-detras-de-las-letras">Secretos detrás de las Letras</a></li>
-                    <li class={currentPath.startsWith('/podcast/sin barreras') ? 'active' : ''}><a href="/podcast/sin-barreras">Sin Barreras</a></li>
+                    <li class={currentPath.startsWith('/podcast/sin-barreras') ? 'active' : ''}><a href="/podcast/sin-barreras">Sin Barreras</a></li>
                     <li class={currentPath.startsWith('/podcast/sabor-del-amor') ? 'active' : ''}><a href="/podcast/sabor-del-amor">El sabor del amor</a></li>
                   </ul>
                 </li>
@@ -24,11 +30,12 @@ const currentPath = Astro.url.pathname;
                   <ul>
                     <li class={currentPath.startsWith('retropical') ? 'active' : ''}><a href="retropical">Retropical</a></li>
                   </ul>
-                </li>
+                </li-->
               </ul>        
             </li>
+            <li class={`menu-section${currentPath.startsWith('/retropical') ? 'active' : ''}`}><a href="/retropical">Retropical</a></li>
             <li class={`menu-section${currentPath.startsWith('/entrevistas') ? ' active' : ''}`}><a href="/entrevistas">Entrevistas</a></li>
-            <li class={currentPath.startsWith('/son-sonidero') ? 'active' : ''}><a href="/son-sonidero">Son Sonidero</a></li>   
+            <li class={`menu-section${currentPath.startsWith('/son-sonidero') ? 'active' : ''}`}><a href="/son-sonidero">Son Sonidero</a></li>   
         </ul>
       </nav>
     </div>
@@ -160,7 +167,8 @@ nav ul ul {
 	display: none;
 	position: absolute; 
   backdrop-filter: brightness(60%) blur(16px);
-  top: 20px;
+  top: 16px;
+  padding-top: 5px;
   left: 0;
   overflow: visible;
   z-index: 2;

@@ -5,7 +5,7 @@ import LeaderBoard from'../components/LeaderBoard.astro';
 import SuperLeader from '../components/SuperLeader.astro';
 import { Image } from 'astro:assets';
 
-const ressti = await fetch("https://sabrositadigital.mx/wp-json/wp/v2/posts?_fields=id,date,title,slug,categories,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=10&categories=143&orderby=date&order=desc");
+const ressti = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_fields=id,date,title,slug,categories,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=10&categories=143&orderby=date&order=desc");
 const poststi = await ressti.json();
 
 
