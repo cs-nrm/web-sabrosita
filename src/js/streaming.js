@@ -710,7 +710,7 @@ document.addEventListener('astro:page-load', ev => {
             autoPlay: true
         });
         
-        var df = document.querySelector('.datafactory');
+        var df = document.querySelector('.df');
         var flktydf = new Flickity( df, {
             contain: true,
             lazyLoad: 1, 
