@@ -1,0 +1,95 @@
+---
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts.js';
+/*import {getArticles} from '../../../lib/api.js';*/
+import Card from '../../../layouts/CardsVideos.astro';
+import BarNrm from '../../../components/BarNrm.astro';
+
+
+export async function getStaticPaths( { paginate } ) {
+    
+    const arrvideos = [
+        {nodo: 789,title: 'Retropical', link: 'retropical', imagen: 'https://storage.googleapis.com/nrm-web/sabrosita/titulos/RETROPICAL.png', descripcion: ''},
+        {nodo: 1643,title: 'Historias con Salsa', link: 'historias-con-salsa', imagen: 'https://storage.googleapis.com/nrm-web/sabrosita/titulos/RETROPICAL.png', descripcion: ''},
+    ]; 
+
+  
+  const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_embed&per_page=250&_fields=title,slug,yoast_head_json,categories,acf&categories=789,1643" ); 
+  const posts = await res.json();
+  //console.log(posts);
+  
+  return arrvideos.flatMap( function(vid) {      
+      const videos = vid.link; 
+      //console.log(pod.nodo);           
+      const filteredPosts = posts.filter((post:any) => post.categories[0]  == vid.nodo || post.categories[1]  == vid.nodo );                      
+      //console.log(filteredPosts);
+      return paginate(filteredPosts,{
+        params:{ videos }, 
+        props: { vid},
+        pageSize: 10
+      });
+  });  
+}
+
+interface Props{
+  page: any; 
+  videos: any;
+  vid:any; 
+}
+
+const { page = [] } = Astro.props;
+const { videos, vid } = Astro.props;
+/*const { pod } = Astro.props;*/
+
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title={SITE_TITLE} seccion="Podcast" description={SITE_DESCRIPTION} />
+    
+  </head>
+  <body>
+    <BarNrm />
+    <Header title={SITE_TITLE} />
+    
+    <main>
+            
+      <div class="container my-12 mx-auto px-4 md:px-12"> 
+        <div class="my-8"><img class="max-w-[200px] m-auto" src={vid.imagen} alt="Título Retropical"/></div>
+        <!--div class="flex flex-wrap justify-center ">
+          <div class="w-full md:w-1/3 lg:w-1/4"><img class="content-center shadow-xl rounded-xl" src={pod.imagen}/></div>
+          <div class="w-full md:w-2/3 lg:w:3/4 p-4 flex items-center">
+            <div>
+              <h1 class="audiowide neon-morado text-center md:text-left font-bold text-3xl md:text-4xl lg:text-3xl xl:text-4xl align-middle">{pod.title} </h1>
+              <p class="align-middle">{pod.descripcion}</p>
+            </div> 
+          </div>
+        </div-->
+        <section class="flex flex-wrap -mx-4">
+          { 
+            page.data.map((post:any) => ( 
+            <>
+              <Card post={post} />
+            </>
+            ))
+          }
+        </section>
+            <div class="m-auto text-center">
+                {page.url.prev && <a href={page.url.prev}>
+                  <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
+                      <span>Anterior</span>
+                  </button>
+                </a>}
+                {page.url.next && <a href={page.url.next}>
+                  <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
+                      <span>Siguiente</span>
+                  </button>
+                </a>}
+            </div>
+      </div>  
+    </main>
+    <Footer />
+  </body>
+</html>
