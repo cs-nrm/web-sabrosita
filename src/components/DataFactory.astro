@@ -27,14 +27,26 @@ partidos = partidos.filter(Boolean);
 // Ordenar por fecha
 partidos.sort((a, b) => a['@date'].localeCompare(b['@date']));
 
-// Utilidad para formatear la fecha a dd/mm/yyyy y hora
-function formatFecha(fechaStr) {
-  // fechaStr: "20250809"
-  return fechaStr ? `${fechaStr.slice(6,8)}/${fechaStr.slice(4,6)}/${fechaStr.slice(0,4)}` : '';
-}
-function formatHora(horaStr) {
-  // horaStr: "00:00:00"
-  return horaStr ? horaStr.slice(0,5) : '';
+// Utilidad para formatear fecha y hora de Argentina a hora México
+function fechaHoraMexico(fechaStr, horaStr) {
+  // fechaStr: "20250809", horaStr: "00:15:00"
+  if (!fechaStr || !horaStr) return {fecha: '', hora: ''};
+
+  const yyyy = parseInt(fechaStr.slice(0,4));
+  const mm = parseInt(fechaStr.slice(4,6)) - 1; // JS: 0=enero
+  const dd = parseInt(fechaStr.slice(6,8));
+  const [hh, min, ss] = horaStr.split(':').map(Number);
+
+  // La hora que llega es local Argentina, así que la tratamos como UTC-3.
+  // Creamos un objeto Date en UTC y restamos 3 horas
+  let dt = new Date(Date.UTC(yyyy, mm, dd, hh, min, ss));
+  dt.setUTCHours(dt.getUTCHours() - 3);
+
+  // Formato dd/mm/yyyy y hh:mm
+  const fecha = `${dt.getUTCDate().toString().padStart(2,'0')}/${(dt.getUTCMonth()+1).toString().padStart(2,'0')}/${dt.getUTCFullYear()}`;
+  const hora = `${dt.getUTCHours().toString().padStart(2,'0')}:${dt.getUTCMinutes().toString().padStart(2,'0')}`;
+
+  return {fecha, hora};
 }
 
 // URL de escudo
@@ -44,7 +56,7 @@ const getEscudoUrl = id =>
 
 <html lang="es">
   <head>
-    
+    <!-- Puedes agregar metas o scripts extra aquí -->
   </head>
   <body class="bg-[#41154d] py-8">
     <div class="flex flex-col items-center justify-center">
@@ -61,28 +73,30 @@ const getEscudoUrl = id =>
             No hay partidos programados para la próxima jornada.
           </div>
         ) : (
-          partidos.map(partido => (
-            <div class="bg-[#fcd586] rounded-2xl shadow-lg px-0 py-0 m-3 w-[300px] flex flex-col items-center" style="min-width: 270px; max-width: 300px;">
-              <div class="w-full mb-2">
-                <div class="bg-[#ffb534] px-2 py-2 rounded-t-2xl text-xs font-bold text-[#41154d] text-center">
-                  {partido['@competition']}<br />
-                  {formatFecha(partido['@date'])} {formatHora(partido['@scheduledStart'])} hrs.
+          partidos.map(partido => {
+            const fechaHora = fechaHoraMexico(partido['@date'], partido['@scheduledStart']);
+            return (
+              <div class="bg-[#fcd586] rounded-2xl shadow-lg px-0 py-0 m-3 w-[300px] flex flex-col items-center" style="min-width: 270px; max-width: 300px;">
+                <div class="w-full mb-2">
+                  <div class="bg-[#ffb534] px-2 py-2 rounded-t-2xl text-xs font-bold text-[#41154d] text-center">
+                    {partido['@competition']}<br />
+                    {fechaHora.fecha} {fechaHora.hora} hrs.
+                  </div>
+                </div>
+                <div class="flex items-center justify-center gap-4 mt-2">
+                  <img src={getEscudoUrl(partido['@homeTeamId'])} alt={partido['@homeTeamName']} class="h-12" />
+                  <span class="text-base font-bold text-[#41154d]">VS</span>
+                  <img src={getEscudoUrl(partido['@awayTeamId'])} alt={partido['@awayTeamName']} class="h-12" />
+                </div>
+                <div class="flex items-center justify-around gap-4 mt-2 w-full px-4">
+                  <span class="font-bold text-xs text-[#41154d]">{partido['@homeTeamName'].toUpperCase()}</span>
+                  <span class="font-bold text-xs text-[#41154d]">{partido['@awayTeamName'].toUpperCase()}</span>
                 </div>
               </div>
-              <div class="flex items-center justify-center gap-4 mt-2">
-                <img src={getEscudoUrl(partido['@homeTeamId'])} alt={partido['@homeTeamName']} class="h-12" />
-                <span class="text-base font-bold text-[#41154d]">VS</span>
-                <img src={getEscudoUrl(partido['@awayTeamId'])} alt={partido['@awayTeamName']} class="h-12" />
-              </div>
-              <div class="flex items-center justify-around gap-4 mt-2 w-full px-4">
-                <span class="font-bold text-xs text-[#41154d]">{partido['@homeTeamName'].toUpperCase()}</span>
-                <span class="font-bold text-xs text-[#41154d]">{partido['@awayTeamName'].toUpperCase()}</span>
-              </div>
-            </div>
-          ))
+            )
+          })
         )}
       </div>
     </div>
-    
   </body>
 </html>
