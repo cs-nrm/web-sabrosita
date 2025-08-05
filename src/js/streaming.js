@@ -686,7 +686,7 @@ document.addEventListener('astro:page-load', ev => {
             contain: true,
             lazyLoad: 1, 
             wrapAround: true, 
-            cellAlign: 'center',
+            cellAlign: 'left',
             pageDots: false,
             autoPlay: 5000,
         });
@@ -695,7 +695,7 @@ document.addEventListener('astro:page-load', ev => {
             contain: true,
             lazyLoad: 1, 
             wrapAround: true, 
-            cellAlign: 'center',
+            cellAlign: 'left',
             pageDots: false,
             autoPlay: 5000,
         });
@@ -705,10 +705,21 @@ document.addEventListener('astro:page-load', ev => {
             contain: true,
             lazyLoad: 1, 
             wrapAround: true, 
-            cellAlign: 'center',
+            cellAlign: 'left',
             pageDots: false,
             autoPlay: true
         });
+        
+        var df = document.querySelector('.datafactory');
+        var flktydf = new Flickity( df, {
+            contain: true,
+            lazyLoad: 1, 
+            wrapAround: true, 
+            cellAlign: 'left',
+            pageDots: false,
+            autoPlay: true
+        });
+        console.log( flktydf);
     }
     
     const imagenNota = document.getElementById("imagen-nota");
