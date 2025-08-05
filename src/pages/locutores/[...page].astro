@@ -12,7 +12,7 @@ import BoxBanner from '../../components/BoxBanner.astro';
 import BarNrm from '../../components/BarNrm.astro';
 
 export async function getStaticPaths( { paginate } ) {
-  const data = await getArticles(713);  
+  const data = await getArticles(1642);  
   return paginate(data, { pageSize: 20 });
 }
 
@@ -35,7 +35,7 @@ const {page=[]} = Astro.props;
 		
 		<main>
       <div class="container my-12 mx-auto px-4 md:px-12">
-				<h1 class="text-center p-4 my-4 font-bold text-xl md:text-2xl lg:text-4xl">Locutores</h1>	
+				<div class="my-8"><img class="max-w-[200px] m-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/TALENTO.png" alt="Título Talento"/></div>	
         <div class="flex flex-col lg:flex-row">
           <div class="sm:min-w-[calc(100%-400px)] lg:mr-10">
             <!--section class="flex flex-wrap -mx-1 lg:-mx-4"-->
@@ -49,19 +49,19 @@ const {page=[]} = Astro.props;
               }
             </section>
             <div class="m-auto text-center">
-                {page.url.prev && <a href={page.url.prev} class="text-black hover:text-white">
-                    <button class="ver-mas lovelo group relative h-8 w-36 m-4 overflow-hidden bg-white hover:bg-[#ef4444] uppercase text-xs font-bold tracking-[3px]">
-                        <span>Anterior</span>
-                    </button>
+                {page.url.prev && <a href={page.url.prev}>
+                  <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
+                      <span>Anterior</span>
+                  </button>
                 </a>}
-                {page.url.next && <a href={page.url.next} class="text-black hover:text-white">
-                    <button class="ver-mas lovelo group relative h-8 w-36 m-4 overflow-hidden bg-white hover:bg-[#ef4444] uppercase text-xs font-bold tracking-[3px]">
-                        <span>Siguiente</span>
-                    </button>
+                {page.url.next && <a href={page.url.next}>
+                  <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
+                      <span>Siguiente</span>
+                  </button>
                 </a>}
             </div>
           </div>
-          <div class="bg-black/20 p-5 sm:min-w-[350px] relative text-center md:text-left">
+          <div class="bg-black/20 rounded-xl p-5 sm:min-w-[350px] relative text-center md:text-left">
             <div class="sticky top-[50px] left-0 right-0">
               <BoxBanner />
               </br>
