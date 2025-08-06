@@ -378,7 +378,7 @@ function getInfoMusic() {
        
         function getInfoProg(){
             
-            fetch("https://sabrositadigital.mx/wp-json/wp/v2/posts?_embed&per_page=100&categories=757&_fields[]=acf&_fields[]=content&_fields[]=jetpack_featured_media_url")
+            fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_embed&per_page=100&categories=757&_fields[]=acf&_fields[]=content&_fields[]=jetpack_featured_media_url")
             .then((res) => {
                 if (!res.ok) {
                     throw new Error
@@ -634,9 +634,12 @@ document.addEventListener('astro:page-load', ev => {
     fetch('/pageview_candidate.txt?'+ts)
     .then(function(resp){
         console.log(resp);            
-    });  
-
+    });      
     /* =======COMSCORE*/
+
+    /* refresh pub*/ 
+    googletag.pubads().refresh();
+    window.instgrm.Embeds.process();
 
 
    const getplayingstatus = playerstatus();
