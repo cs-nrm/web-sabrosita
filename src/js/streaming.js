@@ -634,13 +634,10 @@ document.addEventListener('astro:page-load', ev => {
     fetch('/pageview_candidate.txt?'+ts)
     .then(function(resp){
         console.log(resp);            
-    });      
+    });  
+    
     /* =======COMSCORE*/
-
-    /* refresh pub*/ 
     googletag.pubads().refresh();
-    window.instgrm.Embeds.process();
-
 
    const getplayingstatus = playerstatus();
     document.querySelector('main').classList.remove('loading');    
