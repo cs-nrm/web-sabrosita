@@ -387,7 +387,7 @@ function getInfoMusic() {
                 return res.json();
             })
             .then((data) => {                
-                //console.log(data);
+                console.log(data);
                 const fecha = new Date();                
                 //const hora = fecha.getHours() + ':' + fecha.getUTCMinutes() + ':' + fecha.getSeconds();
                 const dias = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
@@ -420,8 +420,8 @@ function getInfoMusic() {
             });           
         }
         
-        //setTimeout(getInfoProg, 20000);
-        //setInterval( getInfoProg, 300000);       
+        setTimeout(getInfoProg, 20000);
+        setInterval( getInfoProg, 300000);       
 
 const radioActive = function(){
     $('#player-inner').addClass('active');
@@ -547,7 +547,7 @@ document.addEventListener("astro:after-swap", () => {
     setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 3000);
 
     googletag.pubads().refresh();
-    window.instgrm.Embeds.process();
+    //window.instgrm.Embeds.process();
 });
 
 
@@ -648,7 +648,7 @@ document.addEventListener('astro:page-load', ev => {
 
     if ( secenvivo ){   
         //console.log('envivo');
-        getInfoProg();
+        getInfoProg();        
         getInfoMusic();
         setInterval( getInfoProg, 60000);
         $('#radiobutton').addClass('en-vivo');
