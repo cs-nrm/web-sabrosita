@@ -4,42 +4,9 @@ import { Image } from "astro:assets"
 <div class="super-leader w-full py-9 table mx-auto text-center">
   <!--span class="roboto text-xs text-zinc-500">PUBLICIDAD</span-->
   <!--img src="https://contenido.beatdigital.mx/wp-content/uploads/2024/07/super-leader.jpg" alt="super leader" width="970" height="66" /-->
-  <div id="ad-slot6" class="hidden md:block">
-	<script defer is:inline>
-	  var gptAdSlots6 = [];
-	  googletag.cmd.push(function() {
- 	    var mapping6 = googletag.sizeMapping().
-	    addSize([728, 90]).
-	    build(); //970x90
-	    var slot6 = googletag.defineSlot("/21799830913/Sabrosita", [728, 90],'ad-slot6').
-	    defineSizeMapping(mapping6).
-	    addService(googletag.pubads());
-	    googletag.pubads().setTargeting("test","responsive");
-	    googletag.enableServices();
-	    googletag.display('ad-slot6');
-	    googletag.pubads().refresh([slot6]);
-	    //setInterval(function(){googletag.pubads().refresh([slot6]);}, 180000);
-	  });
-	</script>
-  </div>
-  <div id="ad-slot61" class="block md:hidden">
-	<script defer is:inline>
-	  var gptAdSlots61 = [];
-	  googletag.cmd.push(function() {
- 	    var mapping61 = googletag.sizeMapping().
-	    addSize([320, 50]).
-	    build();
-	    var slot61 = googletag.defineSlot("/21799830913/Sabrosita", [320, 50],'ad-slot61').
-	    defineSizeMapping(mapping61).
-	    addService(googletag.pubads());
-	    googletag.pubads().setTargeting("test","responsive");
-	    googletag.enableServices();
-	    googletag.display('ad-slot61');
-	    googletag.pubads().refresh([slot61]);
-	    //setInterval(function(){googletag.pubads().refresh([slot6]);}, 180000);
-	  });
-	</script>
-  </div>
+  <div id="ad-slot6" class="hidden md:block" ></div>
+  <div id="ad-slot61" class="block md:hidden"></div>
+
 	<!--ins class="adsbygoogle"
 		style="display:block; text-align:center; margin:0 auto;"
 		data-ad-client="ca-pub-7423640555477330"
