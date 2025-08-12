@@ -153,7 +153,7 @@ initGPT();
             document.getElementById('play-pause').classList.add('show');
             document.getElementById('play-pause').classList.remove('hide'); 
             document.getElementById('big-play').innerHTML = bigButtonPause;            
-            $('.text-player').html('<div style="font-weight:bold;">Ahora suena...</div><div id="infoMusic" style="line-height:11px; font-size:12px;"></div>');
+            $('.text-player').html('<div style="font-weight:bold;">Estás escuchando...</div><div id="infoMusic" style="line-height:11px; font-size:12px;"></div>');
             $('.text-player').addClass('playing');
             $('#radiobutton').addClass('playerplaying');
             // Limpia cualquier intervalo anterior
