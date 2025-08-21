@@ -47,7 +47,7 @@
 @font-face {
   font-family: 'Poppins';
   src: url('/fonts/Poppins-Regular.ttf');
-  
+  font-display: swap;
 }
 
 .roboto{
