@@ -17,7 +17,7 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
     <article class="news-card">
       <a href={`/tito-nieves/${posts[0].slug}/`}>
         <div class="relative h-full">
-          <img class="rounded-xl" src={posts[0]._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt="Imagen Las de Hoy"/>
+          <img class="rounded-xl aspect-3/2" src={posts[0]._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt={posts[0]._embedded['wp:featuredmedia'][0].alt_text} />
           <div class="news-content absolute bottom-0 left-0 bg-black bg-opacity-60 text-white p-2 w-full rounded-b-xl ">
             <h6 class="leading-none m-0" set:html={posts[0].title.rendered}></h6>
           </div>
@@ -35,7 +35,7 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
               <article class="news-card">
                 <a href={`/tito-nieves/${post.slug}/`}>
                   <div class="relative h-full">
-                    <img class="" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt="Imagen Las de Hoy"/>
+                    <img class="aspect-3/2" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen Tito Nieves"} />
                     <div class="news-content absolute bottom-0 left-0 bg-black bg-opacity-60 p-[5px] text-white w-full">
                       <p class="leading-none text-xs mb-0" set:html={post.title.rendered}></p>
                       <!--div class="text-sm resumen" set:html={post.excerpt.rendered}></div>

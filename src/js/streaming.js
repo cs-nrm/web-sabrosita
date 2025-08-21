@@ -77,7 +77,7 @@ function initGPT() {
   });
 }
 initGPT();
-    function safeRefreshSlots() {
+function safeRefreshSlots() {
     if (window.googletag && googletag.apiReady && googletag.pubads) {
       // Repite para cada slot, si tienes más
       if (window.slot2) googletag.pubads().refresh([window.slot2]);
