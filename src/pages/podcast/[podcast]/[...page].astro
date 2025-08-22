@@ -1,12 +1,7 @@
 ---
-import BaseHead from '../../../components/BaseHead.astro';
-import Header from '../../../components/Header.astro';
-import Footer from '../../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts.js';
-/*import {getArticles} from '../../../lib/api.js';*/
 import Card from '../../../layouts/CardsPodcast.astro';
-import BarNrm from '../../../components/BarNrm.astro';
-
+import { SITE_DESCRIPTION } from '../../../consts.js';
+import Layout from '../../../layouts/Layout.astro';
 
 export async function getStaticPaths( { paginate } ) {
     
@@ -45,54 +40,38 @@ interface Props{
 
 const { page = [] } = Astro.props;
 const { podcast, pod } = Astro.props;
-/*const { pod } = Astro.props;*/
-
+const pageTitle = `Podcast: ${pod.title}`;
 ---
-<!doctype html>
-<html lang="es">
-  <head>
-    <BaseHead title={SITE_TITLE} seccion="Podcast" description={SITE_DESCRIPTION} />
-    
-  </head>
-  <body>
-    <BarNrm />
-    <Header title={SITE_TITLE} />
-    
-    <main>
-            
-      <div class="container my-12 mx-auto px-4 md:px-12">
-        <div class="flex flex-wrap justify-center ">
-          <div class="w-full md:w-1/3 lg:w-1/4"><img class="content-center shadow-xl rounded-xl" src={pod.imagen}/></div>
-          <div class="w-full md:w-2/3 lg:w:3/4 p-4 flex items-center">
-            <div>
-              <h1 class="audiowide neon-morado text-center md:text-left font-bold text-3xl md:text-4xl lg:text-3xl xl:text-4xl align-middle">{pod.title} </h1>
-              <p class="align-middle">{pod.descripcion}</p>
-            </div> 
-          </div>
+
+<Layout title={pageTitle} description={SITE_DESCRIPTION} img={pod.imagen}>
+  <div class="container my-12 mx-auto px-4 md:px-12">
+    <div class="flex flex-wrap justify-center ">
+      <div class="w-full md:w-1/3 lg:w-1/4"><img class="content-center shadow-xl rounded-xl" src={pod.imagen} alt={pod.title} /></div>
+      <div class="w-full md:w-2/3 lg:w-3/4 p-4 flex items-center">
+        <div>
+          <h1 class="audiowide neon-morado text-center md:text-left font-bold text-3xl md:text-4xl lg:text-3xl xl:text-4xl align-middle">{pod.title}</h1>
+          <p class="align-middle">{pod.descripcion}</p>
         </div>
-        <section class="flex flex-wrap -mx-4">
-          { 
-            page.data.map((post:any) => ( 
-            <>
-              <Card post={post} />
-            </>
-            ))
-          }
-        </section>
-            <div class="m-auto text-center">
-                {page.url.prev && <a href={page.url.prev}>
-                  <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
-                      <span>Anterior</span>
-                  </button>
-                </a>}
-                {page.url.next && <a href={page.url.next}>
-                  <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
-                      <span>Siguiente</span>
-                  </button>
-                </a>}
-            </div>
-      </div>  
-    </main>
-    <Footer />
-  </body>
-</html>
+      </div>
+    </div>
+    <section class="flex flex-wrap -mx-4">
+      {page.data.map((post:any) => (<Card post={post} />))}
+    </section>
+    <div class="m-auto text-center">
+      {page.url.prev && (
+        <a href={page.url.prev}>
+          <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
+            <span>Anterior</span>
+          </button>
+        </a>
+      )}
+      {page.url.next && (
+        <a href={page.url.next}>
+          <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
+            <span>Siguiente</span>
+          </button>
+        </a>
+      )}
+    </div>
+  </div>
+</Layout>
