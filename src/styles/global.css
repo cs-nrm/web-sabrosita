@@ -40,6 +40,10 @@
   color: var(--rojo);
 }
 
+.aspect-not{
+  aspect-ratio: 3 / 2;
+}
+
 /*@font-face {
   font-family: 'Roboto';
   src: url('/fonts/Roboto-VariableFont.ttf');
