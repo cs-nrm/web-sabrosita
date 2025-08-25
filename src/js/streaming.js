@@ -76,7 +76,7 @@ function initGPT() {
     //setInterval(function(){googletag.pubads().refresh([slot3]);}, 180000);
   });
 }
-initGPT();
+//initGPT();
 function safeRefreshSlots() {
     if (window.googletag && googletag.apiReady && googletag.pubads) {
       // Repite para cada slot, si tienes más
@@ -95,7 +95,7 @@ function safeRefreshSlots() {
       // O simplemente: googletag.pubads().refresh();
       console.log('Banners refrescados post navegación');
     } else {
-      setTimeout(safeRefreshSlots, 400);
+      safeRefreshSlots(); // Intenta de nuevo después de un breve retraso);
     }
   }
 
@@ -623,17 +623,17 @@ document.addEventListener('astro:before-preparation', ev => {
 
 document.addEventListener("astro:after-swap", () => {
     //console.log('astro:after-swap');
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
+    /*(window.adsbygoogle = window.adsbygoogle || []).push({});
     setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 1000);
     setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 1500);
     setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 2000);
     setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 2500);
-    setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 3000);
+    setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 3000);*/
 
     //googletag.pubads().refresh();
-    //window.instgrm.Embeds.process();
-    initGPT();
-    safeRefreshSlots();
+    window.instgrm.Embeds.process();
+    //initGPT();
+    //safeRefreshSlots();
 });
 
 
@@ -725,7 +725,7 @@ document.addEventListener('astro:page-load', ev => {
     /* =======COMSCORE*/
     //googletag.pubads().refresh();
     initGPT();
-    safeRefreshSlots();
+    //safeRefreshSlots();
 
    const getplayingstatus = playerstatus();
     document.querySelector('main').classList.remove('loading');    
