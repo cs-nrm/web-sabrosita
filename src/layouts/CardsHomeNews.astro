@@ -3,6 +3,7 @@
 const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_fields=id,date,title,slug,categories,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=5&categories=143&orderby=id&order=desc");
 const posts = await res.json();
 const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
+import { Image } from 'astro:assets';
 
 ---
 
@@ -14,7 +15,7 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
             <div class={`cards-filtro-${idx}`}>
               <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
                 <a href={`/nota-sabrosa/${post.slug}/`}>
-                  <div><img class="rounded-xl aspect-not" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen Nota Sabrosa"}/></div>
+                  <div><Image class="rounded-xl aspect-not" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen Nota Sabrosa"}/></div>
                   <div class="news-content p-6">
                     <h5 class="leading-none" set:html={post.title.rendered}></h5>
                     <!--div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
