@@ -16,20 +16,8 @@ const player = document.getElementById('player');
 const secchome = document.getElementById('home');
 
 function initGPT() {
-    googletag.destroySlots();
-  var gptAdSlots2 = [];       //boxbanner
-  var gptAdSlots3 = [];       //billboard 970x250
-  var gptAdSlots31 = [];      //billboard móvil
-  var gptAdSlots32 = [];      //billboard2 móvil
-  var gptAdSlots321 = [];     //billboard2 móvil
-  var gptAdSlots4 = [];       //leaderboard 728x90
-  var gptAdSlots41 = [];      //leaderboard móvil
-  var gptAdSlots42 = [];      //leaderboard2
-  var gptAdSlots421 = [];     //leaderboard2 móvil
-  var gptAdSlots5 = [];       //doublebox
-  var gptAdSlots6 = [];       //superleader 970x90
-  var gptAdSlots61 = [];      //superleader móvil
-  
+
+  googletag.destroySlots();  
   googletag.cmd.push(function() {
     var mapping2 = googletag.sizeMapping().addSize([300, 250]).build();
     var mapping3 = googletag.sizeMapping().addSize([728, 90]).build();
@@ -76,7 +64,8 @@ function initGPT() {
     //setInterval(function(){googletag.pubads().refresh([slot3]);}, 180000);
   });
 }
-//initGPT();
+
+
 function safeRefreshSlots() {
     if (window.googletag && googletag.apiReady && googletag.pubads) {
       // Repite para cada slot, si tienes más
@@ -320,6 +309,7 @@ function detectarNavegador() {
         
 var lastArtist = null;
 var lastSong = null;
+var progInterval = null;
 
 function getInfoMusic() {
     fetch("https://cdn.nrm.com.mx/cdn/sabrosita/playlist/cancion.json")
@@ -504,8 +494,7 @@ function getInfoMusic() {
             });           
         }
         
-        setTimeout(getInfoProg, 20000);
-        setInterval( getInfoProg, 300000);       
+        
 
 const radioActive = function(){
     $('#player-inner').addClass('active');
@@ -619,6 +608,11 @@ document.addEventListener('astro:before-preparation', ev => {
   //  console.log('insert spin');    
     document.querySelector('main').classList.add('loading');    
     document.querySelector('.preloader').classList.add('showpreloader');
+    if (typeof progInterval !== 'undefined' && progInterval) {
+      clearInterval(progInterval);
+      progInterval = null;
+    }
+    
 });
 
 document.addEventListener("astro:after-swap", () => {
@@ -631,7 +625,41 @@ document.addEventListener("astro:after-swap", () => {
     setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 3000);*/
 
     //googletag.pubads().refresh();
-    window.instgrm.Embeds.process();
+    // Re-procesa embeds de Instagram solo si hay alguno y el SDK está listo
+    const hasInstaEmbeds = !!document.querySelector('blockquote.instagram-media, .instagram-media, [data-instgrm-permalink], iframe[src*="instagram.com"]');
+    if (hasInstaEmbeds) {
+      // Carga perezosa del SDK si aún no existe
+      const ensureInstagramSDK = () => new Promise((resolve) => {
+        if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === 'function') {
+          resolve();
+          return;
+        }
+        let s = document.getElementById('instagram-embed-sdk');
+        if (!s) {
+          s = document.createElement('script');
+          s.id = 'instagram-embed-sdk';
+          s.src = 'https://www.instagram.com/embed.js';
+          s.async = true;
+          s.onload = () => resolve();
+          // como fallback, resuelve tras un tiempo prudente
+          setTimeout(() => resolve(), 2000);
+          document.head.appendChild(s);
+        } else {
+          // si ya existe la etiqueta pero aún no expone la API, espera un poco
+          setTimeout(() => resolve(), 500);
+        }
+      });
+
+      ensureInstagramSDK().then(() => {
+        try {
+          if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === 'function') {
+            window.instgrm.Embeds.process();
+          }
+        } catch (e) {
+          console.warn('Instagram Embeds process() falló o no estaba disponible:', e);
+        }
+      });
+    }
     //initGPT();
     //safeRefreshSlots();
 });
@@ -640,7 +668,9 @@ document.addEventListener("astro:after-swap", () => {
 document.addEventListener('astro:page-load', ev => {
    // console.log('pageload');
    //$('.cover-background').html('');
-    
+    initGPT();
+    safeRefreshSlots();
+ 
     window.addEventListener('scroll', function () {
                 const scrollY = window.scrollY;
                 
@@ -654,57 +684,6 @@ document.addEventListener('astro:page-load', ev => {
                     $('.bar-stereo .logo').removeClass('compress-logo');
                 }                
             });
-
-        /* efectos */ 
-    /*const { navegador, sistema } = detectarNavegador();
-    const isMobileAndroid = /Mobi|Android/i.test(navigator.userAgent) && sistema === 'Android';
-    console.log('Navegador: ' + navegador);
-    console.log('Sistema Operativo: ' + sistema);
-    if (!isMobileAndroid) {
-    var distance = '';    
-        
-            const header = $('header');            
-            const navMenuTop = $('.nav-menu').offset().top;
-            const barStereoHeight = $('.bar-stereo').outerHeight();
-            const triggerPoint = navMenuTop - barStereoHeight;
-
-            window.addEventListener('scroll', function () {
-                const scrollY = window.scrollY;
-                
-                if ($('.bar-stereo').hasClass('is-pinned')) {
-                    $('.bar-stereo').addClass('compress');
-                    $('.bar-stereo .logo').addClass('compress-logo');
-                }
-                if (scrollY <= 1) {
-                    $('.bar-stereo').css('position', 'sticky');
-                    $('.bar-stereo').removeClass('compress');
-                    $('.bar-stereo .logo').removeClass('compress-logo');
-                }
-
-                if (scrollY >= triggerPoint) {
-                    $('.bar-stereo').addClass('header-white');
-                    $('.bar-stereo').addClass('header-white');
-                    $('.to-dark').addClass('dark-mode');
-                    $('.bar-stereo .logo').find('img').attr('src','https://storage.googleapis.com/nrm-web/stereocien/logo-stereocien-color-2025.svg');
-                } else {
-                    $('.bar-stereo').removeClass('header-white');
-                    $('.bar-stereo').removeClass('header-white');
-                    $('.to-dark').removeClass('dark-mode');
-                    $('.bar-stereo .logo').find('img').attr('src','https://storage.googleapis.com/nrm-web/stereocien/logo-stereocien-blanco-2025.svg');
-                }
-            });
-        }else{
-            $('.bar-stereo').addClass('compress');
-
-        }
-    /* publicidad google refresh*/
-    /*(function() {
-        if (window.adsbygoogle && Array.isArray(window.adsbygoogle)) {
-            window.adsbygoogle.push({});
-        }
-    })();
-    googletag.pubads().refresh();
-    */
 
     /* =======COMSCORE*/
     var ts = Math.round((new Date()).getTime() / 1000 * Math.random() * 10);
@@ -724,8 +703,6 @@ document.addEventListener('astro:page-load', ev => {
     
     /* =======COMSCORE*/
     //googletag.pubads().refresh();
-    initGPT();
-    //safeRefreshSlots();
 
    const getplayingstatus = playerstatus();
     document.querySelector('main').classList.remove('loading');    
@@ -738,7 +715,7 @@ document.addEventListener('astro:page-load', ev => {
         //console.log('envivo');
         getInfoProg();        
         getInfoMusic();
-        setInterval( getInfoProg, 60000);
+        progInterval = setInterval( getInfoProg, 60000);
         $('#radiobutton').addClass('en-vivo');
         //console.log(local_status);
         if( local_status == null || local_status == 'undefined' || local_status == '' || local_status == 'LIVE_STOP' ){  
@@ -755,6 +732,11 @@ document.addEventListener('astro:page-load', ev => {
         $('.logo-player img').attr('src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player.svg');        
         $('#radiobutton').removeClass('en-vivo');
         $('#big-play').addClass('border-4');
+        if (progInterval) {
+            console.log('clear interval prog');
+            clearInterval(progInterval);
+            progInterval = null;
+        }
     }
     
     
