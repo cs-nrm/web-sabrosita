@@ -39,7 +39,7 @@ console.log(post);
   <a href={`/retropical/${post.slug}/`}>
     <article>
       <div class="flex flex-col items-center justify-between leading-tight p-2 md:p-4 min-h-28 rounded-xl">
-        <img class="w-full h-auto rounded-xl aspect-video" src={post.yoast_head_json.og_image[0].url} alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen Videos"}/>
+        <img loading="lazy" class="w-full h-auto rounded-xl aspect-video" src={post.yoast_head_json.og_image[0].url} alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen Videos"}/>
         <h2 class="py-4 text-xl text-purple-900 leading-none spartan" set:html={post.title.rendered}></h2>        
       </div>
     </article>

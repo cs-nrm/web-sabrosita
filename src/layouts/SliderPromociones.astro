@@ -3,7 +3,7 @@ const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/pos
 const posts = await res.json();
 
 ---
-<div><img class="m-auto max-w-[200px]" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/PROMOCIONES.png" alt="Título Promociones"/></div>
+<div><img loading="lazy" class="m-auto max-w-[200px]" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/PROMOCIONES.png" alt="Título Promociones"/></div>
 <div class="slider-promociones">
 	<div class="carousel main-promos cards promos">
 
@@ -13,7 +13,7 @@ const posts = await res.json();
 			<article>
 				<a href={`/promociones/${post.slug}/`}>
 					<!--Image class="block h-auto w-full object-fill rounded-xl" src={post._embedded['wp:featuredmedia'][0].media_details.sizes['medium_large'].source_url} width="300" height="150" alt={post.title.rendered}/-->
-					<img class="block h-auto w-full object-fill rounded-xl aspect-square" src={post.yoast_head_json.og_image[0].url} width="300" height="150" alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen promoción"} />
+					<img loading="lazy" class="block h-auto w-full object-fill rounded-xl aspect-square" src={post.yoast_head_json.og_image[0].url} width="300" height="150" alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen promoción"} />
 				</a>
 			</article>
 		</div>
