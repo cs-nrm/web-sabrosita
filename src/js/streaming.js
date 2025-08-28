@@ -305,7 +305,74 @@ function detectarNavegador() {
   else if (ua.includes("iPhone") || ua.includes("iPad")) so = "iOS";
 
   return { navegador, sistema: so };
-}        
+}
+
+// === [VOTOS] Helpers y función reutilizable ===
+const VOTE_COLOR = '#ef4444';
+
+function detectarDispositivo() {
+  return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
+}
+
+/**
+ * Registra un voto en el backend.
+ * @param {string} seccion - Ej: 'Radio', 'Hot parade', 'Lanzamientos'
+ * @param {string} artista - Nombre del artista (sin codificar)
+ * @param {string} cancion - Título de la canción (sin codificar)
+ * @param {jQuery|null} $btn - Botón/elemento clicado (opcional) para manejar UI
+ * @returns {Promise}
+ */
+function registerVote(seccion, artista, cancion, $btn = null) {
+  return new Promise((resolve, reject) => {
+    const url = 'https://contenido.sabrositadigital.mx/6456heu2/8s4v3f1l3s.php';
+
+    // Protección de doble click o voto ya marcado
+    if ($btn) {
+      const $svg = $btn.find('svg');
+      const fillColor = ($svg.css('fill') || '').toLowerCase();
+      if (fillColor === VOTE_COLOR) {
+        console.log('Ya votaste por esta canción.');
+        return resolve({ status: 'already' });
+      }
+      if ($btn.prop('disabled')) {
+        return resolve({ status: 'disabled' });
+      }
+      $btn.prop('disabled', true);
+    }
+
+    const safe = (s) => (s || '').toString().replace('&', '%26');
+    const { navegador, sistema } = detectarNavegador();
+
+    $.post(
+      url,
+      {
+        artista: safe(artista),
+        cancion: safe(cancion),
+        seccion: seccion, // El backend actual puede ignorarlo; ya preparado para futuro
+        dispositivo: detectarDispositivo(),
+        navegador,
+        sistema_operativo: sistema,
+      },
+      function (resp) {
+        if ($btn) $btn.prop('disabled', false);
+        if (resp && resp.status === 'success') {
+          if ($btn) $btn.find('svg').css('fill', VOTE_COLOR);
+          console.log('Voto registrado con éxito.');
+          resolve(resp);
+        } else {
+          console.log((resp && resp.message) || 'Error al votar.');
+          reject(resp || new Error('vote-error'));
+        }
+      },
+      'json'
+    ).fail(function () {
+      if ($btn) $btn.prop('disabled', false);
+      console.log('No se pudo registrar el voto. Intenta de nuevo.');
+      reject(new Error('network-fail'));
+    });
+  });
+}
+// === [/VOTOS] ===
         
 var lastArtist = null;
 var lastSong = null;
@@ -359,57 +426,17 @@ function getInfoMusic() {
                 $('#infoMusic').html('<div class="current-song">' + cancion + ' / ' + artist + '</div><div class="share-current"><div class="like"><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1"> <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path> </svg> </div> <div class="share-wp"><a href="https://api.whatsapp.com/send/?text=Estoy%20escuchando%20' + codtit +'%20de%20'+ codart +'%20en%20https://sabrositadigital.mx/" target="_blank"> <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1"> <path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z"></path> </svg> </div></div>'); 
                 //document.getElementById('infoMusic').innerHTML = 
 
-               const url = 'https://contenido.sabrositadigital.mx/6456heu2/8s4v3f1l3s.php';
-               
-                const colorVotado = '#ef4444';
-
-                $('.like').on('click', function (e) {
-                    e.preventDefault();
-
-                    const $btn = $(this);
-                    const $svg = $btn.find('svg');
-                    const fillColor = $svg.css('fill')?.toLowerCase();
-
-                    // Si ya fue votado (el color ya es #ef4444), salir
-                    if (fillColor === colorVotado) {
-                    console.log('Ya votaste por esta canción.');
-                    return;
-                    }
-
-               
-
-                    if (!codart || !codtit || $btn.prop('disabled')) return;
-
-                    $btn.prop('disabled', true);
-
-                    function detectarDispositivo() {
-                     return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
-                        ? 'mobile'
-                        : 'desktop';
-                    }
-                    const { navegador, sistema } = detectarNavegador();
-                    
-                    $.post(
-                    url,
-                    { 'artista':codart, 
-                        'cancion':codtit,
-                        dispositivo: detectarDispositivo(),
-                        navegador,
-                        sistema_operativo: sistema 
-                    },
-                    function (resp) {
-                        if (resp.status === 'success') {
-                        $svg.css('fill', colorVotado);
-                        console.log('Voto registrado con éxito.');
-                        } else {
-                        console.log(resp.message || 'Error al votar.');
-                        $btn.prop('disabled', false);
-                        }
-                    },
-                    'json'
-                    ).fail(function () {
-                    console.log('No se pudo registrar el voto. Intenta de nuevo.');
-                    $btn.prop('disabled', false);
+                
+                // Binder de voto para la sección RADIO (evita handlers duplicados)
+                $('.like').off('click.vote').on('click.vote', function (e) {
+                  e.preventDefault();
+                  const $btn = $(this);
+                  registerVote('Radio', artist, cancion, $btn)
+                    .then(() => {
+                      // Hook opcional: aquí podrías disparar un toast/analytics
+                    })
+                    .catch(() => {
+                      // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
                     });
                 });
 
