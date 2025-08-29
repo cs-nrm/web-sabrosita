@@ -372,34 +372,6 @@ function registerVote(seccion, artista, cancion, $btn = null) {
     });
   });
 }
-// === [/VOTOS] ===
-$('.like-hotparade').off('click.vote').on('click.vote', function (e) {
-                  e.preventDefault();
-                  const artist = $(this).data('artist') || '';
-                  const cancion = $(this).data('song') || '';
-                  const $btn = $(this);
-                  registerVote('HotParade', artist, cancion, $btn)
-                    .then(() => {
-                      // Hook opcional: aquí podrías disparar un toast/analytics
-                    })
-                    .catch(() => {
-                      // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
-                    });
-});
-
-$('.like-lanzamientos').off('click.vote').on('click.vote', function (e) {
-                  e.preventDefault();
-                  const artist = $(this).data('artist') || '';
-                  const cancion = $(this).data('song') || '';
-                  const $btn = $(this);
-                  registerVote('Lanzamientos', artist, cancion, $btn)
-                    .then(() => {
-                      // Hook opcional: aquí podrías disparar un toast/analytics
-                    })
-                    .catch(() => {
-                      // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
-                    });
-});
 
 
 var lastArtist = null;
@@ -1102,6 +1074,36 @@ document.addEventListener('astro:page-load', ev => {
         /*------------------- */
         
     } 
+
+    // === [/VOTOS] ===
+    $('.like-hotparade').off('click.vote').on('click.vote', function (e) {
+                    e.preventDefault();
+                    const artist = $(this).data('artist') || '';
+                    const cancion = $(this).data('song') || '';
+                    const $btn = $(this);
+                    registerVote('HotParade', artist, cancion, $btn)
+                        .then(() => {
+                        // Hook opcional: aquí podrías disparar un toast/analytics
+                        })
+                        .catch(() => {
+                        // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
+                        });
+    });
+
+    $('.like-lanzamientos').off('click.vote').on('click.vote', function (e) {
+                    e.preventDefault();
+                    const artist = $(this).data('artist') || '';
+                    const cancion = $(this).data('song') || '';
+                    const $btn = $(this);
+                    registerVote('Lanzamientos', artist, cancion, $btn)
+                        .then(() => {
+                        // Hook opcional: aquí podrías disparar un toast/analytics
+                        })
+                        .catch(() => {
+                        // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
+                        });
+    });
+
 
         
        
