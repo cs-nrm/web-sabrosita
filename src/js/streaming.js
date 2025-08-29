@@ -373,7 +373,7 @@ function registerVote(seccion, artista, cancion, $btn = null) {
   });
 }
 // === [/VOTOS] ===
-  $('.like-hotparade').off('click.vote').on('click.vote', function (e) {
+$('.like-hotparade').off('click.vote').on('click.vote', function (e) {
                   e.preventDefault();
                   const artist = $(this).data('artist') || '';
                   const cancion = $(this).data('song') || '';
@@ -385,7 +385,23 @@ function registerVote(seccion, artista, cancion, $btn = null) {
                     .catch(() => {
                       // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
                     });
-    });        
+});
+
+$('.like-lanzamientos').off('click.vote').on('click.vote', function (e) {
+                  e.preventDefault();
+                  const artist = $(this).data('artist') || '';
+                  const cancion = $(this).data('song') || '';
+                  const $btn = $(this);
+                  registerVote('Lanzamientos', artist, cancion, $btn)
+                    .then(() => {
+                      // Hook opcional: aquí podrías disparar un toast/analytics
+                    })
+                    .catch(() => {
+                      // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
+                    });
+});
+
+
 var lastArtist = null;
 var lastSong = null;
 var progInterval = null;

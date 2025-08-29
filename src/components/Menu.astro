@@ -7,6 +7,7 @@ const currentPath = Astro.url.pathname;
         <ul>
             <li class={`menu-section${currentPath.startsWith('/nota-sabrosa') ? ' active' : ''}`}><a href="/nota-sabrosa">Nota Sabrosa</a></li>
             <li class={`menu-section${currentPath.startsWith('/promociones') ? ' active' : ''}`}><a href="/promociones">Promociones</a></li>
+            <li class={`menu-section${currentPath.startsWith('/lanzamientos') ? ' active' : ''}`}><a href="/lanzamientos">Lanzamientos</a></li>
             <li class={`menu-section${currentPath.startsWith('/hot-parade') ? ' active' : ''}`}><a href="/hot-parade">Hot Parade</a></li>
             <li class={`dd-menu${currentPath.startsWith('/podcast') ? ' active' : ''}`}>Podcast
               <ul>
