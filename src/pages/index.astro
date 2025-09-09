@@ -12,7 +12,7 @@ import BillBoard from '../components/BillBoard.astro';
 import BillBoard2 from '../components/BillBoard2.astro';
 import Notificacion from '../components/Notificacion.astro';
 import NotaPrincipal from '../layouts/CardsHomePrincipal.astro';
-import CardsHomeTito from '../layouts/CardsHomeTito.astro';
+import CardsHomePatrio from '../layouts/CardsHomePatrio.astro';
 import Promociones from '../layouts/SliderPromociones.astro';
 import SliderHotParade from '../layouts/SliderHotParade.astro';
 import SliderPodcast from '../layouts/SliderPodcast.astro';
@@ -31,10 +31,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       </div>
     </section>
     <LeaderBoard/>
-    <section class="bg-[url(https://storage.googleapis.com/nrm-web/sabrosita/FONDO_TITO.png)] bg-cover bg-no-repeat bg-center">
-      <div class="container-home p-4 mx-auto">          
-        <CardsHomeTito />
-      </div>
+    <section class="patrio">
+        <CardsHomePatrio />
     </section>
     <div class="container-home p-4 mx-auto">
       <div class="flex flex-col md:flex-row justify-center items-center">

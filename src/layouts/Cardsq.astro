@@ -24,6 +24,13 @@ export interface Props {
          'wp:featuredmedia': [
             {
                alt_text: string;
+               media_details: {
+                  sizes: {
+                     'medium_large': {
+                        source_url: string;
+                     }
+                  }
+               }
             }
          ]
       }
@@ -58,11 +65,14 @@ switch (post.categories[0]){
     case 1642:
         url_seccion = 'locutores';
     break;
+    case 1646:
+        url_seccion = 'fiestas-patrias';
+    break;
     default:
         url_seccion = 'nota-sabrosa';    
     break;     
 }
-
+const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resources/img/img_sabrosita.jpg';
 
 /*const section = post.yoast_head_json.schema['@graph'][0].articleSection; 
 console.log(section);*/
@@ -70,7 +80,7 @@ console.log(section);*/
 ---
           <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
             <a href={`/${url_seccion}/${post.slug}/`}>
-              <div><img class="rounded-xl" src={post.yoast_head_json.og_image[0].url} alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen Noticias"}/></div>
+              <div><img loading="lazy" class="rounded-xl" src={post?._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.['medium_large']?.source_url|| PLACEHOLDER_IMG}  alt={post._embedded['wp:featuredmedia'][0].alt_text||"Imagen Noticias"}/></div>
               <div class="news-content p-6">
                 <h5 set:html={post.title.rendered}></h5>
                 <div class="text-sm resumen" set:html={post.excerpt.rendered}></div>
