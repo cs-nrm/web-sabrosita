@@ -324,7 +324,7 @@ function detectarDispositivo() {
  */
 function registerVote(seccion, artista, cancion, $btn = null) {
   return new Promise((resolve, reject) => {
-    const url = 'https://contenido.sabrositadigital.mx/6456heu2/8s4v3f1l3s.php';
+    const url = 'http://34.132.6.90/6456heu2/8s4v3f1l3s.php';
 
     // Protección de doble click o voto ya marcado
     if ($btn) {
@@ -479,7 +479,7 @@ function getInfoMusic() {
        
         function getInfoProg(){
             
-            fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_embed&per_page=100&categories=757&_fields[]=acf&_fields[]=content&_fields[]=jetpack_featured_media_url")
+            fetch("http://34.132.6.90/wp-json/wp/v2/posts?_embed&per_page=100&categories=757&_fields[]=acf&_fields[]=content&_fields[]=jetpack_featured_media_url")
             .then((res) => {
                 if (!res.ok) {
                     throw new Error

@@ -1,5 +1,5 @@
 ---
-const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_embed&per_page=8&_fields=title,slug,excerpt,content,acf,yoast_head_json,_links,_embedded&categories=1642");
+const res = await fetch("http://34.132.6.90/wp-json/wp/v2/posts?_embed&per_page=8&_fields=title,slug,excerpt,content,acf,yoast_head_json,_links,_embedded&categories=1642");
 const posts = await res.json();
 const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resources/img/img_sabrosita.jpg';
 ---

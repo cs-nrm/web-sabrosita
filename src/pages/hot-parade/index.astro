@@ -5,7 +5,7 @@ import DoubleBox from '../../components/DoubleBox.astro';
 import BoxBanner from '../../components/BoxBanner.astro';
 import Layout from '../../layouts/Layout.astro';
 
-const res = await fetch("https://contenido.sabrositadigital.mx/wp-json/wp/v2/posts?_embed&per_page=20&categories=292&_fields=id,title,yoast_head_json,content,slug,categories,acf");
+const res = await fetch("http://34.132.6.90/wp-json/wp/v2/posts?_embed&per_page=20&categories=292&_fields=id,title,yoast_head_json,content,slug,categories,acf");
 const posts = await res.json();
 
 posts.sort(function(a, b){ 
