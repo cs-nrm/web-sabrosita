@@ -1,6 +1,6 @@
 ---
 const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resources/img/img_sabrosita.jpg';
-const res = await fetch("http://34.132.6.90/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=6&categories=791&order_by=date&order=desc");
+const res = await fetch("https://sabrositadigital.com.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=6&categories=791&order_by=date&order=desc");
 const posts = await res.json();
 
 // Filtrar los posts donde acf.fijo es false

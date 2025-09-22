@@ -6,7 +6,7 @@ import SuperLeader from '../components/SuperLeader.astro';
 
 const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resources/img/img_sabrosita.jpg';
 
-const ressti = await fetch("http://34.132.6.90/wp-json/wp/v2/posts?_fields=id,date,title,slug,categories,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=10&categories=143&orderby=date&order=desc");
+const ressti = await fetch("https://sabrositadigital.com.mx/wp-json/wp/v2/posts?_fields=id,date,title,slug,categories,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=10&categories=143&orderby=date&order=desc");
 const poststi = await ressti.json();
 
 
