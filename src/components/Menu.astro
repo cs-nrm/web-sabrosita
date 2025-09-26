@@ -43,6 +43,7 @@ const currentPath = Astro.url.pathname;
     <div class="menu-mobile hidden items-center gap-4 text-white order-3 lg:order-2"> 
        <div class={`menu-section${currentPath.startsWith('/nota-sabrosa') ? ' active' : ''}`}> <a href="/nota-sabrosa">Nota Sabrosa</a></div>
        <div class={`menu-section${currentPath.startsWith('/promociones') ? ' active' : ''}`}> <a href="/promociones">Promociones</a></div>
+       <div class={`menu-section${currentPath.startsWith('/lanzamientos') ? ' active' : ''}`}> <a href="/lanzamientos">Lanzamientos</a></div>
        <div class={`menu-section${currentPath.startsWith('/hot-parade') ? ' active' : ''}`}> <a href="/hot-parade">Hot Parade</a></div>
        <div class={`menu-section${currentPath.startsWith('/entrevistas') ? ' active' : ''}`}> <a href="/entrevistas">Entrevistas</a></div>
        <div class={`menu-section${currentPath.startsWith('/podcast/momentos-irrepetibles') ? ' active' : ''}`}> <a href="/podcast/momentos-irrepetibles">Momentos Irrepetibles</a></div>
