@@ -775,8 +775,9 @@ document.addEventListener('astro:page-load', ev => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
     const secprogram = document.getElementById('programacion');
+    const secprograma = document.getElementById('sonsonidero');
     
-    if ( secprogram || secchome ){  
+    if ( secprogram || secchome || secprograma ){  
 
         var elempod = document.querySelector('.main-carousel');
         var flktypod = new Flickity( elempod, {
