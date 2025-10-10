@@ -40,9 +40,9 @@ const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resour
             page.data.map((post:any) => (
             <div class="carousel-cell card">
             <article class="p-2">
-              <a href={`/locutores/${post.slug}/`} class="text-white">
+              <a href={`/son-sonidero/${post.slug}/`} class="text-white">
                 <div class="img-podcast">
-                  <img loading="lazy" class="block h-auto w-full object-fill" src={post?._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.['medium_large']?.source_url|| PLACEHOLDER_IMG} width="200" height="200" alt="Locutores"/>
+                  <img loading="lazy" class="block h-auto w-full object-fill" src={post?._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.['medium_large']?.source_url|| PLACEHOLDER_IMG} width="200" height="200" alt="Son Sonidero"/>
 
                 </div>
                 <p class="m-0 spartan leading-none" set:html={post.title.rendered}></p>
