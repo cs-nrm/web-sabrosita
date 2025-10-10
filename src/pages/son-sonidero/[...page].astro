@@ -53,9 +53,8 @@ const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resour
             ))
             }
         </div>
-        <div>
-          <p>¿Quieres registrar tu sonidero? <a class="text-sm italic" href="/son-sonidero-registro"><span>Da click <strong>aquí</strong></span></a></p>
-          
+        <div class="m-0 align-center text-center my-8">
+          <a href="/son-sonidero-registro"><button type="button" class="ooc">Registra tu Sonidero</button></a>
         </div>
         <!--div class="m-auto text-center">
           {page.url.prev && (
@@ -90,6 +89,20 @@ const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resour
 </Layout>
 
 <style>
+.ooc{
+  color: #fff;
+  padding-block: .625rem;
+  padding-inline: 1rem;
+  background-color: rgb(0 0 0 / 40%);
+  border-radius: 3.40282e38px;
+  appearance: button;
+  opacity: 1;
+  border: 1px solid white;
+}
+.ooc:hover{
+  background-color: rgb(0 0 0);
+  box-shadow: rgb(255 255 255) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
   .card article{
 	background: black;
     background-blend-mode: soft-light;
