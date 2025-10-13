@@ -2,10 +2,11 @@
 import Player from './Player.astro';
 import { Image } from 'astro:assets';
 const currentPath = Astro.url.pathname;
-
+import Salsaman from './Salsaman.astro';
 ---
 
 <div><Player transition:persist /></div>
+<div><Salsaman /></div>
 
 <div class="preloader">
     <!--div class="circle-container">
