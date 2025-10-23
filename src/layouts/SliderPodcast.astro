@@ -6,7 +6,17 @@ const posts = await res.json();
 ---
 <div><img loading="lazy" class="m-auto max-w-[200px]" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/PODCAST.png" alt="Título Podcast"/></div>
 <div class="main-carousel container cards slider-locutores ">
-
+	<div class="carousel-cell card">
+		<article class="p-2">
+			<a href={`/podcast/celia-cruz/`} class="text-white">
+				<div class="img-podcast">
+					<img loading="lazy" class="block h-auto w-full object-fill" src="https://storage.googleapis.com/nrm-web/sabrosita/podcast/celia-min.jpg" width="200" height="200" alt="Celia Cruz"/>
+				</div>
+				<p class="m-0 spartan leading-none">Celia Cruz, 100 años de azúcar</p>
+				<div class="text-podcast text-[13px] leading-[1.2] font-light hover:text-white">Sabrosita presenta: ¡100 años de azúcar! un especial dedicado a los 100 años del natalicio de Celia Cruz (La reina de la salsa)</div>
+			</a>
+		</article>
+	</div>
 	<div class="carousel-cell card">
 		<article class="p-2">
 			<a href={`/podcast/momentos-irrepetibles/`} class="text-white">
@@ -73,6 +83,7 @@ const posts = await res.json();
 			</a>
 		</article>
 	</div>
+
 
 </div>
 
