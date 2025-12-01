@@ -1,23 +1,23 @@
 ---
 const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resources/img/img_sabrosita.jpg';
-const res = await fetch("https://sabrositadigital.com.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,acf,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=5&categories=1647");
+const res = await fetch("https://sabrositadigital.com.mx/wp-json/wp/v2/posts?_fields=date,title,slug,sticky,acf,yoast_head_json,content,excerpt,_links,_embedded&_embed&per_page=5&categories=1651");
 const posts = await res.json();
 const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
 
 ---
-<!--video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg">
-  <source src="https://storage.googleapis.com/nrm-web/sabrosita/videos/confetti2-min.mp4" type="video/mp4">
-</video-->
+<video id="background-video" autoplay loop muted poster="https://storage.googleapis.com/nrm-web/sabrosita/resources/img/navidad1.jpg">
+  <source src="https://storage.googleapis.com/nrm-web/sabrosita/resources/img/navidad3.mp4" type="video/mp4">
+</video>
 <div class="back-patrio">
   <div class="container-home p-4 mx-auto">
-    <div class="text-center relative z-10"> <img class="max-w-[200px] m-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/muertos.png" alt="Título Día de Muertos"/></div>   
+    <div class="text-center relative z-10"> <img class="max-w-[200px] m-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/navidad.png" alt="Título Navidad"/></div>   
     <div class="container cards mt-8 ">
       <div class="news-grid grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 xl:gap-16">
         {
           filteredPosts.slice(0, 4).map((post:any, idx:number) => (
             <div class={`cards-filtro-${idx}`}>
               <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
-                <a href={`/dia-de-muertos/${post.slug}/`}>
+                <a href={`/navidad/${post.slug}/`}>
                   <div><img loading="lazy" class="aspect-not rounded-xl" src={post?._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.['small-feature']?.source_url || PLACEHOLDER_IMG} alt={post._embedded['wp:featuredmedia'][0].alt_text || "Imagen Mes Patrio"}/></div>
                   <div class="news-content p-6">
                     <h5 set:html={post.title.rendered}></h5>
@@ -33,7 +33,7 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
     </div>
   </div>
   <div class="m-auto text-center mb-8">
-      <a href="/dia-de-muertos/">
+      <a href="/navidad/">
           <button class="ver-mas group relative h-8 m-4 text-xl px-4 rounded-full spartan bold overflow-hidden bg-[#EA262A] border-4 border-[#EA262A] hover:border-[#FDCF27] font-bold">
               <span>Más noticias aquí</span>
           </button>
@@ -54,11 +54,11 @@ const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
    transform: translateX(-50%);
    /*z-index: -1;*/
 }
-.back-patrio {
+/*.back-patrio {
   background: url("https://storage.googleapis.com/nrm-web/sabrosita/back_noviembre%203.jpg") no-repeat;
   background-size: cover;
   background-position: top center;
-}
+}*/
 .cards-filtro-3{display: none;}
 @media (max-width: 1024px){
    #background-video {display: none;} 
