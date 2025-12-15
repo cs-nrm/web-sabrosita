@@ -24,13 +24,13 @@ const notaSabrosa = poststi.filter((post:any) => post.id === 192328); //192328
         <div class="author text-xs bold">por {post.yoast_head_json.author}</div>
       </div>
       <div class="w-full md:w-2/3 order-1 md:order-2">
-        <img
+        <a href={`/nota-sabrosa/${post.slug}/`}><img
           loading="lazy"
           class="rounded-xl aspect-not"
           src={post?._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.['full']?.source_url || PLACEHOLDER_IMG}
           alt={post._embedded['wp:featuredmedia'][0].alt_text || "Imagen Nota Sabrosa"}
           fetchpriority="high"
-        />
+        /></a>
       </div>
     </div>
   </a>
