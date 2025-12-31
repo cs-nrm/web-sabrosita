@@ -1,36 +1,45 @@
 ---
-import CardNews from '../layouts/CardsHomeNews.astro';
-import CardEntrevistas from '../layouts/CardsHomeEntrevistas.astro';
-import Separator from '../components/Separator.astro'; 
-import DoubleBox from '../components/DoubleBox.astro';
-import BoxBanner from '../components/BoxBanner.astro';
-import LeaderBoard from'../components/LeaderBoard.astro';
-import Modal from'../components/Modal.astro';
-import LeaderBoard2 from'../components/LeaderBoard2.astro';
-import SuperLeader from '../components/SuperLeader.astro';
-import BillBoard from '../components/BillBoard.astro';
-import BillBoard2 from '../components/BillBoard2.astro';
-import Notificacion from '../components/Notificacion.astro';
-import NotaPrincipal from '../layouts/CardsHomePrincipal.astro';
-import CardsHomeNavidad from '../layouts/CardsHomeNavidad.astro';
-import Promociones from '../layouts/SliderPromociones.astro';
-import SliderHotParade from '../layouts/SliderHotParade.astro';
-import SliderPodcast from '../layouts/SliderPodcast.astro';
-import DataFactory from '../components/DataFactory.astro';
-import Layout from '../layouts/Layout.astro';
-import Navidad from '../components/Navidad.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import CardNews from "../layouts/CardsHomeNews.astro";
+import CardEntrevistas from "../layouts/CardsHomeEntrevistas.astro";
+import Separator from "../components/Separator.astro";
+import DoubleBox from "../components/DoubleBox.astro";
+import BoxBanner from "../components/BoxBanner.astro";
+import LeaderBoard from "../components/LeaderBoard.astro";
+import Modal from "../components/Modal.astro";
+import LeaderBoard2 from "../components/LeaderBoard2.astro";
+import SuperLeader from "../components/SuperLeader.astro";
+import BillBoard from "../components/BillBoard.astro";
+import BillBoard2 from "../components/BillBoard2.astro";
+import Notificacion from "../components/Notificacion.astro";
+import NotaPrincipal from "../layouts/CardsHomePrincipal.astro";
+import CardsHomeLanzamientos from "../layouts/CardsHomeLanzamientos.astro";
+import CardsHomeNavidad from "../layouts/CardsHomeNavidad.astro";
+import Promociones from "../layouts/SliderPromociones.astro";
+import SliderHotParade from "../layouts/SliderHotParade.astro";
+import SliderPodcast from "../layouts/SliderPodcast.astro";
+import DataFactory from "../components/DataFactory.astro";
+import Layout from "../layouts/Layout.astro";
+import Navidad from "../components/Navidad.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 //import SliderBuenFin from '../layouts/SliderBuen.astro';
 ---
+
 <div>
-  <a target="_blank" href="http://coca-colaentuhogar.com/"><img class="img-prin w-full h-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/resources/img/portada_coca-nueva.jpg" alt="Imagen La Nota"></a>
+  <a target="_blank" href="http://coca-colaentuhogar.com/"
+    ><img
+      class="img-prin w-full h-auto"
+      src="https://storage.googleapis.com/nrm-web/sabrosita/resources/img/portada_coca-nueva.jpg"
+      alt="Imagen La Nota"
+    /></a
+  >
 </div>
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <Notificacion />
   <main id="home">
-    <section>                   
-      <div class="container-home p-4 mx-auto">                        
+    <section>
+      <div class="container-home p-4 mx-auto">
         <NotaPrincipal />
+
         <CardNews />
       </div>
     </section>
@@ -44,9 +53,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         <div class="flex justify-end"><img class="w-full max-w-[100px]" src="https://storage.googleapis.com/nrm-web/nrm/adManager/buen-fin-qr.png"/></div>
       </div>
     </section-->
-    <LeaderBoard/>
+    <LeaderBoard />
     <section class="patrio">
-        <CardsHomeNavidad />
+      <CardsHomeNavidad />
     </section>
     <!--div class="container-home p-4 mx-auto">
       <div class="flex flex-col md:flex-row justify-center items-center">
@@ -63,14 +72,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     </div-->
     <!--BillBoard/-->
     <section>
-      <div class="container-home p-4 mx-auto">                        
-        <SliderHotParade/>
+      <div class="container-home p-4 mx-auto">
+        <SliderHotParade />
       </div>
     </section>
-    <BillBoard2/>
+    <BillBoard2 />
     <section>
-      <div class="container-home p-4 mx-auto">                        
-        <SliderPodcast />    
+      <div class="container-home p-4 mx-auto">
+        <SliderPodcast />
+      </div>
+    </section>
+    <section>
+      <div class="container-home p-4 mx-auto">
+        <CardsHomeLanzamientos />
       </div>
     </section>
     <section>
@@ -82,13 +96,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           <div class="">
             <BoxBanner />
           </div>
-        </div>                
+        </div>
       </div>
     </section>
     <LeaderBoard2 />
     <section class="">
       <div class="container-home p-4 mx-auto">
-        <Promociones />    
+        <Promociones />
       </div>
     </section>
     <Modal />

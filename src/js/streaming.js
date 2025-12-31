@@ -827,6 +827,16 @@ document.addEventListener('astro:page-load', ev => {
             autoPlay: 5000,
         });
 
+        var elemlanza = document.querySelector('.main-lanzamientos');
+        var flktylanza = new Flickity( elemlanza, {
+            contain: true,
+            lazyLoad: 1, 
+            wrapAround: true, 
+            cellAlign: 'left',
+            pageDots: false,
+            autoPlay: 5000,
+        });
+
         var elemtopten = document.querySelector('.main-topten');
         var flktytopten = new Flickity( elemtopten, {
             contain: true,
