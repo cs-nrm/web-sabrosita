@@ -22,16 +22,20 @@ import Layout from "../layouts/Layout.astro";
 /*import Navidad from "../components/Navidad.astro";*/
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 //import SliderBuenFin from '../layouts/SliderBuen.astro';
+import DiaRadio from "../components/DiaRadio.astro";
 ---
 
-<div>
+<!--div>
   <a target="_blank" href="https://YY33n3.short.gy/nrm-original">
     <img class="img-prin w-full h-auto" src="https://storage.googleapis.com/nrm-web/nrm/adManager/portada-granmaestro2.jpg" alt="Imagen La Nota" />
   </a>
-</div>
+</div-->
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <Notificacion />
+  <!--Notificacion /-->
   <main id="home">
+    <section>
+      <DiaRadio />    
+    </section>
     <section>
       <div class="container-home p-4 mx-auto">
         <NotaPrincipal />
@@ -101,7 +105,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         <Promociones />
       </div>
     </section>
-    <!--Modal /-->
+    <Modal />
   </main>
   <!--Navidad /-->
 </Layout>
