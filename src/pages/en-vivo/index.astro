@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { Tabs } from 'astro-tabs';
 import BarNrm from '../../components/BarNrm.astro';
+import LeaderBoard from '../../components/LeaderBoard.astro';
 
 ---
 
@@ -19,7 +20,8 @@ import BarNrm from '../../components/BarNrm.astro';
 		<Header title={SITE_TITLE} />
 		
 		<main id="envivo">
-            <div class=" mx-auto ">				
+            <div class=" mx-auto ">		
+                <LeaderBoard />		
                 <div class="md:flex md:flex-col lg:flex-row">
                     <div class="banner-prog">
                         <img src="" />

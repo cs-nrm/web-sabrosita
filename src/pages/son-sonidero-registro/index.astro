@@ -1,10 +1,12 @@
 ---
+import LeaderBoard from '../../components/LeaderBoard.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="Son Sonidero Registro" description={SITE_DESCRIPTION}>
   <div class="container m-auto">
+    <LeaderBoard />
     <img src="https://storage.googleapis.com/nrm-web/sabrosita/SON-SONIDERO-LOGO-pantalla.png" alt="Son Sonidero" class="w-full h-auto max-w-[400px] m-auto mb-4" />
     <div>
       <h3>Términos y Condiciones Son Sonidero</h3>

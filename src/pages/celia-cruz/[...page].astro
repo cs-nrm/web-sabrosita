@@ -5,6 +5,7 @@ import Card from '../../layouts/Cardsq.astro';
 import DoubleBox from '../../components/DoubleBox.astro';
 import BoxBanner from '../../components/BoxBanner.astro';
 import Layout from '../../layouts/Layout.astro';
+import LeaderBoard from '../../components/LeaderBoard.astro';
 
 export async function getStaticPaths({ paginate }) {
   const data = await getArticles(1648);  
@@ -19,7 +20,8 @@ const { page = [] } = Astro.props;
 ---
 <Layout title="Celia Cruz" description={SITE_DESCRIPTION}>
   <main>
-    <div class="container my-12 mx-auto px-4 md:px-12">
+    <div class="container mb-12 mx-auto px-4 md:px-12">
+      <LeaderBoard />
       <div class="my-8">
         <img class="max-w-[200px] m-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/celia-cruz.png" alt="Título Celia Cruz"/>
       </div>	

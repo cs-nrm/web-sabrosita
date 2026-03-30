@@ -8,6 +8,7 @@ import Card from '../../layouts/Cardsq.astro';
 
 import DoubleBox from '../../components/DoubleBox.astro';
 import BoxBanner from '../../components/BoxBanner.astro';
+import LeaderBoard from '../../components/LeaderBoard.astro';
 
 
 export async function getStaticPaths( { paginate } ) {
@@ -23,7 +24,10 @@ const {page=[]} = Astro.props;
 //console.log(page.data);
 ---
 <Layout title="Entrevistas" description={SITE_DESCRIPTION}>
-  <div class="container my-12 mx-auto px-4 md:px-12">
+  <div class="container mb-12 mx-auto px-4 md:px-12">
+    <LeaderBoard  />
+     <div class="my-8">
+      <img class="max-w-[200px] m-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/ENTREVISTAS.png" alt="Título Entrevistas"/>
     <div class="my-8"><img class="max-w-[200px] m-auto" src="https://storage.googleapis.com/nrm-web/sabrosita/titulos/ENTREVISTAS.png" alt="Título Nota Sabrosa"/></div>
     <div class="flex flex-col lg:flex-row">
       <div class="sm:min-w-[calc(100%-400px)] lg:mr-10">
