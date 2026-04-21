@@ -72,19 +72,19 @@ function initGPT() {
     var mappingDoubleBox   = googletag.sizeMapping().addSize([0, 0],   [300, 600]).build();
     var mappingModal       = googletag.sizeMapping().addSize([600, 0], [600, 800]).addSize([0, 0], [320, 480]).build();
 
-    window.slot3   = googletag.defineSlot("/21799830913/Sabrosita", [[970, 250], [320, 50]], 'ad-slot3').defineSizeMapping(mappingBillboard).addService(googletag.pubads());
-    window.slot4   = googletag.defineSlot("/21799830913/Sabrosita", [[728,  90], [320, 50]], 'ad-slot4').defineSizeMapping(mappingLeader).addService(googletag.pubads());
-    window.slot32  = googletag.defineSlot("/21799830913/Sabrosita", [[728,  90], [320, 50]], 'ad-slot32').defineSizeMapping(mappingLeader).addService(googletag.pubads());
-    window.slot42  = googletag.defineSlot("/21799830913/Sabrosita", [[728,  90], [320, 50]], 'ad-slot42').defineSizeMapping(mappingLeader).addService(googletag.pubads());
-    window.slot6   = googletag.defineSlot("/21799830913/Sabrosita", [[970,  90], [320, 50]], 'ad-slot6').defineSizeMapping(mappingSuperLeader).addService(googletag.pubads());
-    window.slot2   = googletag.defineSlot("/21799830913/Sabrosita", [300, 250],              'ad-slot2').defineSizeMapping(mappingBox).addService(googletag.pubads());
-    window.slot5   = googletag.defineSlot("/21799830913/Sabrosita", [300, 600],              'ad-slot5').defineSizeMapping(mappingDoubleBox).addService(googletag.pubads());
-    window.slot14  = googletag.defineSlot("/21799830913/Sabrosita", [[600, 800], [320, 480]],'ad-slot14').defineSizeMapping(mappingModal).addService(googletag.pubads());
-    window.slot201 = googletag.defineSlot("/21799830913/Beat/Box",  [300, 250], 'ad-slot201').defineSizeMapping(mappingBox).addService(googletag.pubads());
-    window.slot202 = googletag.defineSlot("/21799830913/Beat/Box2", [300, 250], 'ad-slot202').defineSizeMapping(mappingBox).addService(googletag.pubads());
-    window.slot203 = googletag.defineSlot("/21799830913/Beat/Box3", [300, 250], 'ad-slot203').defineSizeMapping(mappingBox).addService(googletag.pubads());
-    window.slot204 = googletag.defineSlot("/21799830913/Beat/Box4", [300, 250], 'ad-slot204').defineSizeMapping(mappingBox).addService(googletag.pubads());
-    window.slot205 = googletag.defineSlot("/21799830913/Beat/Box5", [300, 250], 'ad-slot205').defineSizeMapping(mappingBox).addService(googletag.pubads());
+    window.slot3   = googletag.defineSlot("/23349147378/Sabrosita", [[970, 250], [320, 50]], 'ad-slot3').defineSizeMapping(mappingBillboard).addService(googletag.pubads());
+    window.slot4   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot4').defineSizeMapping(mappingLeader).addService(googletag.pubads());
+    window.slot32  = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot32').defineSizeMapping(mappingLeader).addService(googletag.pubads());
+    window.slot42  = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot42').defineSizeMapping(mappingLeader).addService(googletag.pubads());
+    window.slot6   = googletag.defineSlot("/23349147378/Sabrosita", [[970,  90], [320, 50]], 'ad-slot6').defineSizeMapping(mappingSuperLeader).addService(googletag.pubads());
+    window.slot2   = googletag.defineSlot("/23349147378/Sabrosita", [300, 250],              'ad-slot2').defineSizeMapping(mappingBox).addService(googletag.pubads());
+    window.slot5   = googletag.defineSlot("/23349147378/Sabrosita", [300, 600],              'ad-slot5').defineSizeMapping(mappingDoubleBox).addService(googletag.pubads());
+    window.slot14  = googletag.defineSlot("/23349147378/Sabrosita", [[600, 800], [320, 480]],'ad-slot14').defineSizeMapping(mappingModal).addService(googletag.pubads());
+    window.slot201 = googletag.defineSlot("/23349147378/Sabrosita/Box",  [300, 250], 'ad-slot201').defineSizeMapping(mappingBox).addService(googletag.pubads());
+    window.slot202 = googletag.defineSlot("/23349147378/Sabrosita/Box2", [300, 250], 'ad-slot202').defineSizeMapping(mappingBox).addService(googletag.pubads());
+    window.slot203 = googletag.defineSlot("/23349147378/Sabrosita/Box3", [300, 250], 'ad-slot203').defineSizeMapping(mappingBox).addService(googletag.pubads());
+    window.slot204 = googletag.defineSlot("/23349147378/Sabrosita/Box4", [300, 250], 'ad-slot204').defineSizeMapping(mappingBox).addService(googletag.pubads());
+    window.slot205 = googletag.defineSlot("/23349147378/Sabrosita/Box5", [300, 250], 'ad-slot205').defineSizeMapping(mappingBox).addService(googletag.pubads());
 
     googletag.pubads().setTargeting("test", "responsive");
     googletag.enableServices();
@@ -249,7 +249,7 @@ function safeRefreshSlots() {
       
       var start = function(){
         //console.log('trata la pub primero');    
-        streaming.playAd( 'vastAd', { url:'https://pubads.g.doubleclick.net/gampad/ads?sz=600x360&iu=/21799830913/sabrosita/VDVIDEOS&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]' } );	        
+        streaming.playAd( 'vastAd', { url:'https://pubads.g.doubleclick.net/gampad/ads?sz=600x360&iu=/23349147378/sabrosita/VDVIDEOS&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]' } );	        
       };
 
 
