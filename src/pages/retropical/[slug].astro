@@ -45,6 +45,7 @@ const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resour
         </figure-->
         <!--img class="text-center rounded-xl m-auto shadow-[0_5px_12px_10px_rgba(0,0,0,0.4)]" src={post.yoast_head_json.og_image[0].url} alt={post.title.rendered}/-->
          <Fragment set:html={post.content.rendered} />
+        <div id="ad-slot-videonota"></div>
       </div>
     <LeaderBoard />
 
@@ -106,4 +107,3 @@ const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resour
 <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/nrm-web/nrm/lib/plyr.css" />
 <script is:inline src="https://storage.googleapis.com/nrm-web/nrm/lib/plyr.js"></script>
 <script is:inline src="https://storage.googleapis.com/nrm-web/nrm/lib/SunMediaSabrosita.js"></script>
-<script is:inline data-wid="auto" type="text/javascript" src="https://content.viralize.tv/display/?zid=AAGEvmBi3yVQL6nZ&u=%%REFERRER_URL_ESC%%"></script>

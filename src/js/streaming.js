@@ -71,6 +71,7 @@ function initGPT() {
     var mappingBox         = googletag.sizeMapping().addSize([0, 0],   [300, 250]).build();
     var mappingDoubleBox   = googletag.sizeMapping().addSize([0, 0],   [300, 600]).build();
     var mappingModal       = googletag.sizeMapping().addSize([600, 0], [600, 800]).addSize([0, 0], [320, 480]).build();
+    var mappingVideoNota   = googletag.sizeMapping().addSize([0, 0], [400, 311]).build();
 
     window.slot3   = googletag.defineSlot("/23349147378/Sabrosita", [[970, 250], [320, 50]], 'ad-slot3').defineSizeMapping(mappingBillboard).addService(googletag.pubads());
     window.slot4   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot4').defineSizeMapping(mappingLeader).addService(googletag.pubads());
@@ -85,13 +86,14 @@ function initGPT() {
     window.slot203 = googletag.defineSlot("/23349147378/Sabrosita/Box3", [300, 250], 'ad-slot203').defineSizeMapping(mappingBox).addService(googletag.pubads());
     window.slot204 = googletag.defineSlot("/23349147378/Sabrosita/Box4", [300, 250], 'ad-slot204').defineSizeMapping(mappingBox).addService(googletag.pubads());
     window.slot205 = googletag.defineSlot("/23349147378/Sabrosita/Box5", [300, 250], 'ad-slot205').defineSizeMapping(mappingBox).addService(googletag.pubads());
+    window.slotVideoNota = googletag.defineSlot("/23349147378/StereoCien", [400, 311], 'ad-slot-videonota').defineSizeMapping(mappingVideoNota).addService(googletag.pubads());
 
     googletag.pubads().setTargeting("test", "responsive");
     googletag.enableServices();
 
     // Solo llamar display() si el div existe en el DOM de esta página
     ['ad-slot3','ad-slot4','ad-slot32','ad-slot42','ad-slot6','ad-slot2','ad-slot5','ad-slot14',
-     'ad-slot201','ad-slot202','ad-slot203','ad-slot204','ad-slot205'].forEach(function(id) {
+     'ad-slot201','ad-slot202','ad-slot203','ad-slot204','ad-slot205','ad-slot-videonota'].forEach(function(id) {
       if (document.getElementById(id)) googletag.display(id);
     });
 
