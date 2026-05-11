@@ -86,7 +86,7 @@ function initGPT() {
     window.slot203 = googletag.defineSlot("/23349147378/Sabrosita/Box3", [300, 250], 'ad-slot203').defineSizeMapping(mappingBox).addService(googletag.pubads());
     window.slot204 = googletag.defineSlot("/23349147378/Sabrosita/Box4", [300, 250], 'ad-slot204').defineSizeMapping(mappingBox).addService(googletag.pubads());
     window.slot205 = googletag.defineSlot("/23349147378/Sabrosita/Box5", [300, 250], 'ad-slot205').defineSizeMapping(mappingBox).addService(googletag.pubads());
-    window.slotVideoNota = googletag.defineSlot("/23349147378/StereoCien", [400, 311], 'ad-slot-videonota').defineSizeMapping(mappingVideoNota).addService(googletag.pubads());
+    window.slotVideoNota = googletag.defineSlot("/23349147378/Sabrosita", [400, 311], 'ad-slot-videonota').defineSizeMapping(mappingVideoNota).addService(googletag.pubads());
 
     googletag.pubads().setTargeting("test", "responsive");
     googletag.enableServices();
