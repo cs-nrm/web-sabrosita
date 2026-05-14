@@ -15,6 +15,42 @@ const radioButton = document.getElementById('radiobutton');
 const player = document.getElementById('player');
 const secchome = document.getElementById('home');
 
+const qs = (selector, root = document) => root.querySelector(selector);
+const qsa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+function setHtml(selector, html, root = document) {
+  qsa(selector, root).forEach((el) => { el.innerHTML = html; });
+}
+
+function addClass(selector, className, root = document) {
+  qsa(selector, root).forEach((el) => el.classList.add(className));
+}
+
+function removeClass(selector, className, root = document) {
+  qsa(selector, root).forEach((el) => el.classList.remove(className));
+}
+
+function setStyle(selector, property, value, root = document) {
+  qsa(selector, root).forEach((el) => { el.style[property] = value; });
+}
+
+function setAttr(selector, attribute, value, root = document) {
+  qsa(selector, root).forEach((el) => el.setAttribute(attribute, value));
+}
+
+const boundHandlers = new WeakMap();
+
+function replaceEventListener(element, key, type, handler) {
+  if (!element) return;
+  const handlers = boundHandlers.get(element) || {};
+  if (handlers[key]) {
+    element.removeEventListener(type, handlers[key]);
+  }
+  handlers[key] = handler;
+  boundHandlers.set(element, handlers);
+  element.addEventListener(type, handler);
+}
+
 // ===== Ad Fallback: GPT → AdSense =====
 window._adFallbackStates = window._adFallbackStates || {};
 
@@ -192,9 +228,9 @@ function safeRefreshSlots() {
             document.getElementById('play-pause').classList.add('show');
             document.getElementById('play-pause').classList.remove('hide'); 
             document.getElementById('big-play').innerHTML = bigButtonPause;            
-            $('.text-player').html('<div style="font-weight:bold;">Estás escuchando...</div><div id="infoMusic" style="line-height:11px; font-size:12px;"></div>');
-            $('.text-player').addClass('playing');
-            $('#radiobutton').addClass('playerplaying');
+            setHtml('.text-player', '<div style="font-weight:bold;">Estás escuchando...</div><div id="infoMusic" style="line-height:11px; font-size:12px;"></div>');
+            addClass('.text-player', 'playing');
+            document.getElementById('radiobutton')?.classList.add('playerplaying');
             // Limpia cualquier intervalo anterior
             if (musicInterval) clearInterval(musicInterval);
             setTimeout(function(){
@@ -210,14 +246,13 @@ function safeRefreshSlots() {
             document.getElementById('play-pause').classList.remove('hide'); 
             document.getElementById('play-pause').innerHTML = buttonPlay;            
             document.getElementById('big-play').innerHTML = bigButtonPlay; 
-            $('.text-player').removeClass('playing');
-            $('#radiobutton').removeClass('playerplaying');
-            $('.text-player').html('');
+            removeClass('.text-player', 'playing');
+            document.getElementById('radiobutton')?.classList.remove('playerplaying');
+            setHtml('.text-player', '');
             setTimeout( function(){
-                $('.text-player').html('ESCUCHA LA RADIO <span style="color: #df104a;    font-weight: bold;    font-size: 12px;">EN VIVO </span> AHORA');             
+                setHtml('.text-player', 'ESCUCHA LA RADIO <span style="color: #df104a;    font-weight: bold;    font-size: 12px;">EN VIVO </span> AHORA');             
             },1000);
             if (musicInterval) clearInterval(musicInterval);    
-            //$('.text-player').attr('id','');            
          }
 
      }
@@ -230,8 +265,9 @@ function safeRefreshSlots() {
             Dist: 'WebSanrosita'
             }
         }); 
-        $('#td_container').removeClass('pub_active');
-        $('#full-cover').css('display','none');
+        document.getElementById('td_container')?.classList.remove('pub_active');
+        const fullCover = document.getElementById('full-cover');
+        if (fullCover) fullCover.style.display = 'none';
         
        
       }
@@ -243,10 +279,11 @@ function safeRefreshSlots() {
     }
 
       function startAd(e){
-        $('#td_container').addClass('pub_active');
-        $('#full-cover').css('display','block');
+        document.getElementById('td_container')?.classList.add('pub_active');
+        const fullCover = document.getElementById('full-cover');
+        if (fullCover) fullCover.style.display = 'block';
         document.getElementById('big-play').innerHTML = buttongLoading;    
-        $('.text-player').html('<div style="font-style: italic; line-height:11px; font-weight:bold; font-size:11px;">Iniciamos después del anuncio...</div>'); 
+        setHtml('.text-player', '<div style="font-style: italic; line-height:11px; font-weight:bold; font-size:11px;">Iniciamos después del anuncio...</div>'); 
       }
       
       var start = function(){
@@ -369,57 +406,67 @@ function detectarDispositivo() {
  * @param {string} seccion - Ej: 'Radio', 'Hot parade', 'Lanzamientos'
  * @param {string} artista - Nombre del artista (sin codificar)
  * @param {string} cancion - Título de la canción (sin codificar)
- * @param {jQuery|null} $btn - Botón/elemento clicado (opcional) para manejar UI
+ * @param {HTMLElement|null} button - Botón/elemento clicado (opcional) para manejar UI
  * @returns {Promise}
  */
-function registerVote(seccion, artista, cancion, $btn = null) {
+function registerVote(seccion, artista, cancion, button = null) {
   return new Promise((resolve, reject) => {
     const url = 'https://sabrositadigital.com.mx/6456heu2/8s4v3f1l3s.php';
 
     // Protección de doble click o voto ya marcado
-    if ($btn) {
-      const $svg = $btn.find('svg');
-      const fillColor = ($svg.css('fill') || '').toLowerCase();
+    if (button) {
+      const svg = button.querySelector('svg');
+      const fillColor = ((svg && getComputedStyle(svg).fill) || '').toLowerCase();
       if (fillColor === VOTE_COLOR) {
         console.log('Ya votaste por esta canción.');
         return resolve({ status: 'already' });
       }
-      if ($btn.prop('disabled')) {
+      if (button.disabled) {
         return resolve({ status: 'disabled' });
       }
-      $btn.prop('disabled', true);
+      button.disabled = true;
     }
 
     const safe = (s) => (s || '').toString().replace('&', '%26');
     const { navegador, sistema } = detectarNavegador();
 
-    $.post(
-      url,
-      {
+    const body = new URLSearchParams({
         artista: safe(artista),
         cancion: safe(cancion),
         seccion: seccion, // El backend actual puede ignorarlo; ya preparado para futuro
         dispositivo: detectarDispositivo(),
         navegador,
         sistema_operativo: sistema,
-      },
-      function (resp) {
-        if ($btn) $btn.prop('disabled', false);
+    });
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+      body,
+    })
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error('network-fail');
+        }
+        return resp.json();
+      })
+      .then((resp) => {
+        if (button) button.disabled = false;
         if (resp && resp.status === 'success') {
-          if ($btn) $btn.find('svg').css('fill', VOTE_COLOR);
+          const svg = button?.querySelector('svg');
+          if (svg) svg.style.fill = VOTE_COLOR;
           console.log('Voto registrado con éxito.');
           resolve(resp);
         } else {
           console.log((resp && resp.message) || 'Error al votar.');
           reject(resp || new Error('vote-error'));
         }
-      },
-      'json'
-    ).fail(function () {
-      if ($btn) $btn.prop('disabled', false);
-      console.log('No se pudo registrar el voto. Intenta de nuevo.');
-      reject(new Error('network-fail'));
-    });
+      })
+      .catch(() => {
+        if (button) button.disabled = false;
+        console.log('No se pudo registrar el voto. Intenta de nuevo.');
+        reject(new Error('network-fail'));
+      });
   });
 }
 
@@ -473,22 +520,21 @@ function getInfoMusic() {
                 console.log('Artista: ' + artist);
                 console.log('Canción: ' + cancion);
                 console.log('escribe');
-                $('#infoMusic').html('<div class="current-song">' + cancion + ' / ' + artist + '</div><div class="share-current"><div class="like"><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1"> <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path> </svg> </div> <div class="share-wp"><a href="https://api.whatsapp.com/send/?text=Estoy%20escuchando%20' + codtit +'%20de%20'+ codart +'%20en%20https://sabrositadigital.mx/" target="_blank"> <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1"> <path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z"></path> </svg> </div></div>'); 
+                setHtml('#infoMusic', '<div class="current-song">' + cancion + ' / ' + artist + '</div><div class="share-current"><div class="like"><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1"> <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path> </svg> </div> <div class="share-wp"><a href="https://api.whatsapp.com/send/?text=Estoy%20escuchando%20' + codtit +'%20de%20'+ codart +'%20en%20https://sabrositadigital.mx/" target="_blank"> <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1"> <path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z"></path> </svg> </div></div>'); 
                 //document.getElementById('infoMusic').innerHTML = 
 
                 
                 // Binder de voto para la sección RADIO (evita handlers duplicados)
-                $('.like').off('click.vote').on('click.vote', function (e) {
+                qsa('.like').forEach((button) => replaceEventListener(button, 'click.vote', 'click', function (e) {
                   e.preventDefault();
-                  const $btn = $(this);
-                  registerVote('Radio', artist, cancion, $btn)
+                  registerVote('Radio', artist, cancion, button)
                     .then(() => {
                       // Hook opcional: aquí podrías disparar un toast/analytics
                     })
                     .catch(() => {
                       // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
                     });
-                });
+                }));
 
                 // Consulta el cover solo si hay cambio
                 var linkcover = coverbase + '&track=' + codtit + '&artist=' + codart;
@@ -502,21 +548,21 @@ function getInfoMusic() {
                     .then((dataalbum) => {
                         var lig = dataalbum.track.album;
                         if (secenvivo) {
-                            $('.cover-background').html('');
+                            setHtml('.cover-background', '');
                             if (!lig || artist == 'PAUSA COMERCIAL') {
                                 cover = 'https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player-small.svg';
-                                $('.logo-player img').attr('src', cover);
+                                setAttr('.logo-player img', 'src', cover);
                             } else {
                                 cover = dataalbum.track.album.image[2]['#text'];
-                                $('.logo-player img').attr('src', cover);
+                                setAttr('.logo-player img', 'src', cover);
                             }
                         } else {
                             if (!lig || artist == 'PAUSA COMERCIAL') {
-                                $('#radiobutton .cover-background').html('');
+                                setHtml('#radiobutton .cover-background', '');
                             } else {
                                 cover = dataalbum.track.album.image[2]['#text'];
-                                $('#radiobutton .cover-background').html('');
-                                $('#radiobutton').append('<div class="cover-background"><img src="' + cover + '" /></div>');
+                                setHtml('#radiobutton .cover-background', '');
+                                document.getElementById('radiobutton')?.insertAdjacentHTML('beforeend', '<div class="cover-background"><img src="' + cover + '" /></div>');
                             }
                         }
                     });
@@ -549,11 +595,11 @@ function getInfoMusic() {
                     if(prog.acf[dia] === true){
                         var h_i;
                         if( prog.acf.hora_fin >= hora &&  prog.acf.hora_inicio <= hora){
-                            $('.banner-prog img').attr('src', prog._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url);
-                            $('.envivo-prog').html(prog.acf.programa);
-                            $('.envivo-now').html( prog.acf.hora_inicio + ' - ' + prog.acf.hora_fin);
-                            $('.envivo-prog-tab').html(prog.acf.programa);                            
-                            $('.envivo-desc').html(prog.content.rendered);                            
+                            setAttr('.banner-prog img', 'src', prog._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url);
+                            setHtml('.envivo-prog', prog.acf.programa);
+                            setHtml('.envivo-now', prog.acf.hora_inicio + ' - ' + prog.acf.hora_fin);
+                            setHtml('.envivo-prog-tab', prog.acf.programa);                            
+                            setHtml('.envivo-desc', prog.content.rendered);                            
                         }
 
                         if (prog.acf.hora_inicio > hora) {
@@ -565,8 +611,8 @@ function getInfoMusic() {
                 });   
                 if (siguientePrograma) {
                  //   console.log("Siguiente programa:", siguientePrograma.acf.programa);
-                    $('.envivo-next').html(siguientePrograma.acf.hora_inicio + ' - ' + siguientePrograma.acf.hora_fin);
-                    $('.envivo-prog-next-tab').html(siguientePrograma.acf.programa);
+                    setHtml('.envivo-next', siguientePrograma.acf.hora_inicio + ' - ' + siguientePrograma.acf.hora_fin);
+                    setHtml('.envivo-prog-next-tab', siguientePrograma.acf.programa);
                 }                                                
             });           
         }
@@ -574,56 +620,57 @@ function getInfoMusic() {
         
 
 const radioActive = function(){
-    $('#player-inner').addClass('active');
-    $('#player-v-podcast').removeClass('active');
-    $('#player-v-video').removeClass('active');
-    $('.player-float').removeClass('hide');
+    document.getElementById('player-inner')?.classList.add('active');
+    document.getElementById('player-v-podcast')?.classList.remove('active');
+    document.getElementById('player-v-video')?.classList.remove('active');
+    removeClass('.player-float', 'hide');
 }
 
 const podcastActive = function(){
     //transitionPlayer();
-    $('#player-inner').removeClass('active');
-    $('#player-v-podcast').addClass('active');
-    $('#player-v-video').removeClass('active');
-    $('.player-float').addClass('hide');
-    $('.player-float').removeClass('active');
-    //$('#radiobutton').addClass('playerplaying'); 
+    document.getElementById('player-inner')?.classList.remove('active');
+    document.getElementById('player-v-podcast')?.classList.add('active');
+    document.getElementById('player-v-video')?.classList.remove('active');
+    addClass('.player-float', 'hide');
+    removeClass('.player-float', 'active');
 }
 
 const videoActive = function(){
-    $('#player-inner').removeClass('active');
-    $('#player-v-podcast').removeClass('active');
-    $('#player-v-video').addClass('active');
+    document.getElementById('player-inner')?.classList.remove('active');
+    document.getElementById('player-v-podcast')?.classList.remove('active');
+    document.getElementById('player-v-video')?.classList.add('active');
 }
 
 const radioStop = function(){
         transitionPlayer();
         streaming.stop();
-        $('#player').attr('data-status','init');                
+        document.getElementById('player')?.setAttribute('data-status','init');                
         //hidebarra();
-        $('#player-inner').removeClass('active');
+        document.getElementById('player-inner')?.classList.remove('active');
 }
 
 const initPlayer = function(){
     transitionPlayer();
-    $('#player-v-podcast').removeClass('active');
-    $('#player-v-video').removeClass('active');
-    $('.player-float').removeClass('hide');
-    $('#radiobutton').removeClass('playerplaying'); 
-    $('.player-float').removeClass('hide');
-    $('.player-float').addClass('active');    
+    document.getElementById('player-v-podcast')?.classList.remove('active');
+    document.getElementById('player-v-video')?.classList.remove('active');
+    removeClass('.player-float', 'hide');
+    document.getElementById('radiobutton')?.classList.remove('playerplaying'); 
+    removeClass('.player-float', 'hide');
+    addClass('.player-float', 'active');    
 }
 
 const transitionPlayer = function(){
-    $('#radiobutton').width('0px');
+    const radioButton = document.getElementById('radiobutton');
+    if (radioButton) radioButton.style.width = '0px';
     setTimeout( function(){
-        $('#radiobutton').width('250px');
+        const radioButton = document.getElementById('radiobutton');
+        if (radioButton) radioButton.style.width = '250px';
     }, 500);
 }
 
 
 const playerstatus = function(){
-    var state  = $('#player').attr('data-status');
+    var state  = document.getElementById('player')?.getAttribute('data-status');
     return state;
 };
 
@@ -643,42 +690,34 @@ const playstopRadio = function(){
             if( local_status == null || local_status == 'undefined' || local_status == '' ){                                
                 //console.log('aqui debe iniciar');
                 start();     
-                $('#player').attr('data-status','radio-playing');
+                document.getElementById('player')?.setAttribute('data-status','radio-playing');
                 //transitionBarra();                 
                 radioActive();   
             }else if(local_status == 'LIVE_STOP'){
                 //console.log('else play');
                 play();
-                $('#player').attr('data-status','radio-playing');
+                document.getElementById('player')?.setAttribute('data-status','radio-playing');
             }else if( local_status == 'LIVE_PLAYING' || local_status == 'GETTING_STATION_INFORMATION' || local_status == 'LIVE_CONNECTING' || local_status == 'LIVE_BUFFERING'){                
                 radioStop();
             }
 };
 
 
-$('#big-play').on('click',function(){    
+document.getElementById('big-play')?.addEventListener('click',function(){    
        // console.log('click en radiobutton');
         playstopRadio();      
 });
 
 
-$('#return-live').on('click',function(){    
+document.getElementById('return-live')?.addEventListener('click',function(){    
        playstopRadio();    
 });
 
-$('.radio-link').on('click',function(){    
+qsa('.radio-link').forEach((link) => link.addEventListener('click',function(){    
        playstopRadio();    
-});
+}));
 
 
-
-/*$('#play-pause').on('click', function(){
-    playstopRadio();
-});*/
-
-
-
-  
 
 /* NAVIGATION */ 
 document.addEventListener('astro:before-preparation', ev => {
@@ -744,20 +783,20 @@ document.addEventListener("astro:after-swap", () => {
 
 document.addEventListener('astro:page-load', ev => {
    // console.log('pageload');
-   //$('.cover-background').html('');
     initGPT();
  
     window.addEventListener('scroll', function () {
                 const scrollY = window.scrollY;
                 
-                if ($('.bar-stereo').hasClass('is-pinned')) {
-                    $('.bar-stereo').addClass('compress');
-                    $('.bar-stereo .logo').addClass('compress-logo');
+                const barStereo = qs('.bar-stereo');
+                if (barStereo?.classList.contains('is-pinned')) {
+                    barStereo.classList.add('compress');
+                    addClass('.bar-stereo .logo', 'compress-logo');
                 }
                 if (scrollY <= 1) {
-                    $('.bar-stereo').css('position', 'sticky');
-                    $('.bar-stereo').removeClass('compress');
-                    $('.bar-stereo .logo').removeClass('compress-logo');
+                    setStyle('.bar-stereo', 'position', 'sticky');
+                    removeClass('.bar-stereo', 'compress');
+                    removeClass('.bar-stereo .logo', 'compress-logo');
                 }                
             });
 
@@ -792,22 +831,22 @@ document.addEventListener('astro:page-load', ev => {
         getInfoProg();        
         getInfoMusic();
         progInterval = setInterval( getInfoProg, 60000);
-        $('#radiobutton').addClass('en-vivo');
+        document.getElementById('radiobutton')?.classList.add('en-vivo');
         //console.log(local_status);
         if( local_status == null || local_status == 'undefined' || local_status == '' || local_status == 'LIVE_STOP' ){  
             playstopRadio();
         }
         if( local_status == 'LIVE_PLAYING' || local_status == 'GETTING_STATION_INFORMATION' || local_status == 'LIVE_CONNECTING' || local_status == 'LIVE_BUFFERING' ){
-            $('.cover-background').html('');
+            setHtml('.cover-background', '');
         }
-        $('.logo-player img').attr('src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player-small.svg');
-        $('#big-play').removeClass('border-4');
+        setAttr('.logo-player img', 'src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player-small.svg');
+        document.getElementById('big-play')?.classList.remove('border-4');
         
     }else{
        // getInfoMusic();
-        $('.logo-player img').attr('src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player.svg');        
-        $('#radiobutton').removeClass('en-vivo');
-        $('#big-play').addClass('border-4');
+        setAttr('.logo-player img', 'src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player.svg');        
+        document.getElementById('radiobutton')?.classList.remove('en-vivo');
+        document.getElementById('big-play')?.classList.add('border-4');
         if (progInterval) {
             console.log('clear interval prog');
             clearInterval(progInterval);
@@ -905,21 +944,17 @@ document.addEventListener('astro:page-load', ev => {
         //hidebarra();
     }
 
-   /* $('#big-play').on('click', function(){
-        playstopRadio();
-    });*/
-    
-    $('.audiopod').each(function(){   
-        $(this).on('click',function(){
+    qsa('.audiopod').forEach((audioPod) => {   
+        replaceEventListener(audioPod, 'click.podcast', 'click', function(){
             const getstatus = playerstatus();
-            const podactive = $(this).find('.play-pause-podcast');
-            const podcaststatus = podactive.attr('data-podcast-status');
+            const podactive = audioPod.querySelector('.play-pause-podcast');
+            const podcaststatus = podactive?.getAttribute('data-podcast-status');
             const containerpodcast  = document.getElementById('iframepodcast');
             
             transitionPlayer();
             podcastActive();
             setTimeout( function(){
-                $('#radiobutton').addClass('playerplaying'); 
+                document.getElementById('radiobutton')?.classList.add('playerplaying'); 
             },600);
             
             
@@ -927,22 +962,24 @@ document.addEventListener('astro:page-load', ev => {
                 radioStop();                
             }            
                                                 
-            podactive.html('<img class="loading-gif" src="https://storage.googleapis.com/nrm-web/oye/recursos/loading-normal.gif" />');
+            if (podactive) podactive.innerHTML = '<img class="loading-gif" src="https://storage.googleapis.com/nrm-web/oye/recursos/loading-normal.gif" />';
             
-            $('.close-podcast').on('click',function(){
+            qsa('.close-podcast').forEach((closeButton) => replaceEventListener(closeButton, 'click.closePodcast', 'click', function(){
                 initPlayer();
                 const playerpodcast = document.getElementById('iframepodcast').getElementsByTagName('iframe')[0];                
                 const ply =  new playerjs.Player(playerpodcast);
                 ply.on('ready', ()=> {
                     ply.pause();
-                    podactive.attr('data-podcast-status','ready');
+                    podactive?.setAttribute('data-podcast-status','ready');
                 });
-                $('.audiopod').each(function(){
-                    $('.audiopod').find('.play-pause-podcast').html(buttonPodcastPlay);
-                    $('.audiopod').find('.play-pause-podcast').attr('data-podcast-status','ready');
+                qsa('.audiopod').forEach((item) => {
+                    qsa('.play-pause-podcast', item).forEach((playButton) => {
+                        playButton.innerHTML = buttonPodcastPlay;
+                        playButton.setAttribute('data-podcast-status','ready');
+                    });
                 });
                 
-            });
+            }));
             
             if (getstatus == 'podcast-playing'){
                 
@@ -950,17 +987,20 @@ document.addEventListener('astro:page-load', ev => {
                 const ply =  new playerjs.Player(playerpodcast);
                 ply.on('ready', ()=> {
                     ply.pause();
-                    podactive.attr('data-podcast-status','ready');
+                    podactive?.setAttribute('data-podcast-status','ready');
                 });
-                $('.audiopod').each(function(){
-                    $('.audiopod').find('.play-pause-podcast').html(buttonPodcastPlay);
-                    $('.audiopod').find('.play-pause-podcast').attr('data-podcast-status','ready');
+                qsa('.audiopod').forEach((item) => {
+                    qsa('.play-pause-podcast', item).forEach((playButton) => {
+                        playButton.innerHTML = buttonPodcastPlay;
+                        playButton.setAttribute('data-podcast-status','ready');
+                    });
                 });
             }
             //console.log(podcaststatus);            
             if(podcaststatus == 'ready'){
                 //transitionBarra();
-                const ifr = $(this).find('.data-iframe').attr('data-iframe');
+                const ifr = audioPod.querySelector('.data-iframe')?.getAttribute('data-iframe');
+                if (!ifr) return;
                 const ifrsrc = ifr.split('src="');
                 const src = ifrsrc[1].split('"');
                 //const playerpodcast = document.getElementById('playerpodcast');
@@ -978,17 +1018,17 @@ document.addEventListener('astro:page-load', ev => {
                 const ply =  new playerjs.Player(playerpodcast);
                  
                 ply.on('ready', ()=> {
-                    podactive.attr('data-podcast-status','active');
-                    $('#player').attr('data-status','podcast-playing');
+                    podactive?.setAttribute('data-podcast-status','active');
+                    document.getElementById('player')?.setAttribute('data-status','podcast-playing');
                     playerpodcast.classList.add('iframestyle');
                     ply.play(); 
                     
                     ply.on('play', ()=>{
-                        podactive.html(buttonPodcastPause); 
+                        if (podactive) podactive.innerHTML = buttonPodcastPause; 
                     });
     
                     ply.on('pause', ()=>{
-                        podactive.html(buttonPodcastPlay); 
+                        if (podactive) podactive.innerHTML = buttonPodcastPlay; 
                     });
                     
                 });   
@@ -1006,7 +1046,7 @@ document.addEventListener('astro:page-load', ev => {
                 const ply =  new playerjs.Player(playerpodcast);
                 ply.on('ready', ()=> {
                     ply.pause();
-                    podactive.attr('data-podcast-status','ready');
+                    podactive?.setAttribute('data-podcast-status','ready');
                 });                
                 
             }
@@ -1014,9 +1054,10 @@ document.addEventListener('astro:page-load', ev => {
         });
     });
     
-    $('.wp-block-image').each(function(){        
-        const datasrc = $(this).find('img').attr('data-src');        
-        $(this).find('img').attr('src',datasrc);
+    qsa('.wp-block-image').forEach((blockImage) => {        
+        const image = blockImage.querySelector('img');
+        const datasrc = image?.getAttribute('data-src');        
+        if (image && datasrc) image.setAttribute('src',datasrc);
     });
 
     
@@ -1029,24 +1070,21 @@ document.addEventListener('astro:page-load', ev => {
         //console.log(navigator.userAgent);
         if(navigator.userAgent.indexOf("iPhone") != -1){
             
-        $('.wp-block-embed-youtube .wp-block-embed__wrapper iframe').each(function(t,el){
-           // console.log($(this));   
-            //const ele = $(this).attr('id','el-'+t);     
-            $(this).on('click',function(){
+        qsa('.wp-block-embed-youtube .wp-block-embed__wrapper iframe').forEach((iframe) => {
+            iframe.addEventListener('click',function(){
                 const getstatus = playerstatus();
                 if( getstatus == 'radio-playing'){
                     radioStop();   
                     //hidebarra();
-                    $('#player').attr('data-status','video-playing');
+                    document.getElementById('player')?.setAttribute('data-status','video-playing');
                 }
             });            
             
         });        
 
         }else{                      
-        $('.wp-block-embed-youtube .wp-block-embed__wrapper').each(function(){
-           // console.log($(this).find('iframe'));            
-            const plyr = new Plyr($(this).find('iframe').parent(),{
+        qsa('.wp-block-embed-youtube .wp-block-embed__wrapper').forEach((wrapper) => {
+            const plyr = new Plyr(wrapper,{
                 debug:true,
                 controls:[
                     'play-large', // The large play button in the center
@@ -1075,11 +1113,11 @@ document.addEventListener('astro:page-load', ev => {
                 if( getstatus == 'radio-playing'){
                     radioStop();   
                     //hidebarra();
-                    $('#player').attr('data-status','video-playing');
+                    document.getElementById('player')?.setAttribute('data-status','video-playing');
                 }
             });
             
-            $('#radiobutton').on('click', function(){
+            document.getElementById('radiobutton')?.addEventListener('click', function(){
                 plyr.pause();
             });     
         }); 
@@ -1087,10 +1125,9 @@ document.addEventListener('astro:page-load', ev => {
         
         
         /*voto*/
-        $('.voto-pop').each(function(){
-            $(this).on('click', function(){
-                //console.log($(this).attr('data-voto-id'));
-                const id = $(this).attr('data-voto-id');                                
+        qsa('.voto-pop').forEach((voteButton) => {
+            replaceEventListener(voteButton, 'click.popVote', 'click', function(){
+                const id = voteButton.getAttribute('data-voto-id');                                
                 /*const params = {
                     "search": id, 
                     "per_page": 1000                    
@@ -1122,8 +1159,8 @@ document.addEventListener('astro:page-load', ev => {
                 })
                 .then((data) => { 
                         //console.log(data);
-                        $(this).addClass('voted');
-                        $(this).find('svg').attr('fill','white');
+                        voteButton.classList.add('voted');
+                        voteButton.querySelector('svg')?.setAttribute('fill','white');
                         Toastify({
                             text: "Gracias por tu voto",
                             className: "info",
@@ -1147,33 +1184,31 @@ document.addEventListener('astro:page-load', ev => {
     } 
 
     // === [/VOTOS] ===
-    $('.like-hotparade').off('click.vote').on('click.vote', function (e) {
+    qsa('.like-hotparade').forEach((button) => replaceEventListener(button, 'click.vote', 'click', function (e) {
                     e.preventDefault();
-                    const artist = $(this).data('artist') || '';
-                    const cancion = $(this).data('song') || '';
-                    const $btn = $(this);
-                    registerVote('HotParade', artist, cancion, $btn)
+                    const artist = button.dataset.artist || '';
+                    const cancion = button.dataset.song || '';
+                    registerVote('HotParade', artist, cancion, button)
                         .then(() => {
                         // Hook opcional: aquí podrías disparar un toast/analytics
                         })
                         .catch(() => {
                         // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
                         });
-    });
+    }));
 
-    $('.like-lanzamientos').off('click.vote').on('click.vote', function (e) {
+    qsa('.like-lanzamientos').forEach((button) => replaceEventListener(button, 'click.vote', 'click', function (e) {
                     e.preventDefault();
-                    const artist = $(this).data('artist') || '';
-                    const cancion = $(this).data('song') || '';
-                    const $btn = $(this);
-                    registerVote('Lanzamientos', artist, cancion, $btn)
+                    const artist = button.dataset.artist || '';
+                    const cancion = button.dataset.song || '';
+                    registerVote('Lanzamientos', artist, cancion, button)
                         .then(() => {
                         // Hook opcional: aquí podrías disparar un toast/analytics
                         })
                         .catch(() => {
                         // Manejo ya se hizo con logs; deja el catch vacío para no romper UX
                         });
-    });
+    }));
 
 
 
@@ -1182,4 +1217,3 @@ document.addEventListener('astro:page-load', ev => {
 
 // Bootstrap: el listener de fallback se registra UNA SOLA VEZ al cargar el script
 googletag.cmd.push(initAdFallbackListener);
-
