@@ -927,6 +927,17 @@ document.addEventListener('astro:page-load', ev => {
             freeScroll: true,
             wrapAround: true
         }); 
+        var elemportada = document.querySelector('.carousel-portada');
+        var flktyportada = new Flickity(elemportada, {
+            cellAlign: 'center',
+            prevNextButtons: false,
+            pageDots: false,
+            pauseAutoPlayOnHover: true,
+            freeScroll: true,
+            wrapAround: true,
+            autoPlay: 5000,
+        });
+        
     }
     
     const imagenNota = document.getElementById("imagen-nota");
