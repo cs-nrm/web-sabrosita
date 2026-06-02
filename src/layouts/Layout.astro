@@ -66,8 +66,9 @@ const ogImageAbs = Astro.site ? new URL(ogImage, Astro.site).toString() : ogImag
         <img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=6906652&amp;cv=cv=4.4.0&amp;cj=1" width="1" height="1" alt="" style="display:none;"/>
     </noscript>
     <!-- End Comscore (noscript) -->
-
+    <slot name="beforeHeader" />
     <BarNrm />
+
     <Header title={metaTitle} />
 
     <main class="min-h-screen flex flex-col">

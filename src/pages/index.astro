@@ -24,6 +24,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 //import SliderBuenFin from '../layouts/SliderBuen.astro';
 import DiaRadio from "../components/DiaRadio.astro";
 import CardsHomeTaco from "../layouts/CardsHomeTaco.astro";
+import SliderPortada from "../layouts/SliderPortada.astro";
 ---
 
 <!--div>
@@ -33,6 +34,7 @@ import CardsHomeTaco from "../layouts/CardsHomeTaco.astro";
 </div-->
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <Notificacion />
+  <SliderPortada slot="beforeHeader" />
   <main id="home">
     <!--section>
       <DiaRadio />    
@@ -95,7 +97,8 @@ import CardsHomeTaco from "../layouts/CardsHomeTaco.astro";
       <div class="container-home p-4 mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-16">
           <div class="lg:col-span-2">
-            <CardEntrevistas />
+            <!--CardEntrevistas /-->
+            <a href="/los-coleccionistas"><img class="w-full h-auto rounded-xl" src="https://storage.googleapis.com/nrm-web/sabrosita/resources/img/los-coleccionistas.jpg"/></a>
           </div>
           <div class="">
             <BoxBanner />
