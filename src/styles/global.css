@@ -729,7 +729,7 @@ article .plyr--video{
 	}
 }
 
-/* NOTIFICACIÓN */
+/* NOTIFICACIÓN 
 
 .ns-attached{max-width: 350px !important; left: auto !important;}
 .ns-effect-bouncyflip {
@@ -739,7 +739,6 @@ article .plyr--video{
 	right: 30px;
 }
 .ns-effect-bouncyflip p {
-	/*padding: .5em 0.2em .8em .2em!important;*/
 	font-size: 16px;
 }
 .ns-box {
@@ -754,7 +753,6 @@ article .plyr--video{
 	top: 200px;
 	left: 70px;
 	text-decoration: none;
-	/*text-align: right;*/
 	line-height: 0px;
 	color: #dc0d0d!important;
 	font-size: 17px;
@@ -786,7 +784,6 @@ article .plyr--video{
 .fondo-live{
 	width: 300px;
 	height: 256px;
-	/*background: #fff url('https://storage.googleapis.com/nrm-web/mundial/notificacion_sorteo.jpg') no-repeat;*/
   background: #fff url('https://sabrositadigital.com.mx/wp-content/uploads/2025/08/NOTIFICACION-SON-SONIDERO.jpg') no-repeat;
 	background-position: top center;
 }
@@ -799,9 +796,9 @@ article .plyr--video{
 	right: -3px !important;
 	top: -3px !important;
 }
+*/
 
-
-/* NOTIFICACIÓN MUNDIAL
+/* NOTIFICACIÓN MUNDIAL*/
 
 .ns-attached{max-width: 350px !important; left: auto !important;}
 .ns-effect-bouncyflip {
@@ -868,7 +865,7 @@ article .plyr--video{
 .ns-close {
 	right: -3px !important;
 	top: -3px !important;
-}*/
+}
 
 /* FIESTAS PATRIAS */
 .patrio{
