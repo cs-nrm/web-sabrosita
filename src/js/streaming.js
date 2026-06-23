@@ -844,7 +844,7 @@ document.addEventListener('astro:page-load', ev => {
         
     }else{
        // getInfoMusic();
-        setAttr('.logo-player img', 'src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player.svg');        
+        setAttr('.logo-player img', 'src','https://storage.googleapis.com/nrm-web/sabrosita/resources/img/logo-sabrosita-player590.svg');        
         document.getElementById('radiobutton')?.classList.remove('en-vivo');
         document.getElementById('big-play')?.classList.add('border-4');
         if (progInterval) {
