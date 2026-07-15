@@ -51,69 +51,22 @@ function replaceEventListener(element, key, type, handler) {
   element.addEventListener(type, handler);
 }
 
-// ===== Ad Fallback: GPT → AdSense =====
-window._adFallbackStates = window._adFallbackStates || {};
-
-function adFallback(slots, fallbackId) {
-  var state = { slots: slots, fallbackId: fallbackId, loaded: {}, rendered: 0 };
-  slots.forEach(function(id) { state.loaded[id] = false; });
-  window._adFallbackStates[fallbackId] = state;
-}
-
-function initAdFallbackListener() {
-  googletag.pubads().addEventListener('slotRenderEnded', function(event) {
-    var id = event.slot.getSlotElementId();
-    var states = Object.values(window._adFallbackStates);
-    for (var i = 0; i < states.length; i++) {
-      var state = states[i];
-      if (!state.slots.includes(id)) continue;
-      if (!event.isEmpty) state.loaded[id] = true;
-      state.rendered++;
-      if (state.rendered < state.slots.length) break;
-      var showGPT = state.slots.every(function(s) { return state.loaded[s]; });
-      state.slots.forEach(function(s) {
-        var el = document.getElementById(s);
-        if (el) el.style.display = showGPT ? '' : 'none';
-      });
-      var fb = document.getElementById(state.fallbackId);
-      if (fb) {
-        fb.style.display = showGPT ? 'none' : 'block';
-        if (!showGPT) {
-          var schedulePush = function() {
-            if (fb.offsetWidth > 0) {
-              try { (adsbygoogle = window.adsbygoogle || []).push({}); }
-              catch (e) { console.error('adFallback: adsbygoogle push failed', e); }
-            } else {
-              setTimeout(schedulePush, 50);
-            }
-          };
-          requestAnimationFrame(schedulePush);
-        }
-      }
-      break;
-    }
-  });
-}
-
 function initGPT() {
   googletag.cmd.push(function() {
     googletag.destroySlots();
-    window._adFallbackStates = {};
 
     // Responsive mappings — addSize([viewport_w, viewport_h], [ad_w, ad_h])
-    var mappingBillboard   = googletag.sizeMapping().addSize([768, 0], [970, 250]).addSize([0, 0], [320, 50]).build();
     var mappingLeader      = googletag.sizeMapping().addSize([768, 0], [728,  90]).addSize([0, 0], [320, 50]).build();
-    var mappingSuperLeader = googletag.sizeMapping().addSize([768, 0], [970,  90]).addSize([0, 0], [320, 50]).build();
     var mappingBox         = googletag.sizeMapping().addSize([0, 0],   [300, 250]).build();
     var mappingDoubleBox   = googletag.sizeMapping().addSize([0, 0],   [300, 600]).build();
     var mappingModal       = googletag.sizeMapping().addSize([600, 0], [600, 800]).addSize([0, 0], [320, 480]).build();
     var mappingVideoNota   = googletag.sizeMapping().addSize([0, 0], [400, 311]).build();
 
-    window.slot3   = googletag.defineSlot("/23349147378/Sabrosita", [[970, 250], [320, 50]], 'ad-slot3').defineSizeMapping(mappingBillboard).addService(googletag.pubads());
+    window.slot3   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot3').defineSizeMapping(mappingLeader).addService(googletag.pubads());
     window.slot4   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot4').defineSizeMapping(mappingLeader).addService(googletag.pubads());
     window.slot32  = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot32').defineSizeMapping(mappingLeader).addService(googletag.pubads());
     window.slot42  = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot42').defineSizeMapping(mappingLeader).addService(googletag.pubads());
-    window.slot6   = googletag.defineSlot("/23349147378/Sabrosita", [[970,  90], [320, 50]], 'ad-slot6').defineSizeMapping(mappingSuperLeader).addService(googletag.pubads());
+    window.slot6   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot6').defineSizeMapping(mappingLeader).addService(googletag.pubads());
     window.slot2   = googletag.defineSlot("/23349147378/Sabrosita", [300, 250],              'ad-slot2').defineSizeMapping(mappingBox).addService(googletag.pubads());
     window.slot5   = googletag.defineSlot("/23349147378/Sabrosita", [300, 600],              'ad-slot5').defineSizeMapping(mappingDoubleBox).addService(googletag.pubads());
     window.slot14  = googletag.defineSlot("/23349147378/Sabrosita", [[600, 800], [320, 480]],'ad-slot14').defineSizeMapping(mappingModal).addService(googletag.pubads());
@@ -132,15 +85,6 @@ function initGPT() {
      'ad-slot201','ad-slot202','ad-slot203','ad-slot204','ad-slot205','ad-slot-videonota'].forEach(function(id) {
       if (document.getElementById(id)) googletag.display(id);
     });
-
-    // Registrar fallbacks GPT → AdSense
-    if (document.getElementById('ad-slot3'))  adFallback(['ad-slot3'],  'ad-slot3-adsense');
-    if (document.getElementById('ad-slot4'))  adFallback(['ad-slot4'],  'ad-slot4-adsense');
-    if (document.getElementById('ad-slot32')) adFallback(['ad-slot32'], 'ad-slot32-adsense');
-    if (document.getElementById('ad-slot42')) adFallback(['ad-slot42'], 'ad-slot42-adsense');
-    if (document.getElementById('ad-slot6'))  adFallback(['ad-slot6'],  'ad-slot6-adsense');
-    if (document.getElementById('ad-slot2'))  adFallback(['ad-slot2'],  'ad-slot2-adsense');
-    if (document.getElementById('ad-slot5'))  adFallback(['ad-slot5'],  'ad-slot5-adsense');
   });
 }
 
@@ -733,13 +677,6 @@ document.addEventListener('astro:before-preparation', ev => {
 
 document.addEventListener("astro:after-swap", () => {
     //console.log('astro:after-swap');
-    /*(window.adsbygoogle = window.adsbygoogle || []).push({});
-    setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 1000);
-    setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 1500);
-    setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 2000);
-    setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 2500);
-    setTimeout(() => { (window.adsbygoogle = window.adsbygoogle || []).push({}); }, 3000);*/
-
     //googletag.pubads().refresh();
     // Re-procesa embeds de Instagram solo si hay alguno y el SDK está listo
     const hasInstaEmbeds = !!document.querySelector('blockquote.instagram-media, .instagram-media, [data-instgrm-permalink], iframe[src*="instagram.com"]');
@@ -1225,6 +1162,3 @@ document.addEventListener('astro:page-load', ev => {
 
 
 });
-
-// Bootstrap: el listener de fallback se registra UNA SOLA VEZ al cargar el script
-googletag.cmd.push(initAdFallbackListener);
