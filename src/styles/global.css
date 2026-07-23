@@ -796,7 +796,7 @@ article .plyr--video{
 .fondo-live .info{position: absolute; bottom: 0; font-size: 24px; bottom:35px; width: 300px;}
 
 .ns-effect-bouncyflip .ns-close::after, .ns-effect-bouncyflip .ns-close::before{
-	background: #fff!important;
+	background: #000!important;
 }
 .ns-close {
 	right: -3px !important;
