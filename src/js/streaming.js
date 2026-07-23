@@ -85,7 +85,12 @@ function initGPT() {
      'ad-slot201','ad-slot202','ad-slot203','ad-slot204','ad-slot205','ad-slot-videonota'].forEach(function(id) {
       if (document.getElementById(id)) googletag.display(id);
     });
-  });
+
+    if (window._boxRefreshInterval) clearInterval(window._boxRefreshInterval);
+    window._boxRefreshInterval = setInterval(function() {
+      googletag.pubads().refresh([window.ad-slot2]); }, 10000);
+
+    });
 }
 
 
