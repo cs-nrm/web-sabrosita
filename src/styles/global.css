@@ -736,7 +736,7 @@ article .plyr--video{
 }
 
 /* NOTIFICACIÓN */
-/*
+
 .ns-attached{max-width: 350px !important; left: auto !important;}
 .ns-effect-bouncyflip {
 	background: #EB00D9!important;
@@ -802,10 +802,10 @@ article .plyr--video{
 	right: -3px !important;
 	top: -3px !important;
 }
-*/
+
 
 /* NOTIFICACIÓN MUNDIAL*/
-
+/*
 .ns-attached{max-width: 350px !important; left: auto !important;}
 .ns-effect-bouncyflip {
 	background: #99ff1e !important;
@@ -827,7 +827,6 @@ article .plyr--video{
 .ns-box-inner a, .ns-box-inner .fondo-live div:first-child{
 	position: relative;
 	top: 182px;
-	/*left: 50px;*/
 	text-decoration: none;
 	line-height: 0px;
 	color: #dc0d0d!important;
@@ -842,7 +841,7 @@ article .plyr--video{
     top: 0 !important;
 }
 .ns-box-inner .fondo-live div:first-child, .ns-box-inner a{color: white !important;}
-/*.ns-box-inner h3{margin: 0; font-size: 1.5rem; color: #000 !important;}*/
+
 .ns-box-inner h3 {
   margin: 0;
   font-size: 1.2rem;
@@ -873,11 +872,7 @@ article .plyr--video{
 .ns-effect-bouncyflip .ns-close::after, .ns-effect-bouncyflip .ns-close::before{
 	background: #000 !important;
 }
-
-/* La librería externa define .ns-close en 20x20px; 44px es el mínimo táctil (WCAG 2.5.8).
-   Los offsets van en positivo: la notificación está pegada al borde superior de la
-   pantalla y con valores negativos el botón se sale del viewport y se corta.
-   El círculo blanco no es cosmético: sin él la X negra se pierde sobre la imagen. */
+*/
 .ns-close {
 	width: 44px !important;
 	height: 44px !important;
