@@ -4,14 +4,14 @@ const res = await fetch("https://sabrositadigital.com.mx/wp-json/wp/v2/posts?_fi
 const posts = await res.json();
 const filteredPosts = posts.filter((post:any) => !post.acf?.fijo);
 import { Image } from 'astro:assets';
-
+import BoxBanner2 from '../components/BoxBanner2.astro';
 ---
 
       <div class="container cards mt-8">
 
         <div class="news-grid grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 xl:gap-16">
         {
-          filteredPosts.slice(1, 4).map((post:any, idx:number) => (
+          filteredPosts.slice(1, 3).map((post:any, idx:number) => (
             <div class={`cards-filtro-${idx}`}>
               <article class="news-card transition duration-[0.2s] hover:translate-y-[-4px]">
                 <a href={`/nota-sabrosa/${post.slug}/`}>
@@ -26,6 +26,7 @@ import { Image } from 'astro:assets';
             </div>
           ))
           }
+          <BoxBanner2 />
         </div>
       </div>
 

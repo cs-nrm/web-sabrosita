@@ -910,4 +910,5 @@ article .plyr--video{
 }
 
 /* PUBLICIDAD */
-#ad-slot4 iframe:hover, #ad-slot3 iframe:hover, #ad-slot32 iframe:hover, #ad-slot42 iframe:hover, #ad-slot6 iframe:hover{height:400px;z-index:10000;position:relative; cursor: pointer;}
+#ad-slot4 iframe:hover, #ad-slot3 iframe:hover, #ad-slot32 iframe:hover, #ad-slot42 iframe:hover, #ad-slot6 iframe:hover{height:400px;z-index:10000;position:absolute; cursor: pointer;}
+#ad-slot4, #ad-slot3, #ad-slot32, #ad-slot42, #ad-slot6{position: relative; z-index: 1; transition: all 0.5s;}
