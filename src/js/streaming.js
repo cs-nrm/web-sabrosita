@@ -763,6 +763,20 @@ document.addEventListener('astro:page-load', ev => {
     /* =======COMSCORE*/
     //googletag.pubads().refresh();
 
+
+    //  TFP - Apple Music
+    window.amplified = window.amplified || { init: [] };
+    amplified.init.push(function() {
+        amplified.setParams({
+            artist: "",
+            song: "",
+        });
+        amplified.pushAdUnit(100007141);
+        amplified.run();
+    });
+
+
+
    const getplayingstatus = playerstatus();
     document.querySelector('main').classList.remove('loading');    
     document.querySelector('.preloader').classList.remove('showpreloader');
