@@ -671,16 +671,39 @@ qsa('.radio-link').forEach((link) => link.addEventListener('click',function(){
 
 
 function initAppleMusicAds() {
-  window.amplified = window.amplified || { init: [] };
+  const slot = document.getElementById('amplified_100007141');
+  if (!slot) return;
 
-  window.amplified.init.push(function() {
-    window.amplified.setParams({
-      artist: "",
-      song: "",
-    });
-    window.amplified.pushAdUnit(100007141);
-    window.amplified.run();
-  });
+  const runAppleMusicAds = () => {
+    window.amplified = window.amplified || { init: [] };
+
+    if (typeof window.amplified.setParams === 'function' &&
+        typeof window.amplified.pushAdUnit === 'function' &&
+        typeof window.amplified.run === 'function') {
+      window.amplified.setParams({ artist: '', song: '' });
+      window.amplified.pushAdUnit(100007141);
+      window.amplified.run();
+      return true;
+    }
+
+    if (Array.isArray(window.amplified.init)) {
+      window.amplified.init.push(function() {
+        window.amplified.setParams({ artist: '', song: '' });
+        window.amplified.pushAdUnit(100007141);
+        window.amplified.run();
+      });
+      return true;
+    }
+
+    return false;
+  };
+
+  if (runAppleMusicAds()) return;
+
+  window.setTimeout(() => {
+    if (!document.getElementById('amplified_100007141')) return;
+    runAppleMusicAds();
+  }, 500);
 }
 
 /* NAVIGATION */ 
@@ -697,6 +720,7 @@ document.addEventListener('astro:before-preparation', ev => {
 
 document.addEventListener("astro:after-swap", () => {
     //console.log('astro:after-swap');
+    initAppleMusicAds();
     //googletag.pubads().refresh();
     // Re-procesa embeds de Instagram solo si hay alguno y el SDK está listo
     const hasInstaEmbeds = !!document.querySelector('blockquote.instagram-media, .instagram-media, [data-instgrm-permalink], iframe[src*="instagram.com"]');
