@@ -670,6 +670,19 @@ qsa('.radio-link').forEach((link) => link.addEventListener('click',function(){
 
 
 
+function initAppleMusicAds() {
+  window.amplified = window.amplified || { init: [] };
+
+  window.amplified.init.push(function() {
+    window.amplified.setParams({
+      artist: "",
+      song: "",
+    });
+    window.amplified.pushAdUnit(100007141);
+    window.amplified.run();
+  });
+}
+
 /* NAVIGATION */ 
 document.addEventListener('astro:before-preparation', ev => {
   //  console.log('insert spin');    
@@ -764,18 +777,7 @@ document.addEventListener('astro:page-load', ev => {
     //googletag.pubads().refresh();
 
 
-    //  TFP - Apple Music
-    window.amplified = window.amplified || { init: [] };
-    amplified.init.push(function() {
-        amplified.setParams({
-            artist: "",
-            song: "",
-        });
-        amplified.pushAdUnit(100007141);
-        amplified.run();
-    });
-
-
+    initAppleMusicAds();
 
    const getplayingstatus = playerstatus();
     document.querySelector('main').classList.remove('loading');    
