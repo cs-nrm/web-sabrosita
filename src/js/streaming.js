@@ -720,7 +720,6 @@ document.addEventListener('astro:before-preparation', ev => {
 
 document.addEventListener("astro:after-swap", () => {
     //console.log('astro:after-swap');
-    initAppleMusicAds();
     //googletag.pubads().refresh();
     // Re-procesa embeds de Instagram solo si hay alguno y el SDK está listo
     const hasInstaEmbeds = !!document.querySelector('blockquote.instagram-media, .instagram-media, [data-instgrm-permalink], iframe[src*="instagram.com"]');
