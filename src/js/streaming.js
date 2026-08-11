@@ -88,7 +88,7 @@ function initGPT() {
 
     if (window._boxRefreshInterval) clearInterval(window._boxRefreshInterval);
     window._boxRefreshInterval = setInterval(function() {
-      googletag.pubads().refresh([window.slot2]); 
+      googletag.pubads().refresh([window.slot201]); 
       googletag.pubads().refresh([window.slot4]); 
     }, 120000);
 
