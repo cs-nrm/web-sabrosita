@@ -736,7 +736,7 @@ article .plyr--video{
 }
 
 /* NOTIFICACIÓN */
-/*
+
 .ns-attached{max-width: 350px !important; left: auto !important;}
 .ns-effect-bouncyflip {
 	background: #EB00D9!important;
@@ -798,13 +798,10 @@ article .plyr--video{
 .ns-effect-bouncyflip .ns-close::after, .ns-effect-bouncyflip .ns-close::before{
 	background: #000!important;
 }
-.ns-close {
-	right: -3px !important;
-	top: -3px !important;
-}
 
-*/
-/* NOTIFICACIÓN MUNDIAL*/
+
+
+/* NOTIFICACIÓN MUNDIAL
 
 .ns-attached{max-width: 350px !important; left: auto !important;}
 .ns-effect-bouncyflip {
@@ -871,7 +868,7 @@ article .plyr--video{
 
 .ns-effect-bouncyflip .ns-close::after, .ns-effect-bouncyflip .ns-close::before{
 	background: #000 !important;
-}
+}*/
 
 .ns-close {
 	width: 44px !important;
