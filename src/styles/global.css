@@ -740,6 +740,7 @@ article .plyr--video{
 .ns-attached{max-width: 350px !important; left: auto !important;}
 .ns-effect-bouncyflip {
 	background: #EB00D9!important;
+  background: #f21203 !important;
 	text-align: center;
 	left: auto;
 	right: 30px;
@@ -758,6 +759,8 @@ article .plyr--video{
 	position: relative;
 	top: 200px;
 	left: 70px;
+  top: 190px;
+  left: 40px;
 	text-decoration: none;
 	line-height: 0px;
 	color: #dc0d0d!important;
@@ -772,7 +775,7 @@ article .plyr--video{
     top: 0 !important;
 }
 .ns-box-inner .fondo-live div:first-child, .ns-box-inner a{color: white !important;}
-.ns-box-inner h3{margin: 0; font-size: 1.5rem; color: #ffffff!important;}
+.ns-box-inner h3{margin: 0; font-size: 2.5rem; color: #ffec00 !important;}
 .ns-box-inner i {
     font-size: 2.3rem;
 	position: relative;
@@ -790,7 +793,8 @@ article .plyr--video{
 .fondo-live{
 	width: 300px;
 	height: 256px;
-  background: #fff url('https://sabrositadigital.com.mx/wp-content/uploads/2025/08/NOTIFICACION-SON-SONIDERO.jpg') no-repeat;
+  /*background: #fff url('https://sabrositadigital.com.mx/wp-content/uploads/2025/08/NOTIFICACION-SON-SONIDERO.jpg') no-repeat;*/
+  background: #fff url('https://storage.googleapis.com/nrm-web/sabrosita/resources/img/notificacion_askis3.jpg') no-repeat;
 	background-position: top center;
 }
 .fondo-live .info{position: absolute; bottom: 0; font-size: 24px; bottom:35px; width: 300px;}
