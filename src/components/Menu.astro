@@ -9,9 +9,10 @@ const currentPath = Astro.url.pathname;
             <li class={`menu-section${currentPath.startsWith('/promociones') ? ' active' : ''}`}><a href="/promociones">Promociones</a></li>
             <li class={`menu-section${currentPath.startsWith('/lanzamientos') ? ' active' : ''}`}><a href="/lanzamientos">Lanzamientos</a></li>
             <li class={`menu-section${currentPath.startsWith('/hot-parade') ? ' active' : ''}`}><a href="/hot-parade">Hot Parade</a></li>
-            <!--li class={`dd-menu${currentPath.startsWith('/podcast') ? ' active' : ''}`}>Podcast
+            <li class={`dd-menu${currentPath.startsWith('/podcast') ? ' active' : ''}`}>Podcast
               <ul>
-                <li class={currentPath.startsWith('/podcast/celia-cruz') ? 'active' : ''}><a href="/podcast/celia-cruz">Celia Cruz, 100 años de azúcar</a></li>
+                <li class={currentPath.startsWith('/podcast/salsaman-y-la-fragoso') ? 'active' : ''}><a href="/podcast/salsaman-y-la-fragoso">Salsamán y la Fragoso</a></li>
+                <!--li class={currentPath.startsWith('/podcast/celia-cruz') ? 'active' : ''}><a href="/podcast/celia-cruz">Celia Cruz, 100 años de azúcar</a></li>
                 <li class={currentPath.startsWith('/podcast/momentos-irrepetibles') ? 'active' : ''}><a href="/podcast/momentos-irrepetibles">Momentos Irrepetibles</a></li>
                 <li class={currentPath.startsWith('/podcast/frecuencia-del-miedo') ? 'active' : ''}><a href="/podcast/frecuencia-del-miedo">Frecuencia del Miedo</a></li>
                 <li class={currentPath.startsWith('/podcast/vidas-salseras') ? 'active' : ''}><a href="/podcast/vidas-salseras">Vidas Salseras</a></li>
@@ -34,8 +35,8 @@ const currentPath = Astro.url.pathname;
                     <li class={currentPath.startsWith('retropical') ? 'active' : ''}><a href="retropical">Retropical</a></li>
                   </ul>
                 </li-->
-              <!--/ul>        
-            </li-->
+              </ul>        
+            </li>
             <li class={`menu-section${currentPath.startsWith('/retropical') ? 'active' : ''}`}><a href="/retropical">Retropical</a></li>
             <li class={`menu-section${currentPath.startsWith('/entrevistas') ? ' active' : ''}`}><a href="/entrevistas">Entrevistas</a></li>
             <li class={`menu-section${currentPath.startsWith('/son-sonidero') ? 'active' : ''}`}><a href="/son-sonidero">Son Sonidero</a></li>   
