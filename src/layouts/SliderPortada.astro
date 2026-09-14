@@ -14,7 +14,7 @@ const posts = await res.json();
 		<div class="carousel-cell card">
 			<article>
 				<a target="_blank" href={`${post.acf.link}`}> 
-					<Image loading="lazy" class="block h-auto w-full object-fill" src={post?.yoast_head_json?.['og_image']?.[0]?.url || PLACEHOLDER_IMG} width="300" height="150" alt="Imagen Promociones"/>
+					<Image loading="lazy" class="block h-full max-h-[365px] w-auto max-w-[1300px] object-fill" src={post?.yoast_head_json?.['og_image']?.[0]?.url || PLACEHOLDER_IMG} width="300" height="150" alt="Imagen Promociones"/>
 				</a>
 			</article>
 		</div>
@@ -40,6 +40,9 @@ const posts = await res.json();
 	mask-image: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(79,79,79,0) 51%, rgba(0,0,0,0.6488970588235294) 100%);
     mask-image: radial-gradient(ellipse 82% 200% at 49% 33%,black 39%,transparent 61%);
 	mask-image: radial-gradient(ellipse 76% 226% at 50% 60%, black 56%, transparent 65%);
+}
+.carousel-portada{
+	overflow: hidden;
 }
 .carousel{
   /*background-color: #7cdada;
