@@ -5,7 +5,8 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sabrositadigital.mx',
-  integrations: [mdx(), sitemap({ sitemap: '/sitemap.xml' })],
+  integrations: [mdx(), sitemap()],
+  compressHTML: true,
   devToolbar: {
     enabled: true
   }
