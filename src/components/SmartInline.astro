@@ -1,0 +1,93 @@
+---
+---
+
+<!-- Smart AdServer / Equativ - Medios Federales (formato 111268 "Inline").
+     Aqui solo va el contenedor. El onecall, el render, el boton de cerrar y el
+     mostrado condicional los maneja initSmartAdServer() en src/js/streaming.js,
+     que corre en cada astro:page-load.
+     No romper: el id "inline" tiene que coincidir letra por letra con
+     SAS_TAG_INLINE de streaming.js; los ids de HTML distinguen mayusculas. -->
+<div id="smart-inline-float" class="smart-inline-float">
+    <button type="button" id="smart-inline-close" class="smart-inline-close" aria-label="Cerrar publicidad">&times;</button>
+    <span class="smart-inline-label">PUBLICIDAD</span>
+    <div id="inline"></div>
+</div>
+
+<style>
+/* Flotante del lado izquierdo: el reproductor de radio (#radiobutton) vive
+   anclado a la derecha, asi que la izquierda es el lado libre.
+   z-index 100000 a proposito: por debajo del modal de takeover (100001) y muy
+   por debajo del reproductor (10000000000), para no taparle los controles. */
+.smart-inline-float {
+    position: fixed;
+    left: 12px;
+    bottom: 90px;
+    z-index: 100000;
+    width: 300px;
+    max-width: calc(100vw - 24px);
+    padding: 6px;
+    border-radius: 0.75rem;
+    line-height: 0;
+    /* No romper: esto NO puede ser display:none mientras no haya anuncio.
+       La plantilla video-read de Smart mide el ancho del div para dimensionarse
+       y, oculto, mide 0, con lo que el video nunca se despliega. Se queda en su
+       sitio pero invisible y sin capturar clicks hasta que haya creativo. */
+    background: transparent;
+    pointer-events: none;
+}
+.smart-inline-float .smart-inline-label,
+.smart-inline-float .smart-inline-close {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* is-filled lo pone y lo quita el ResizeObserver de streaming.js segun el alto
+   real del div: tambien se quita cuando el video termina y Smart vacia el div. */
+.smart-inline-float.is-filled {
+    background: rgba(0, 0, 0, 0.75);
+    pointer-events: auto;
+}
+.smart-inline-float.is-filled .smart-inline-label,
+.smart-inline-float.is-filled .smart-inline-close {
+    opacity: 1;
+    visibility: visible;
+}
+
+.smart-inline-label {
+    display: block;
+    font-family: Roboto, sans-serif;
+    font-size: 10px;
+    line-height: 1.4;
+    color: #a1a1aa;
+    text-align: left;
+    padding-left: 2px;
+}
+.smart-inline-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 26px;
+    height: 26px;
+    line-height: 24px;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid #fff;
+    padding: 0;
+}
+
+/* En movil el reproductor flotante ocupa la esquina inferior derecha
+   (bottom 30px, 250px de ancho), por eso aqui sube para quedar apilado
+   encima y no encimado. */
+@media (max-width: 768px) {
+    .smart-inline-float {
+        left: 8px;
+        bottom: 120px;
+        width: 300px;
+        max-width: calc(100vw - 16px);
+    }
+}
+</style>

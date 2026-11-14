@@ -64,6 +64,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
 <script is:inline>window.googletag = window.googletag || { cmd: [] };</script>
 
+<!-- Smart AdServer / Equativ (Medios Federales, red 4308) -->
+<!-- Los dos externos y el setup van una sola vez aqui; el onecall y el render
+     se repiten por pagina desde initSmartAdServer() en src/js/streaming.js.
+     is:inline obligatorio: sin el, Astro los trata como modulo y "sas" dejaria
+     de ser global, con lo que smart.js nunca veria la cola sas.cmd. -->
+<script is:inline async type="application/javascript" src="https://ced.sascdn.com/tag/4308/smart.js"></script>
+<script is:inline async type="text/javascript" src="https://tagmanager.smartadserver.com/4308/790083/smart.prebid.js"></script>
+<script is:inline>
+  window.sas = window.sas || {};
+  window.sas.cmd = window.sas.cmd || [];
+  // Guarda por si ClientRouter reinyecta el head: setup() una sola vez por sesion.
+  if (!window.__sasSetupDone) {
+    window.__sasSetupDone = true;
+    window.sas.cmd.push(function () {
+      window.sas.setup({ networkid: 4308, domain: "https://adapi.smartadserver.com", async: true, renderMode: 2 });
+    });
+  }
+</script>
+
 
 <!-- Hotjar Tracking Code for Sabrosita Astro -->
 <script is:inline>
