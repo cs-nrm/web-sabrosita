@@ -1,0 +1,109 @@
+<!-- START MAINTAG NOTAS -->
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="//tagmanager.smartadserver.com">
+<link rel="preconnect" href="https://ced.sascdn.com" crossorigin>
+<link rel="preconnect" href="https://adapi.smartadserver.com" crossorigin>
+
+<script is:inline src="https://ced.sascdn.com/tag/4308/smart.js"></script>
+
+<script is:inline type="text/javascript">
+  var sas = sas || {};
+  sas.cmd = sas.cmd || [];
+
+  sas.cmd.push(() => {
+    sas.setup({
+      networkid: 4308,
+      domain: "https://adapi.smartadserver.com",
+      async: true,
+      renderMode: 2
+    });
+
+    sas.call("onecall", {
+      siteId: 794552,
+      pageId: 2249307,
+      formats: [
+        { id: 111268, tagId: "Inline" }
+      ],
+      schain: "1.0,1!mediosfederales.com,794552,1,sabrositadigital,sabrositadigital.mx"
+    });
+  });
+</script>
+<!-- END MAINTAG NOTAS -->
+
+<!-- Codigo propio de Sabrosita. El fragmento de MF ya no trae el render y usa
+     renderMode 2, asi que el render va aqui, por pagina.
+     is:inline obligatorio en los dos <script> de arriba y en este: sin el, Astro
+     los trata como modulo y "sas" deja de ser global. -->
+<script is:inline type="text/javascript">
+  if (!window._sasListo) {
+    window._sasListo = true;
+    let sasPrimera = true;
+
+    const sasCerrado = () => {
+      try { return sessionStorage.getItem('sasInlineClosed') === '1'; } catch (e) { return false; }
+    };
+
+    document.addEventListener('astro:page-load', () => {
+      const primera = sasPrimera;
+      sasPrimera = false;
+
+      // Soltar el observer de la pagina anterior antes de cualquier return: si no,
+      // al salir del home se queda vigilando un nodo que ya no esta en el DOM.
+      if (window._sasInlineObs) {
+        window._sasInlineObs.disconnect();
+        window._sasInlineObs = null;
+      }
+
+      const caja = document.getElementById('smart-inline-float');
+      const holder = document.getElementById('Inline');
+      if (!caja || !holder) return;
+      if (sasCerrado()) { caja.classList.add('is-closed'); return; }
+
+      // Trampa: no sirve contar hijos. Smart siempre mete sus <script> y un
+      // contenedor de 1px, haya video o no. Lo que distingue un creativo real es
+      // el alto: la plantilla video-read desplegada mide ~162px. El toggle va en
+      // los dos sentidos a proposito, porque al terminar el video (~15 s) la
+      // plantilla vacia el div y el recuadro tiene que desaparecer.
+      window._sasInlineObs = new ResizeObserver(() => {
+        caja.classList.toggle('is-filled', holder.offsetHeight > 20);
+      });
+      window._sasInlineObs.observe(holder);
+
+      sas.cmd.push(() => {
+        // En la primera carga el onecall ya lo hizo el bloque de arriba; repetirlo
+        // pediria el anuncio dos veces. En las navegaciones del ClientRouter si
+        // hace falta, porque ese bloque no se vuelve a ejecutar.
+        if (!primera) {
+          sas.call("onecall", {
+            siteId: 794552,
+            pageId: 2249307,
+            formats: [
+              { id: 111268, tagId: "Inline" }
+            ],
+            schain: "1.0,1!mediosfederales.com,794552,1,sabrositadigital,sabrositadigital.mx"
+          });
+        }
+        sas.render("Inline");
+      });
+    });
+
+    // Delegado en document: el boton se va y vuelve con cada swap del ClientRouter,
+    // asi no hay que reengancharlo pagina por pagina.
+    document.addEventListener('click', (e) => {
+      if (!e.target || !e.target.closest || !e.target.closest('#smart-inline-close')) return;
+      const caja = document.getElementById('smart-inline-float');
+      const holder = document.getElementById('Inline');
+      if (window._sasInlineObs) {
+        window._sasInlineObs.disconnect();
+        window._sasInlineObs = null;
+      }
+      if (caja) {
+        caja.classList.remove('is-filled');
+        caja.classList.add('is-closed');
+      }
+      // Vaciar el div, no solo ocultarlo: escondido el video seguiria sonando.
+      if (holder) holder.innerHTML = '';
+      try { sessionStorage.setItem('sasInlineClosed', '1'); } catch (err) {}
+    });
+  }
+</script>

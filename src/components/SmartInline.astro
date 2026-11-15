@@ -3,14 +3,13 @@
 
 <!-- Smart AdServer / Equativ - Medios Federales (formato 111268 "Inline").
      Aqui solo va el contenedor. El onecall, el render, el boton de cerrar y el
-     mostrado condicional los maneja initSmartAdServer() en src/js/streaming.js,
-     que corre en cada astro:page-load.
-     No romper: el id "inline" tiene que coincidir letra por letra con
-     SAS_TAG_INLINE de streaming.js; los ids de HTML distinguen mayusculas. -->
+     mostrado condicional viven en components/head/SmartMediosFederales.astro.
+     No romper: el id "Inline" va con I mayuscula, igual que el tagId del maintag
+     y que sas.render("Inline"); los ids de HTML distinguen mayusculas. -->
 <div id="smart-inline-float" class="smart-inline-float">
     <button type="button" id="smart-inline-close" class="smart-inline-close" aria-label="Cerrar publicidad">&times;</button>
     <span class="smart-inline-label">PUBLICIDAD</span>
-    <div id="inline"></div>
+    <div id="Inline"></div>
 </div>
 
 <style>
@@ -41,8 +40,9 @@
     visibility: hidden;
 }
 
-/* is-filled lo pone y lo quita el ResizeObserver de streaming.js segun el alto
-   real del div: tambien se quita cuando el video termina y Smart vacia el div. */
+/* is-filled lo pone y lo quita el ResizeObserver de SmartMediosFederales.astro
+   segun el alto real del div: tambien se quita cuando el video termina y Smart
+   vacia el div. */
 .smart-inline-float.is-filled {
     background: rgba(0, 0, 0, 0.75);
     pointer-events: auto;
@@ -51,6 +51,11 @@
 .smart-inline-float.is-filled .smart-inline-close {
     opacity: 1;
     visibility: visible;
+}
+
+/* Ya cerrado no queda creativo que medir, asi que aqui si puede irse del flujo. */
+.smart-inline-float.is-closed {
+    display: none;
 }
 
 .smart-inline-label {

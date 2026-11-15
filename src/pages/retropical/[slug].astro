@@ -8,6 +8,7 @@ import LeaderBoard2 from '../../components/LeaderBoard2.astro';
 import { any } from 'astro/zod';
 import { SITE_TITLE } from '../../consts';
 import MoreVideos from '../../components/MoreVideos.astro';
+import SmartInline from '../../components/SmartInline.astro';
 
 const { slug } = Astro.params;
 
@@ -47,7 +48,12 @@ const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resour
         </figure-->
         <!--img class="text-center rounded-xl m-auto shadow-[0_5px_12px_10px_rgba(0,0,0,0.4)]" src={post.yoast_head_json.og_image[0].url} alt={post.title.rendered}/-->
          <Fragment set:html={post.content.rendered} />
-        <div id="ad-slot-videonota"></div>
+        <!-- ShowHeroes/Exte apagados: entraban por GAM en este slot.
+             En su lugar va el flotante de Medios Federales, el mismo del Inicio.
+             Para reactivarlos hay que descomentar tambien el slot videonota
+             en src/js/streaming.js. -->
+        <!-- <div id="ad-slot-videonota"></div> -->
+        <SmartInline />
       </div>
     <LeaderBoard />
 

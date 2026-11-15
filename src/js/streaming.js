@@ -60,7 +60,11 @@ function initGPT() {
     var mappingBox         = googletag.sizeMapping().addSize([0, 0],   [300, 250]).build();
     var mappingDoubleBox   = googletag.sizeMapping().addSize([0, 0],   [300, 600]).build();
     var mappingModal       = googletag.sizeMapping().addSize([600, 0], [600, 800]).addSize([0, 0], [320, 480]).build();
-    var mappingVideoNota   = googletag.sizeMapping().addSize([0, 0], [400, 311]).build();
+    // ShowHeroes/Exte apagados en interiores: llegaban por GAM en el slot
+    // videonota. En su lugar va el flotante de Medios Federales (SmartInline).
+    // Para reactivarlos: descomentar estas tres cosas (mapping, defineSlot y la
+    // entrada de la lista de display) y el div en las paginas de nota.
+    // var mappingVideoNota   = googletag.sizeMapping().addSize([0, 0], [400, 311]).build();
 
     window.slot3   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot3').defineSizeMapping(mappingLeader).addService(googletag.pubads());
     window.slot4   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot4').defineSizeMapping(mappingLeader).addService(googletag.pubads());
@@ -75,14 +79,14 @@ function initGPT() {
     window.slot203 = googletag.defineSlot("/23349147378/Sabrosita/Box3", [300, 250], 'ad-slot203').defineSizeMapping(mappingBox).addService(googletag.pubads());
     window.slot204 = googletag.defineSlot("/23349147378/Sabrosita/Box4", [300, 250], 'ad-slot204').defineSizeMapping(mappingBox).addService(googletag.pubads());
     window.slot205 = googletag.defineSlot("/23349147378/Sabrosita/Box5", [300, 250], 'ad-slot205').defineSizeMapping(mappingBox).addService(googletag.pubads());
-    window.slotVideoNota = googletag.defineSlot("/23349147378/Sabrosita", [400, 311], 'ad-slot-videonota').defineSizeMapping(mappingVideoNota).addService(googletag.pubads());
+    // window.slotVideoNota = googletag.defineSlot("/23349147378/Sabrosita", [400, 311], 'ad-slot-videonota').defineSizeMapping(mappingVideoNota).addService(googletag.pubads());
 
     googletag.pubads().setTargeting("test", "responsive");
     googletag.enableServices();
 
     // Solo llamar display() si el div existe en el DOM de esta página
     ['ad-slot3','ad-slot4','ad-slot32','ad-slot42','ad-slot6','ad-slot2','ad-slot5','ad-slot14',
-     'ad-slot201','ad-slot202','ad-slot203','ad-slot204','ad-slot205','ad-slot-videonota'].forEach(function(id) {
+     'ad-slot201','ad-slot202','ad-slot203','ad-slot204','ad-slot205'/*,'ad-slot-videonota'*/].forEach(function(id) {
       if (document.getElementById(id)) googletag.display(id);
     });
 
@@ -93,90 +97,6 @@ function initGPT() {
     }, 120000);
 
     });
-}
-
-
-/* ===== SMART ADSERVER (Equativ) - Medios Federales, red 4308 ===== */
-/* Los externos (smart.js, smart.prebid.js) y sas.setup viven en BaseHead.astro
-   y corren una sola vez. Aqui solo va lo que se repite por pagina, igual que
-   initGPT: se llama desde astro:page-load.
-
-   El id va identico en los tres lugares (formats[].tagId, el <div> y render).
-   El fragmento original de MF traia tagId "inline" pero div id="Inline" y
-   render("Inline"); los ids de HTML distinguen mayusculas, asi que el anuncio
-   no encontraba donde pintarse.
-
-   mobileCheck del fragmento original no se porto: sus ramas mobile y desktop
-   pedian exactamente el mismo formato. Si MF diferencia formatos por
-   dispositivo mas adelante, ahi vuelve a hacer falta. */
-var SAS_TAG_INLINE  = 'inline';
-var SAS_SITE_ID     = 794552;
-var SAS_PAGE_ID     = 2249307;
-var SAS_FORMAT_ID   = 111268;
-var SAS_SCHAIN      = '1.0,1!mediosfederales.com,794552,1,sabrositadigital.mx,,sabrositadigital.mx,';
-
-function sasInlineWasClosed() {
-  try { return sessionStorage.getItem('sasInlineClosed') === '1'; } catch (e) { return false; }
-}
-
-function initSmartAdServer() {
-  // Antes que nada soltar el observer de la pagina anterior: si no, queda
-  // vigilando un nodo que ya no esta en el DOM.
-  if (window._sasInlineResizeObs) {
-    window._sasInlineResizeObs.disconnect();
-    window._sasInlineResizeObs = null;
-  }
-  // Solo pedir el anuncio si el contenedor existe en la pagina actual.
-  if (!document.getElementById(SAS_TAG_INLINE)) return;
-  if (!window.sas || !window.sas.cmd) return;
-  // Si ya lo cerro en esta sesion, ni se pide.
-  if (sasInlineWasClosed()) return;
-
-  var wrapper = document.getElementById('smart-inline-float');
-  var holder  = document.getElementById(SAS_TAG_INLINE);
-
-  // El recuadro solo se pinta cuando hay creativo de verdad.
-  // Trampa: no sirve contar hijos. Smart siempre mete sus <script> y un
-  // sas_container de 1px, haya video o no, asi que contar nodos lo mostraria
-  // siempre. Lo que distingue un creativo real es el alto: la plantilla
-  // video-read desplegada mide ~162px, vacia o plegada mide 0 o 1.
-  // El toggle va en los dos sentidos a proposito: cuando el video termina
-  // (~15 s) la plantilla vacia el div y el recuadro tiene que desaparecer.
-  if (wrapper && holder && typeof ResizeObserver !== 'undefined') {
-    window._sasInlineResizeObs = new ResizeObserver(function() {
-      wrapper.classList.toggle('is-filled', holder.offsetHeight > 20);
-    });
-    window._sasInlineResizeObs.observe(holder);
-  }
-
-  var closeBtn = document.getElementById('smart-inline-close');
-  if (closeBtn && wrapper) {
-    replaceEventListener(closeBtn, 'sasInlineClose', 'click', function() {
-      // Vaciar el div, no solo ocultarlo: con el recuadro escondido el video
-      // seguiria reproduciendose dentro. Vaciarlo lo corta.
-      holder.innerHTML = '';
-      wrapper.classList.remove('is-filled');
-      if (window._sasInlineResizeObs) {
-        window._sasInlineResizeObs.disconnect();
-        window._sasInlineResizeObs = null;
-      }
-      try { sessionStorage.setItem('sasInlineClosed', '1'); } catch (e) {}
-    });
-  }
-
-  window.sas.cmd.push(function() {
-    window.sas.call('onecall', {
-      siteId: SAS_SITE_ID,
-      pageId: SAS_PAGE_ID,
-      formats: [{ id: SAS_FORMAT_ID, tagId: SAS_TAG_INLINE }],
-      // encodeURIComponent: target usa sintaxis clave=valor;clave=valor, una URL
-      // con & o = sin codificar rompe el targeting de Equativ.
-      target: 'dominio=' + encodeURIComponent(window.location.href),
-      schain: SAS_SCHAIN
-    });
-    // renderMode 2 = render manual, por eso hace falta llamar render().
-    window.sas.render(SAS_TAG_INLINE);
-  });
 }
 
 
@@ -848,7 +768,6 @@ document.addEventListener("astro:after-swap", () => {
 document.addEventListener('astro:page-load', ev => {
    // console.log('pageload');
     initGPT();
-    initSmartAdServer();
  
     window.addEventListener('scroll', function () {
                 const scrollY = window.scrollY;
