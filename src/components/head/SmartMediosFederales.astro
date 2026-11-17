@@ -10,45 +10,28 @@
   var sas = sas || {};
   sas.cmd = sas.cmd || [];
 
-  sas.cmd.push(() => {
-    sas.setup({
-      networkid: 4308,
-      domain: "https://adapi.smartadserver.com",
-      async: true,
-      renderMode: 2
-    });
-
-    sas.call("onecall", {
-      siteId: 794552,
-      pageId: 2249307,
-      formats: [
-        { id: 111268, tagId: "Inline" }
-      ],
-      schain: "1.0,1!mediosfederales.com,794552,1,sabrositadigital,sabrositadigital.mx"
-    });
-  });
-</script>
-<!-- END MAINTAG NOTAS -->
-
-<!-- Codigo propio de Sabrosita. El fragmento de MF ya no trae el render y usa
-     renderMode 2, asi que el render va aqui, por pagina.
-     is:inline obligatorio en los dos <script> de arriba y en este: sin el, Astro
-     los trata como modulo y "sas" deja de ser global. -->
-<script is:inline type="text/javascript">
   if (!window._sasListo) {
     window._sasListo = true;
-    let sasPrimera = true;
+
+    // setup va solo y una sola vez por carga: smart.js no admite mas de una
+    // llamada por documento. Por eso este bloque no se puede reejecutar en cada
+    // navegacion del ClientRouter, y la peticion de anuncio vive mas abajo.
+    sas.cmd.push(() => {
+      sas.setup({
+        networkid: 4308,
+        domain: "https://adapi.smartadserver.com",
+        async: true,
+        renderMode: 2
+      });
+    });
 
     const sasCerrado = () => {
       try { return sessionStorage.getItem('sasInlineClosed') === '1'; } catch (e) { return false; }
     };
 
     document.addEventListener('astro:page-load', () => {
-      const primera = sasPrimera;
-      sasPrimera = false;
-
       // Soltar el observer de la pagina anterior antes de cualquier return: si no,
-      // al salir del home se queda vigilando un nodo que ya no esta en el DOM.
+      // al salir de una pagina con recuadro se queda vigilando un nodo muerto.
       if (window._sasInlineObs) {
         window._sasInlineObs.disconnect();
         window._sasInlineObs = null;
@@ -56,6 +39,8 @@
 
       const caja = document.getElementById('smart-inline-float');
       const holder = document.getElementById('Inline');
+      // Sin contenedor no se pide nada. Antes se pedia en las 261 paginas y solo
+      // 223 podian pintarlo: en el resto la puja se ganaba y se perdia.
       if (!caja || !holder) return;
       if (sasCerrado()) { caja.classList.add('is-closed'); return; }
 
@@ -70,20 +55,20 @@
       window._sasInlineObs.observe(holder);
 
       sas.cmd.push(() => {
-        // En la primera carga el onecall ya lo hizo el bloque de arriba; repetirlo
-        // pediria el anuncio dos veces. En las navegaciones del ClientRouter si
-        // hace falta, porque ese bloque no se vuelve a ejecutar.
-        if (!primera) {
-          sas.call("onecall", {
-            siteId: 794552,
-            pageId: 2249307,
-            formats: [
-              { id: 111268, tagId: "Inline" }
-            ],
-            schain: "1.0,1!mediosfederales.com,794552,1,sabrositadigital,sabrositadigital.mx"
-          });
-        }
+        sas.call("onecall", {
+          siteId: 794552,
+          pageId: 2249307,
+          formats: [
+            { id: 111268, tagId: "Inline" }
+          ],
+          schain: "1.0,1!mediosfederales.com,794552,1,sabrositadigital,sabrositadigital.mx"
+        });
+        // No romper: las dos lineas de abajo hacen cosas distintas. La del tag solo
+        // lo marca como pendiente; la de abajo, sin argumentos, es la que libera la
+        // cola. Sin ella la peticion no sale hasta que vence renderModeTimeout:
+        // medido en vivo, 5004 ms de espera muerta en cada carga.
         sas.render("Inline");
+        sas.render();
       });
     });
 
@@ -107,3 +92,4 @@
     });
   }
 </script>
+<!-- END MAINTAG NOTAS -->
