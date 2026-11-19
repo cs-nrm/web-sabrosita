@@ -2,7 +2,8 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
-import SmartMediosFederales from './head/SmartMediosFederales.astro';
+// Medios Federales apagado, ver medios-federales.md en la raiz del repo.
+// import SmartMediosFederales from './head/SmartMediosFederales.astro';
 
 interface Props {
 	title?: string;
@@ -65,7 +66,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
 <script is:inline>window.googletag = window.googletag || { cmd: [] };</script>
 
-<SmartMediosFederales />
+{/* Medios Federales apagado en todo el sitio mientras se decide donde va.
+    No borrar components/head/SmartMediosFederales.astro: se va a reusar.
+    Que hace, como encenderlo y las trampas medidas (el contenedor no puede
+    ir display:none, el render sin argumentos, DOMContentLoaded en vez de
+    load): medios-federales.md en la raiz del repo.
+    <SmartMediosFederales /> */}
 
 
 <!-- Hotjar Tracking Code for Sabrosita Astro -->

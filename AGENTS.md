@@ -44,6 +44,7 @@ This document serves as a guide for AI agents and developers working on the `web
 1.  **Respect the Content Structure**: When adding new pages, verify if they fit into an existing content category (e.g., `src/pages/navidad/`) or require a new one.
 2.  **Component Reusability vs. Specificity**: The code currently leans towards *specific* components (`SliderHotParade`, `SliderPodcast`). When fixing bugs, edit the specific component. When adding features, ask yourself if you should create a new specific component or (if requested) refactor to a generic one.
 3.  **Media Handling**: Changes to audio/video playback should be tested against `streaming.js` logic to avoid breaking the radio stream.
+4.  **Publicidad comentada**: el código de Medios Federales (Equativ) está en el repo pero desconectado a propósito. Antes de tocar `SmartMediosFederales.astro`, `SmartInline.astro` o el slot `ad-slot-videonota`, lee [medios-federales.md](medios-federales.md): explica qué hace, dónde está comentado, cómo encenderlo y las trampas ya medidas.
 
 ## Context
 - The project appears to be a migration or evolution of a legacy site, given the high specificity of components.

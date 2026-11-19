@@ -8,7 +8,7 @@ import MoreEntrevistas from '../../components/MoreEntrevistas.astro';
 import LeaderBoard2 from '../../components/LeaderBoard2.astro';
 import { any } from 'astro/zod';
 import { SITE_TITLE } from '../../consts';
-import SmartInline from '../../components/SmartInline.astro';
+// import SmartInline from '../../components/SmartInline.astro';
 
 const { slug } = Astro.params;
 
@@ -89,12 +89,11 @@ const PLACEHOLDER_IMG = 'https://storage.googleapis.com/nrm-web/sabrosita/resour
           </div>
           <div class="w-full">
             <Fragment set:html={post.content.rendered} />
-            <!-- ShowHeroes/Exte apagados: entraban por GAM en este slot.
-                 En su lugar va el flotante de Medios Federales, el mismo del Inicio.
-                 Para reactivarlos hay que descomentar tambien el slot videonota
-                 en src/js/streaming.js. -->
-            <!-- <div id="ad-slot-videonota"></div> -->
-            <SmartInline />
+            <div id="ad-slot-videonota"></div>
+            {/* Medios Federales apagado: chocaba con ShowHeroes/Exte en este hueco.
+                No borrar, se va a reusar. Que hace y como encenderlo:
+                medios-federales.md en la raiz del repo.
+                <SmartInline /> */}
           </div>
           
         </article>
