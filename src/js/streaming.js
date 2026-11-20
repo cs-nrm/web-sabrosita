@@ -61,7 +61,7 @@ function initGPT() {
     var mappingDoubleBox   = googletag.sizeMapping().addSize([0, 0],   [300, 600]).build();
     var mappingModal       = googletag.sizeMapping().addSize([600, 0], [600, 800]).addSize([0, 0], [320, 480]).build();
     var mappingVideoNota   = googletag.sizeMapping().addSize([0, 0], [400, 311]).build();
-    var mappingSuperleader       = googletag.sizeMapping().addSize([970, 0], [970, 90]).addSize([0, 0], [320, 480]).build();
+    var mappingSuperleader       = googletag.sizeMapping().addSize([970, 0], [970, 90]).addSize([0, 0], [320, 50]).build();
     // ShowHeroes/Exte apagados en interiores: llegaban por GAM en el slot
     // videonota. En su lugar va el flotante de Medios Federales (SmartInline).
     // Para reactivarlos: descomentar estas tres cosas (mapping, defineSlot y la
