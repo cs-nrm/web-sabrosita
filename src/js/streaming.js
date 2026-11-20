@@ -61,12 +61,19 @@ function initGPT() {
     var mappingDoubleBox   = googletag.sizeMapping().addSize([0, 0],   [300, 600]).build();
     var mappingModal       = googletag.sizeMapping().addSize([600, 0], [600, 800]).addSize([0, 0], [320, 480]).build();
     var mappingVideoNota   = googletag.sizeMapping().addSize([0, 0], [400, 311]).build();
+    var mappingSuperleader       = googletag.sizeMapping().addSize([970, 0], [970, 90]).addSize([0, 0], [320, 480]).build();
+    // ShowHeroes/Exte apagados en interiores: llegaban por GAM en el slot
+    // videonota. En su lugar va el flotante de Medios Federales (SmartInline).
+    // Para reactivarlos: descomentar estas tres cosas (mapping, defineSlot y la
+    // entrada de la lista de display) y el div en las paginas de nota.
+    // var mappingVideoNota   = googletag.sizeMapping().addSize([0, 0], [400, 311]).build();
+
 
     window.slot3   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot3').defineSizeMapping(mappingLeader).addService(googletag.pubads());
     window.slot4   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot4').defineSizeMapping(mappingLeader).addService(googletag.pubads());
     window.slot32  = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot32').defineSizeMapping(mappingLeader).addService(googletag.pubads());
     window.slot42  = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot42').defineSizeMapping(mappingLeader).addService(googletag.pubads());
-    window.slot6   = googletag.defineSlot("/23349147378/Sabrosita", [[728,  90], [320, 50]], 'ad-slot6').defineSizeMapping(mappingLeader).addService(googletag.pubads());
+    window.slot6   = googletag.defineSlot("/23349147378/Sabrosita", [[970,  90], [320, 50]], 'ad-slot6').defineSizeMapping(mappingSuperleader).addService(googletag.pubads());
     window.slot2   = googletag.defineSlot("/23349147378/Sabrosita", [300, 250],              'ad-slot2').defineSizeMapping(mappingBox).addService(googletag.pubads());
     window.slot5   = googletag.defineSlot("/23349147378/Sabrosita", [300, 600],              'ad-slot5').defineSizeMapping(mappingDoubleBox).addService(googletag.pubads());
     window.slot14  = googletag.defineSlot("/23349147378/Sabrosita", [[600, 800], [320, 480]],'ad-slot14').defineSizeMapping(mappingModal).addService(googletag.pubads());
@@ -90,6 +97,7 @@ function initGPT() {
     window._boxRefreshInterval = setInterval(function() {
       googletag.pubads().refresh([window.slot201]); 
       googletag.pubads().refresh([window.slot4]); 
+      googletag.pubads().refresh([window.slot6]); 
     }, 120000);
 
     });
